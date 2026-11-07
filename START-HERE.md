@@ -2,7 +2,7 @@
 
 Publication handoff: **November 7, 2026 UTC**. This is a new, owner-authorized public snapshot, not the original private development repository or its Git history. Its initial commit records publication now, not the dates when the underlying work or historical transactions occurred. No new license is added and existing licensing is unchanged.
 
-The 237 files from the reviewed publication tree are preserved byte-for-byte, including `evidence/publication-preparation.json`. This quickstart is the only additional file, for **238 published files**. The dated preparation reports describe their status when written; statements that publication had not occurred are historical. The original README's instructions for `judging/package.py` describe the development-only packager, which is not included here; use the included verification and build scripts instead.
+The **initial** public snapshot, commit `12f2362c93e88684673fdede649e88b315099ce4`, preserved all 237 prepared files byte-for-byte and added this quickstart, for 238 files. The owner-authorized documentation follow-up changes only `README.md` and this quickstart and adds `PUBLICATION-HISTORY.md`, for **239 files**. All 236 other initial files, including executable source, dependency locks, tests and historical evidence, are unchanged. The dated preparation reports describe their status when written; statements that publication had not occurred are historical. See [publication history](PUBLICATION-HISTORY.md) for the verified repository creation timestamp and the scope of each record.
 
 ## Live product and source identity
 
@@ -50,13 +50,29 @@ The local service entry point is `agent.py`; starting it or any Cloudflare/check
 These are instructions for reviewers, not a claim that publication reran the suites:
 
 ```sh
-python scripts/verify_package.py
 python scripts/test_offline.py
 TOOL_OFFER_TEST_PYTHON="$(command -v python)" npm --prefix site run check
 npm --prefix bridge/checkout test
 ```
 
-The package verifier checks the original selected-file manifest and retained revision-79 archive; `evidence/publication-preparation.json` inventories the 236 prepared members other than itself, including the later deployment supplements. This quickstart is outside those historical inventories and is recorded by the new Git commit. Tests use synthetic/mocked services; the offline Python runner blocks external socket connections. Do not execute live acceptance, payment, deployment or external-service mutation scripts as routine tests.
+Tests use synthetic/mocked services; the offline Python runner blocks external socket connections. Do not execute live acceptance, payment, deployment or external-service mutation scripts as routine tests.
+
+**Integrity scope:** `scripts/verify_package.py` checks the original selected-file manifest, which includes the original README, and the retained revision-79 archive. That historical manifest and `evidence/publication-preparation.json` are intentionally unchanged. Running the historical verifier directly against the updated README will correctly report that selected content changed; it is not the integrity command for this documentation overlay. In a full Git clone, verify that every non-overlay file still matches the audited initial public snapshot:
+
+```sh
+git diff --exit-code 12f2362c93e88684673fdede649e88b315099ce4 -- . ':!README.md' ':!START-HERE.md' ':!PUBLICATION-HISTORY.md'
+git status --short
+```
+
+An empty diff confirms tracked non-overlay bytes match; inspect any untracked files separately. To run the original manifest verifier without changing your working tree, extract the initial public commit into a new temporary directory, using the Python environment installed above:
+
+```sh
+baseline_dir="$(mktemp -d)"
+git archive 12f2362c93e88684673fdede649e88b315099ce4 | tar -x -C "$baseline_dir"
+python "$baseline_dir/scripts/verify_package.py"
+```
+
+The current Git commit records the documentation overlay; historical inventories are not relabeled as current documentation hashes. [Publication history](PUBLICATION-HISTORY.md) lists its exact three-path scope. These integrity checks are not a rerun of product tests or a new deployment attestation.
 
 Retained results for the unchanged candidate: **550 Python tests with three skips**, **163 staged tests**, **51 site tests**, and clean-package **550 Python tests with the same three skips**. Deployment separately verified **29/29 hosted members**, all seven changed members, the full Agentverse profile, **108 public-surface checks** and the established non-payment signed-result/replay health check. See the dated evidence rather than treating these as fresh tests of future dependencies or services.
 

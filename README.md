@@ -1,5 +1,23 @@
 # Tool Offer Agent
 
+**Turn public API/MCP documentation and your seller terms into a source-attributed offer draft you can review, correct, assess and export.** Tool Offer Agent is by Kingan Logic; this public judging repository is maintained under the GitHub organization **Max-ROI-LLCt**.
+
+## Try It In ASI:One
+
+Open [Tool Offer Agent](https://tooloffer.kinganlogic.com/), choose **Launch Agent**, and send **`start`** to **`@tool-offer-builder`**. Choose **Start with my tool**, supply public documentation and the requested seller terms, then ask for **`draft`**, **`review intake`**, **`readiness`** or **`buyer explanation`**. **Try a fictional example** is a restricted demonstration, not a live Parcel API or permission to sell it.
+
+- [Native Agentverse profile](https://agentverse.ai/agents/details/agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a/profile)
+- Agent address: `agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a`
+- **For code review and local setup:** [Start here](START-HERE.md), [source layout](#source-layout), [dated verification and publication history](PUBLICATION-HISTORY.md).
+
+**Known live limitation:** ASI:One delivery remains under investigation. Some requests stay on “Reasoning…” despite generated hosted replies; Agentverse manual Testing returned responses. A read receipt or outgoing envelope is not confirmed ASI display. Use the included local instructions to inspect the implementation; this documentation update does not resolve or conceal the [delivery incident](docs/ASI-DELIVERY-INCIDENT-2026-11-07.md).
+
+## Feedback Into Corrections
+
+Testers reported an introductory-only natural-language readiness response, intake review opening a blank replacement form, and crowded draft headings. The corrected agent routes supported readiness requests to the substantive assessment, displays retained intake with a correction/cancellation path, and separates draft headings and fields. Identical replacements preserve revision; fictional restrictions remain enforced. [The dated correction report](docs/CORRECTIONS-2026-11-07.md) explains the routing, parsing, review and evidence changes and their checks.
+
+**Deployed product:** Tool Offer Agent **1.4.9**, Agentverse **revision 86**, release **`66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19`**. [Deployment evidence](DEPLOYED-RELEASE.md) is separate from registry publication and this public Git history. Below, “later local source corrections are not thereby deployed” describes the limits of the historical registry receipt, not the status of revision 86.
+
 [![VerifyMCP report for Tool Offer Agent.](https://verifymcp.io/badge/com-kinganlogic-tool-offer-agent/tooloffer.svg?variant=verified)](https://verifymcp.io/servers/com-kinganlogic-tool-offer-agent/tooloffer)
 
 The live badge links to a third-party report, not blanket security certification. No score is fixed in this repository.
@@ -61,7 +79,7 @@ Discovery is public. Machine calls use identity-bound Bearer credentials obtaine
 
 Offer drafting is free to users; operator inference costs and quotas remain. Optional buyer-authorized FAHCE evaluation is a separate native-chat checkout flow, not an MCP/REST operation and not native Fetch payment integration. `wallet` / `purchase guide` explain prerequisites, `preflight` is free screening, and explicit `check` can prepare eligible checkout. A checkout or 402 challenge is not buyer authorization, payment, settlement or a positive evaluation. Never retry payment to resolve an uncertain result.
 
-The dedicated MCP Registry publisher authenticates publication only. It does not attest to FAHCE execution or certify offers. Keep `rg-tooloffer-publisher`, `kv-toa-pub-0dc85b24`, key `tool-offer-mcp-registry-p384`, and Worker `tooloffer-registry-proof` separate from product runtimes. Ownership proof route: `kinganlogic.com/.well-known/mcp-registry-auth`. Do not change the separate FAHCE DNS proof, receipt, OCI, attestation or signing boundaries.
+The dedicated MCP Registry publisher authenticates publication only. Its credentials and signing infrastructure are separate from product runtimes and from FAHCE execution, receipts and attestations. Registry publication does not certify an offer or authorize a purchase. No operator credentials or signing material are needed for public code review.
 
 The official Registry identity `com.kinganlogic/tool-offer-agent` was published as 1.4.9 at `2026-11-07T03:32:16.914361Z`, active/latest at the verified post-publication readback. Publication is complete. `machine/registry-publication.json` records the owner-supplied official readback and baseline source correspondence; later local corrections are not thereby deployed. Publication does not guarantee indexing, adoption, certification or hackathon acceptance.
 
@@ -70,10 +88,10 @@ The official Registry identity `com.kinganlogic/tool-offer-agent` was published 
 - `tool_offer_agent/`: Python runtime, retained evidence, restrictions, cards, readiness and native/machine operations.
 - `machine/contract.json`, `machine/public-profile.txt`, `machine/public-profile.json`, `machine/guide.txt`: canonical release inputs. `machine/release.py`, `machine/discovery.py`, `machine/surfaces.py`: release generation, mirror consistency and public-asset inventory.
 - `site/src/`: existing Cloudflare gateway, identity registry, signing and HTTP routes. `site/public/`: authored homepage/styles/assets plus generated profiles, examples, schemas and instructions.
-- `cloudflare/transaction_custody.mjs` and `tool_offer_agent/cloudflare_custody.py`: separate seller-side custody Worker and Python client.
-- **Current checkout/relay/wallet:** `bridge/checkout/` preserves the current sibling `../wallet-approval/` implementation from the separate outer checkout, with provenance and content hashes. The older inner `wallet-approval/` adapter is not a substitute. This release does not redeploy the checkout service.
+- `bridge/custody/` and `tool_offer_agent/cloudflare_custody.py`: separate seller-side custody Worker, tests and Python client.
+- **Current checkout/relay/wallet:** `bridge/checkout/` contains the reviewed companion implementation, dependency lockfile, tests and provenance. It connects to separate wallet, custody and FAHCE services; this correction release did not redeploy those services. See [the bridge architecture](docs/BRIDGE.md).
 - `tests/`, `site/tests/`: regression suites. `build_hosted.py`: flat Agentverse packaging; its Python manifest does not describe the complete system.
-- `docs/RELEASE-READINESS.md`: evidence, outstanding findings, video facts and publication decision. The existing private development history is not a public judging package.
+- `docs/RELEASE-READINESS.md`: retained historical readiness report. [Publication history](PUBLICATION-HISTORY.md) explains which later deployment/publication records supersede its status language without rewriting its evidence.
 
 ## Setup And Tests
 
@@ -82,41 +100,27 @@ Use Python 3.12 and Node 24. Python package metadata remains at its historical p
 ```sh
 python3.12 -m venv .venv
 . .venv/bin/activate
-python -m pip install -e '.[test]'
+python -m pip install -c constraints-validated.txt -e '.[test]'
 npm --prefix site ci
-python -m unittest discover -s tests
-TOOL_OFFER_TEST_PYTHON="$(command -v python)" npm --prefix site run check
-python machine/discovery.py check
-python build_hosted.py
 npm --prefix bridge/checkout ci
+tool-offer --state data/judging-local.sqlite3 --sender judging-local --session inspect --message help
+python scripts/test_offline.py
+TOOL_OFFER_TEST_PYTHON="$(command -v python)" npm --prefix site run check
 npm --prefix bridge/checkout test
-npm --prefix bridge/checkout run build
 ```
 
-Tests use synthetic/mocked services and require no purchases. Original-checkout suites also retain private historical fixtures; those are deliberately excluded or replaced with labeled synthetic fixtures in the curated selection. Source directories and test dependencies must be selected together; do not ship caches, `.avctl`, `.wrangler`, `.env`, databases, raw customer exports or private acceptance credentials.
+Tests use synthetic/mocked services and require no purchases. The selected fixtures are explicitly labeled where synthetic. `.avctl/config.toml` is intentionally included as a **public identity/profile reference**, not authenticated CLI state; `.env.example` contains placeholders. Real authentication, `.env` files, private caches, databases and raw customer exports are not part of the judging snapshot. Configure your own identity for a separately hosted instance; do not reuse production credentials or deploy merely to review the code.
+
+**Already completed for the unchanged executable candidate:** 550 Python tests with three skips, 163 staged tests, 51 site tests, and clean-package 550 Python tests with the same three skips. [The dated report](docs/CORRECTIONS-2026-11-07.md) and [deployment readback](evidence/deployed-corrections.json) record their scope. These are retained results, not fresh tests from this documentation commit. No GitHub Actions run was present at the November 7 publication review; no green CI result is claimed.
 
 External runtime services are Agentverse hosting, ASI:One/native chat, the configured extraction/conversation provider, Cloudflare Worker/Durable Objects, and (only for optional evaluation) the existing checkout/relay and FAHCE service. Configure placeholders from `.env.example` through the appropriate secret stores. Never put gateway, custody, checkout or inference credentials in public discovery. Public documentation URLs must be accessible; private/local URLs and credentials are rejected. Provider availability and wallet eligibility are not guaranteed by this repository.
 
-## Release Workflow
+## Attribution, History And Limits
 
-Authenticate using `avctl auth login --no-browser` and existing Wrangler login. Verify `git rev-parse --show-toplevel` is this inner repository before any commit. Capture fresh authenticated hosted source into a unique ignored `data/` directory. Generate **all intended authored modules**, not only the CLI's default chat/machine pair. Preserve captured hosted entrypoints and compare every module hash with readback.
+This is the **owner-authorized public judging snapshot** of Tool Offer Agent, not a publication of the private development repository. The GitHub repository was created on **November 7, 2026 at 07:44:32 UTC**. Its initial snapshot commit was created locally at **07:38:42 UTC** before that repository was created. [Publication history](PUBLICATION-HISTORY.md) distinguishes those timestamps from deployment, tests and historical transactions; they are not independent proof of original development dates or organizer eligibility.
 
-```sh
-python machine/release.py capture --work data/<unique-release>
-python machine/release.py generate --work data/<unique-release> --modules <reviewed-authored-module-list>
-python machine/release.py check --work data/<unique-release>
-python machine/release.py deploy --work data/<unique-release>
-python machine/release.py verify-site --work data/<unique-release>
-```
+Tool Offer Agent's reviewed contribution covers offer preparation, source attribution, retained intake, native/machine integration, correction, readiness, exports, its gateway and companion integration. Kingan Logic branding and the external FAHCE engine/payment/receipt/attestation infrastructure pre-exist these corrections; the repository does not claim to implement those external services. The **November 1, 2026** transaction evidence remains historical, not a transaction on revision 86. No license is added or changed by this publication.
 
-`machine/registry-server.json` is generated server metadata, not a publication receipt. Its 1.4.9 name, version and endpoint match the completed publication recorded in `machine/registry-publication.json`. Do not republish this completed version; no publisher secret belongs in a product runtime.
+The ASI delivery incident, **three skipped custody integration checks**, **four inherited high-severity dependency entries** from the dated review and missing `verify_new_tooloffer.mjs` harness remain explicit limitations. Source inspection and local tests do not certify live delivery, service execution, commercial rights or hackathon acceptance. Do not submit credentials in chat or documentation URLs; we do not control retention by ASI or other platform components.
 
-Build the local-only judges' selection with `python judging/package.py data/judging-<unique-name>` after building the checkout bundle. It selects exact reviewed paths, verifies protected input hashes, applies explicitly labeled synthetic substitutions, and produces a manifest and ZIP with byte readback. It never reads the private acceptance directory or publishes a repository. The extracted package includes `scripts/test_offline.py` and its validated dependency constraints.
-
-The deployed `release_id` binds runtime source, canonical inputs and generators; `discovery-surfaces.json` inventories exact public asset hashes. Agentverse source readback—not a displayed version—establishes byte correspondence. Publication across Agentverse and Cloudflare is not atomic; failed readback means incomplete release. Keep existing 1.4.7 signed acceptance associated with its original release. The readiness source-record hash is SHA-256 of canonical retained-document JSON, distinct from a source-text byte hash.
-
-## Attribution And Publication
-
-Kingan Logic and FAHCE are legitimate component identities. FAHCE engine, payment/receipt/attestation services and their keys are pre-existing external components, not newly implemented by these presentation changes. This work covers Tool Offer Agent's offer preparation, evidence retention, native/machine integration, review/readiness/export, gateway and companion integration. Original commit references and private signed evidence are retained; timestamps alone do not prove hackathon eligibility or independent execution.
-
-Do not make the existing private repository public. A reviewed, complete source selection does not erase historical disclosures or establish that a curated snapshot meets judging rules. The owner must approve the sanitized publication scope and confirm the organizer's history requirements before any public repository or submission is created.
+Future updates are separately reviewed, owner-approved snapshots, not an automatic mirror of private working files. Historical manifests and frozen ZIPs remain unchanged; [the quickstart](START-HERE.md#tests-and-integrity) explains integrity checks after this documentation-only update.
