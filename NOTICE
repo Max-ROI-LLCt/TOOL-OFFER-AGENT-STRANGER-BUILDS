@@ -1,0 +1,35 @@
+Required Notice: Copyright (c) 2026 Kingan Logic. Tool Offer Agent. https://tooloffer.kinganlogic.com/
+
+License adoption: November 7, 2026. SPDX identifier: PolyForm-Noncommercial-1.0.0.
+
+The unchanged PolyForm Noncommercial License 1.0.0 in LICENSE applies to the
+original first-party software made available in this public judging snapshot,
+including the agent, gateway and included payment-bridge implementation.
+This is a source-available license, not an open-source license.
+
+Noncommercial use, modification and redistribution are permitted subject to
+LICENSE, including its required-notice obligations. Copyright is not transferred.
+Commercial use of this first-party software requires a separate permission or
+commercial license from Kingan Logic. The owner remains free to offer commercial
+licenses. Contact Kingan Logic through https://tooloffer.kinganlogic.com/.
+
+Additional judging permission: competition organizers and judges may copy, run,
+test and locally modify this snapshot solely to evaluate this submission,
+including when acting for a commercial organization, while preserving notices.
+This additional permission does not authorize commercial deployment or resale.
+
+The included first-party setup and usage instructions may be copied with the
+software for these permitted purposes. This notice does not change the terms of
+other Kingan Logic writing, artwork or products. It grants no trademark license
+or right to represent a modified version as an official Kingan Logic product.
+
+Third-party software, dependencies, their bundled portions and third-party
+content retain their respective licenses and notices; they are not relicensed
+under PolyForm. See THIRD-PARTY-NOTICES.md and the upstream package licenses.
+
+This source license does not change the terms of using the hosted Tool Offer
+Agent or FAHCE services. It grants no access to production credentials, private
+signing infrastructure, external FAHCE engine source or customer records.
+It does not authorize payments, certify offers or override fictional-example
+restrictions. Prior publication receipts and frozen packages remain historical;
+the license is first supplied by this public follow-up, not backdated into them.

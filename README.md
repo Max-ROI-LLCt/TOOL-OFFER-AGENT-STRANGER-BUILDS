@@ -14,9 +14,13 @@ Open [Tool Offer Agent](https://tooloffer.kinganlogic.com/), choose **Launch Age
 
 ## Feedback Into Corrections
 
-Testers reported an introductory-only natural-language readiness response, intake review opening a blank replacement form, and crowded draft headings. The corrected agent routes supported readiness requests to the substantive assessment, displays retained intake with a correction/cancellation path, and separates draft headings and fields. Identical replacements preserve revision; fictional restrictions remain enforced. [The dated correction report](docs/CORRECTIONS-2026-11-07.md) explains the routing, parsing, review and evidence changes and their checks.
+**Competition feedback, November 7, 2026:** the owner shared **Trick or Feedback** notes from **Thạch Hồ Lê Minh**, who tried the fictional Parcel journey through WebMCP and ASI:One. The tester praised field-level source links and clear noncommercial limits, requested a shorter buyer summary, and reported two WebMCP invocation errors and an unfinished ASI buyer-explanation follow-up. [Feedback provenance, response and limits](docs/COMPETITION-FEEDBACK-2026-11-07.md) distinguish those open observations from confirmed fixes; no counted-feedback or delivery-success claim is made.
 
-**Deployed product:** Tool Offer Agent **1.4.9**, Agentverse **revision 86**, release **`66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19`**. [Deployment evidence](DEPLOYED-RELEASE.md) is separate from registry publication and this public Git history. Below, “later local source corrections are not thereby deployed” describes the limits of the historical registry receipt, not the status of revision 86.
+Separate earlier testing reported an introductory-only natural-language readiness response, intake review opening a blank replacement form, and crowded draft headings. Revision 86 routes supported readiness requests to the substantive assessment, displays retained intake with a correction/cancellation path, and separates draft headings and fields. Identical replacements preserve revision; fictional restrictions remain enforced. [The dated correction report](docs/CORRECTIONS-2026-11-07.md) records the changes and completed checks.
+
+**Deployed product:** Tool Offer Agent **1.4.9**, Agentverse **revision 86**, release **`66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19`**. The canonical manifest and public Agentverse README both matched this release on the November 7 documentation readback. [Deployment evidence](DEPLOYED-RELEASE.md) identifies the executable source; this public Git commit identifies the judging snapshot and its documentation/license additions.
+
+**Registry history is separate:** the completed **1.4.9** publication at **03:32:16.914361 UTC on November 7** corresponds to release **`294379abcc1a2df39f22d9aa94423f2902e5353bb74fc29411e657e6d2c0afa1`**, not revision 86. The later correction deployment retained application version 1.4.9 but has the distinct release ID above. The generated discovery block below preserves the historical receipt's wording: publication alone did not deploy corrections; **the later revision-86 deployment did**. No new registry publication or version bump is claimed. See [the dated source mapping](PUBLICATION-HISTORY.md#deployed-source-and-historical-records).
 
 [![VerifyMCP report for Tool Offer Agent.](https://verifymcp.io/badge/com-kinganlogic-tool-offer-agent/tooloffer.svg?variant=verified)](https://verifymcp.io/servers/com-kinganlogic-tool-offer-agent/tooloffer)
 
@@ -58,8 +62,6 @@ Drafting is free; operator inference costs and published quotas still apply.
 Optional FAHCE evaluation is separate and buyer-authorized: 0.15 USDC on Base mainnet via the private human checkout. A free preflight is not an evaluation. Checkout preparation, wallet connection and a 402 challenge are not payment authorization, settlement or a completed result. Changed price, network, token or recipient stops payment. No automatic spending.
 <!-- tool-offer-discovery:end -->
 
-By Kingan Logic. Tool Offer Agent turns public API/MCP documentation and truthful seller terms into source-attributed offer drafts. It supports intake, drafting, review, correction, rebuilding, deterministic readiness and complete exports. Bring real documentation with **Start with my tool**. **Try a fictional example** is an optional, commercially restricted demonstration of the real agent—not a working parcel service.
-
 Documentation is evidence of documented claims, not proof of service execution or seller rights. Price, access, customer and payment terms are seller statements. Review, readiness and export never certify an offer, publish a listing or authorize commercial use. Fictional restrictions survive correction, rebuilding and export. No fabricated integrations, buyers or rights are supplied.
 
 ## Entrances
@@ -80,8 +82,6 @@ Discovery is public. Machine calls use identity-bound Bearer credentials obtaine
 Offer drafting is free to users; operator inference costs and quotas remain. Optional buyer-authorized FAHCE evaluation is a separate native-chat checkout flow, not an MCP/REST operation and not native Fetch payment integration. `wallet` / `purchase guide` explain prerequisites, `preflight` is free screening, and explicit `check` can prepare eligible checkout. A checkout or 402 challenge is not buyer authorization, payment, settlement or a positive evaluation. Never retry payment to resolve an uncertain result.
 
 The dedicated MCP Registry publisher authenticates publication only. Its credentials and signing infrastructure are separate from product runtimes and from FAHCE execution, receipts and attestations. Registry publication does not certify an offer or authorize a purchase. No operator credentials or signing material are needed for public code review.
-
-The official Registry identity `com.kinganlogic/tool-offer-agent` was published as 1.4.9 at `2026-11-07T03:32:16.914361Z`, active/latest at the verified post-publication readback. Publication is complete. `machine/registry-publication.json` records the owner-supplied official readback and baseline source correspondence; later local corrections are not thereby deployed. Publication does not guarantee indexing, adoption, certification or hackathon acceptance.
 
 ## Source Layout
 
@@ -119,8 +119,14 @@ External runtime services are Agentverse hosting, ASI:One/native chat, the confi
 
 This is the **owner-authorized public judging snapshot** of Tool Offer Agent, not a publication of the private development repository. The GitHub repository was created on **November 7, 2026 at 07:44:32 UTC**. Its initial snapshot commit was created locally at **07:38:42 UTC** before that repository was created. [Publication history](PUBLICATION-HISTORY.md) distinguishes those timestamps from deployment, tests and historical transactions; they are not independent proof of original development dates or organizer eligibility.
 
-Tool Offer Agent's reviewed contribution covers offer preparation, source attribution, retained intake, native/machine integration, correction, readiness, exports, its gateway and companion integration. Kingan Logic branding and the external FAHCE engine/payment/receipt/attestation infrastructure pre-exist these corrections; the repository does not claim to implement those external services. The **November 1, 2026** transaction evidence remains historical, not a transaction on revision 86. No license is added or changed by this publication.
+Tool Offer Agent's reviewed contribution covers offer preparation, source attribution, retained intake, native/machine integration, correction, readiness, exports, its gateway and companion integration. Kingan Logic branding and the external FAHCE engine/payment/receipt/attestation infrastructure pre-exist these corrections; the repository does not claim to implement those external services. The **November 1, 2026** transaction evidence remains historical, not a transaction on revision 86.
 
 The ASI delivery incident, **three skipped custody integration checks**, **four inherited high-severity dependency entries** from the dated review and missing `verify_new_tooloffer.mjs` harness remain explicit limitations. Source inspection and local tests do not certify live delivery, service execution, commercial rights or hackathon acceptance. Do not submit credentials in chat or documentation URLs; we do not control retention by ASI or other platform components.
 
-Future updates are separately reviewed, owner-approved snapshots, not an automatic mirror of private working files. Historical manifests and frozen ZIPs remain unchanged; [the quickstart](START-HERE.md#tests-and-integrity) explains integrity checks after this documentation-only update.
+Future updates are separately reviewed, owner-approved snapshots, not an automatic mirror of private working files. Historical manifests and frozen ZIPs remain unchanged; [the quickstart](START-HERE.md#tests-and-integrity) explains integrity checks after this documentation/license update.
+
+## License
+
+The original first-party software is **source-available under [PolyForm Noncommercial 1.0.0](LICENSE)**, adopted on November 7, 2026. You may use, modify and share it for noncommercial purposes under those terms, while preserving the [required attribution notice](NOTICE). Copyright remains with Kingan Logic; commercial reuse or resale requires separate permission. This is **not an open-source license**.
+
+[NOTICE](NOTICE) also expressly permits organizers and judges to run and test this submission for evaluation, including on behalf of a commercial organization. It does not grant production access, authorize payments or change hosted-service terms. The owner may offer separate commercial licenses. [Third-party dependencies and bundled code keep their own licenses](THIRD-PARTY-NOTICES.md); ownership of Tool Offer Agent and FAHCE does not replace those terms. This license addition does not establish compliance with any organizer requirement for an open-source license.
