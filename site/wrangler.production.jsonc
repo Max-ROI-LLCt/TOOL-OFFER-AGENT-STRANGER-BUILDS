@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kingan-tooloffer-site",
+  "compatibility_date": "2026-10-30",
+  "main": "src/worker.mjs",
+  "build": {"command": "python3 ../machine/discovery.py check"},
+  "durable_objects": {"bindings": [{"name": "MACHINE_GATEWAY", "class_name": "MachineGateway"}]},
+  "migrations": [{"tag": "machine-v1", "new_sqlite_classes": ["MachineGateway"]}],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  },
+  "preview_urls": true,
+  "previews": {},
+  "routes": [
+    {
+      "pattern": "tooloffer.kinganlogic.com",
+      "custom_domain": true
+    }
+  ]
+}

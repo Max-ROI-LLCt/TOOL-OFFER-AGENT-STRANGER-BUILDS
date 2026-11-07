@@ -1,0 +1,24 @@
+{
+  "name": "kingan-tooloffer-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy:preview": "wrangler preview --config wrangler.jsonc --ignore-base-config",
+    "deploy:domain": "wrangler deploy --config wrangler.production.jsonc",
+    "check": "node --test tests/*.test.mjs",
+    "release:check": "python3 ../machine/release.py check",
+    "discovery:check": "python3 ../machine/discovery.py check",
+    "discovery:sync": "python3 ../machine/discovery.py sync",
+    "discovery:live": "python3 ../machine/discovery.py live"
+  },
+  "dependencies": {
+    "@noble/curves": "2.4.0",
+    "@noble/hashes": "2.4.0",
+    "@scure/base": "2.4.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.156.0"
+  }
+}

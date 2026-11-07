@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+.wrangler/
+.avctl/
+.agentverse-custody/
+data/
+state/
+tests/.state/
+.DS_Store

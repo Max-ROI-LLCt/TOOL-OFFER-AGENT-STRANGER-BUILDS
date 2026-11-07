@@ -1,0 +1,1240 @@
+{
+  "machine_readable_profile": "https://tooloffer.kinganlogic.com/manifest.json",
+  "capabilities": [
+    "Read public API/MCP documentation and retain source-attributed evidence.",
+    "Collect seller-stated customer, pricing, payment, access and invocation terms.",
+    "Draft, review and revise an offer within an isolated conversation.",
+    "Explain the buyer offer and prepare listing guidance without publication.",
+    "Assess retained offer readiness deterministically without inference or payment.",
+    "Export structured and human-readable records, with verified multipart retrieval when needed."
+  ],
+  "payments": {
+    "drafting": {
+      "price": "0",
+      "wallet_required": false,
+      "terms": "Drafting is free; operator inference costs and published quotas still apply."
+    },
+    "evaluation": {
+      "provider": "FAHCE Diagnose",
+      "optional": true,
+      "separate_from_drafting": true,
+      "buyer_authorization_required": true,
+      "machine_adapter_supported": false,
+      "protocol": "x402 with buyer-signed EIP-3009 authorization",
+      "amount": "0.15",
+      "asset": "USDC",
+      "network": "Base mainnet",
+      "chain_id": 8453,
+      "atomic_amount": "150000",
+      "terms": "Optional FAHCE evaluation is separate and buyer-authorized: 0.15 USDC on Base mainnet via the private human checkout. A free preflight is not an evaluation. Checkout preparation, wallet connection and a 402 challenge are not payment authorization, settlement or a completed result. Changed price, network, token or recipient stops payment. No automatic spending.",
+      "instructions_url": "https://tooloffer.kinganlogic.com/instructions.md",
+      "checkout_access": "In native chat, wallet explains setup; check prepares an eligible private checkout only when explicitly requested. The buyer reviews the exact request and separately signs there. purchase status retrieves the existing outcome; never purchase again to resolve uncertainty."
+    }
+  },
+  "fictional": true,
+  "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "scope": "Offline controlled fixture, not a live API, purchase, attestation or seller authorization.",
+  "stress_coverage": "Retained filler source notes force multipart delivery. Accepted, polled and completed objects intentionally exercise response binding and client assembly; these are not live customer records.",
+  "raw_api_facts": {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Fictional Parcel Format API",
+      "version": "1.0"
+    },
+    "paths": {
+      "/normalize": {
+        "post": {
+          "summary": "Normalize seller-supplied parcel dimensions into centimetres",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "length",
+                    "width",
+                    "height",
+                    "unit"
+                  ],
+                  "properties": {
+                    "length": {
+                      "type": "number"
+                    },
+                    "width": {
+                      "type": "number"
+                    },
+                    "height": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "enum": [
+                        "cm",
+                        "in"
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "length": 10,
+                  "width": 4,
+                  "height": 2,
+                  "unit": "in"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Normalized dimensions; no carrier quote or shipment booking",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "length_cm": {
+                        "type": "number"
+                      },
+                      "width_cm": {
+                        "type": "number"
+                      },
+                      "height_cm": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "example": {
+                    "length_cm": 25.4,
+                    "width_cm": 10.16,
+                    "height_cm": 5.08
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "x-limitations": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+    "x-commercial-terms": "Documentation describes the interface; it grants no resale rights or seller authority.",
+    "x-synthetic-notes": [
+      "Fictional documentation retained to demonstrate multipart source export. 0",
+      "Fictional documentation retained to demonstrate multipart source export. 1",
+      "Fictional documentation retained to demonstrate multipart source export. 2",
+      "Fictional documentation retained to demonstrate multipart source export. 3",
+      "Fictional documentation retained to demonstrate multipart source export. 4",
+      "Fictional documentation retained to demonstrate multipart source export. 5",
+      "Fictional documentation retained to demonstrate multipart source export. 6",
+      "Fictional documentation retained to demonstrate multipart source export. 7",
+      "Fictional documentation retained to demonstrate multipart source export. 8",
+      "Fictional documentation retained to demonstrate multipart source export. 9",
+      "Fictional documentation retained to demonstrate multipart source export. 10",
+      "Fictional documentation retained to demonstrate multipart source export. 11",
+      "Fictional documentation retained to demonstrate multipart source export. 12",
+      "Fictional documentation retained to demonstrate multipart source export. 13",
+      "Fictional documentation retained to demonstrate multipart source export. 14",
+      "Fictional documentation retained to demonstrate multipart source export. 15",
+      "Fictional documentation retained to demonstrate multipart source export. 16",
+      "Fictional documentation retained to demonstrate multipart source export. 17",
+      "Fictional documentation retained to demonstrate multipart source export. 18",
+      "Fictional documentation retained to demonstrate multipart source export. 19",
+      "Fictional documentation retained to demonstrate multipart source export. 20",
+      "Fictional documentation retained to demonstrate multipart source export. 21",
+      "Fictional documentation retained to demonstrate multipart source export. 22",
+      "Fictional documentation retained to demonstrate multipart source export. 23",
+      "Fictional documentation retained to demonstrate multipart source export. 24",
+      "Fictional documentation retained to demonstrate multipart source export. 25",
+      "Fictional documentation retained to demonstrate multipart source export. 26",
+      "Fictional documentation retained to demonstrate multipart source export. 27",
+      "Fictional documentation retained to demonstrate multipart source export. 28",
+      "Fictional documentation retained to demonstrate multipart source export. 29",
+      "Fictional documentation retained to demonstrate multipart source export. 30",
+      "Fictional documentation retained to demonstrate multipart source export. 31",
+      "Fictional documentation retained to demonstrate multipart source export. 32",
+      "Fictional documentation retained to demonstrate multipart source export. 33",
+      "Fictional documentation retained to demonstrate multipart source export. 34",
+      "Fictional documentation retained to demonstrate multipart source export. 35",
+      "Fictional documentation retained to demonstrate multipart source export. 36",
+      "Fictional documentation retained to demonstrate multipart source export. 37",
+      "Fictional documentation retained to demonstrate multipart source export. 38",
+      "Fictional documentation retained to demonstrate multipart source export. 39",
+      "Fictional documentation retained to demonstrate multipart source export. 40",
+      "Fictional documentation retained to demonstrate multipart source export. 41",
+      "Fictional documentation retained to demonstrate multipart source export. 42",
+      "Fictional documentation retained to demonstrate multipart source export. 43",
+      "Fictional documentation retained to demonstrate multipart source export. 44",
+      "Fictional documentation retained to demonstrate multipart source export. 45",
+      "Fictional documentation retained to demonstrate multipart source export. 46",
+      "Fictional documentation retained to demonstrate multipart source export. 47",
+      "Fictional documentation retained to demonstrate multipart source export. 48",
+      "Fictional documentation retained to demonstrate multipart source export. 49",
+      "Fictional documentation retained to demonstrate multipart source export. 50",
+      "Fictional documentation retained to demonstrate multipart source export. 51",
+      "Fictional documentation retained to demonstrate multipart source export. 52",
+      "Fictional documentation retained to demonstrate multipart source export. 53",
+      "Fictional documentation retained to demonstrate multipart source export. 54",
+      "Fictional documentation retained to demonstrate multipart source export. 55",
+      "Fictional documentation retained to demonstrate multipart source export. 56",
+      "Fictional documentation retained to demonstrate multipart source export. 57",
+      "Fictional documentation retained to demonstrate multipart source export. 58",
+      "Fictional documentation retained to demonstrate multipart source export. 59",
+      "Fictional documentation retained to demonstrate multipart source export. 60",
+      "Fictional documentation retained to demonstrate multipart source export. 61",
+      "Fictional documentation retained to demonstrate multipart source export. 62",
+      "Fictional documentation retained to demonstrate multipart source export. 63",
+      "Fictional documentation retained to demonstrate multipart source export. 64"
+    ]
+  },
+  "seller_assertions": {
+    "tool_url": "https://parcel-example.invalid/",
+    "docs": "https://parcel-example.invalid/openapi.json",
+    "seller_name": "Fictional Parcel Workshop",
+    "job": "Normalize parcel dimensions for a packing form",
+    "customer": "Shipping form developers",
+    "pricing": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+    "payment": "Fictional invoice; no payment connection exists",
+    "access": "Fictional seller-issued API key; do not send a real credential",
+    "invocation": "POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>"
+  },
+  "operational_proof": "NOT_ESTABLISHED: no external API invocation",
+  "seller_commercial_authority": "NOT_ESTABLISHED: fictional seller assertions only",
+  "buyer_offer": {
+    "schema": "TOOL_OFFER_BUYER_V1",
+    "offer_sha256": "ecdd86b49c5ac240568ca67f28feb3e9e4d3687be8336ef2a14c661fad4103a4",
+    "revision": 1,
+    "outdated": false,
+    "draft_version": 1,
+    "draft_version_scope": "generated_in_this_conversation",
+    "documentation_evidence": {
+      "status": "documented_for_review",
+      "buyer_ready": false,
+      "missing_core_categories": [],
+      "issues": [],
+      "scope": "Source-grounded claims for review, not independent verification or commercial authorization."
+    },
+    "restrictions": {
+      "schema": "TOOL_OFFER_RESTRICTIONS_V1",
+      "demonstration_only": false,
+      "third_party_non_ownership": false,
+      "not_representing_maintainers": false,
+      "commercial_authorization": "not_established",
+      "lifecycle": "current_product",
+      "sources": []
+    },
+    "description": {
+      "job": "Normalize parcel dimensions for a packing form",
+      "customer": "Shipping form developers",
+      "outcome_status": "proposed_not_executed"
+    },
+    "provider": {
+      "name": "Fictional Parcel Workshop",
+      "identity_status": "seller_supplied_not_authenticated",
+      "tool_url": "https://parcel-example.invalid/",
+      "intended_customer": "Shipping form developers",
+      "source_urls": [
+        "https://parcel-example.invalid/openapi.json"
+      ]
+    },
+    "interface": {
+      "capabilities": [
+        {
+          "text": "POST /normalize: Normalize seller-supplied parcel dimensions into centimetres",
+          "source_url": "https://parcel-example.invalid/openapi.json",
+          "location": "paths[/normalize].post",
+          "evidence_status": "documentation_claim_not_verified",
+          "source_pointer": "/paths/~1normalize/post",
+          "derivation": {
+            "kind": "openapi_endpoint",
+            "path": "/normalize",
+            "method": "post",
+            "summary_field": "summary",
+            "source_pointers": [
+              "/paths/~1normalize",
+              "/paths/~1normalize/post",
+              "/paths/~1normalize/post/summary"
+            ]
+          }
+        }
+      ],
+      "inputs": [
+        {
+          "text": "Request body (required). application/json: object. Fields — length (required): number; width (required): number; height (required): number; unit (required): text. choices: cm (centimetres), in (inches)",
+          "source_url": "https://parcel-example.invalid/openapi.json",
+          "location": "paths[/normalize].post.requestBody",
+          "evidence_status": "documentation_claim_not_verified",
+          "schema_value": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "length",
+                    "width",
+                    "height",
+                    "unit"
+                  ],
+                  "properties": {
+                    "length": {
+                      "type": "number"
+                    },
+                    "width": {
+                      "type": "number"
+                    },
+                    "height": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "enum": [
+                        "cm",
+                        "in"
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "length": 10,
+                  "width": 4,
+                  "height": 2,
+                  "unit": "in"
+                }
+              }
+            }
+          },
+          "source_pointer": "/paths/~1normalize/post/requestBody",
+          "derivation": {
+            "kind": "schema_summary"
+          },
+          "text_scope": "Readable schema summary; schema_value retains the complete exact schema."
+        }
+      ],
+      "outputs": [
+        {
+          "text": "Response 200: Normalized dimensions; no carrier quote or shipment booking. application/json: object. Fields — length_cm (optional): number; width_cm (optional): number; height_cm (optional): number",
+          "source_url": "https://parcel-example.invalid/openapi.json",
+          "location": "paths[/normalize].post.responses",
+          "evidence_status": "documentation_claim_not_verified",
+          "schema_value": {
+            "200": {
+              "description": "Normalized dimensions; no carrier quote or shipment booking",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "length_cm": {
+                        "type": "number"
+                      },
+                      "width_cm": {
+                        "type": "number"
+                      },
+                      "height_cm": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "example": {
+                    "length_cm": 25.4,
+                    "width_cm": 10.16,
+                    "height_cm": 5.08
+                  }
+                }
+              }
+            }
+          },
+          "source_pointer": "/paths/~1normalize/post/responses",
+          "derivation": {
+            "kind": "schema_summary"
+          },
+          "text_scope": "Readable schema summary; schema_value retains the complete exact schema."
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+          "source_url": "https://parcel-example.invalid/openapi.json",
+          "location": "/x-limitations",
+          "evidence_status": "documentation_claim_not_verified",
+          "source_pointer": "/x-limitations",
+          "derivation": {
+            "kind": "json_value_text",
+            "source_pointers": [
+              "/x-limitations"
+            ]
+          }
+        }
+      ]
+    },
+    "seller_terms": {
+      "pricing": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+      "payment_instructions": "Fictional invoice; no payment connection exists",
+      "access_instructions": "Fictional seller-issued API key; do not send a real credential",
+      "invocation_instructions": "POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>"
+    },
+    "documented_terms": [
+      {
+        "text": "Documentation describes the interface; it grants no resale rights or seller authority.",
+        "source_url": "https://parcel-example.invalid/openapi.json",
+        "location": "/x-commercial-terms",
+        "evidence_status": "documentation_claim_not_verified",
+        "source_pointer": "/x-commercial-terms",
+        "derivation": {
+          "kind": "json_value_text",
+          "source_pointers": [
+            "/x-commercial-terms"
+          ]
+        }
+      }
+    ],
+    "commercial_terms_provenance": {
+      "seller_terms": "seller_supplied_not_independently_authorized",
+      "documented_third_party_terms": "source_claims_not_seller_permission",
+      "authorization_status": "not_established"
+    },
+    "coverage": {
+      "missing_categories": [],
+      "meaning": "Unknown or not extracted from bounded sources; not proof of absence or lack of support.",
+      "extraction_mode": "deterministic_limited"
+    },
+    "evidence_availability": {
+      "capabilities": "documented_unverified",
+      "inputs": "documented_unverified",
+      "outputs": "documented_unverified",
+      "limitations": "documented_unverified",
+      "documented_commercial_terms": "documented_unverified"
+    },
+    "semantic_support": "not_established_by_this_export",
+    "use_restrictions": [],
+    "boundaries": [
+      "Documentation and seller statements are untrusted claims, not verified capabilities.",
+      "No publication, purchase, invocation, or seller trust certification has occurred.",
+      "FAHCE evaluates supplied evidence, not authenticity or trust."
+    ],
+    "evaluation_status": "not_established_by_this_export"
+  },
+  "buyer_copy": "## Buyer explanation — Draft v1; revision 1\n\nConcise derived overview, not a quotation or full specification.\n\nDocumented details available for review; behavior, payment operation and seller authorization remain unverified.\n\nOffered operation (documented, not independently verified): POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\nFor: Shipping form developers\n\nSeller-scoped proposed job: Normalize parcel dimensions for a packing form\n\nSeller-stated pricing: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\nPayment (seller supplied): Fictional invoice; no payment connection exists\n\nAccess (seller supplied): Fictional seller-issued API key; do not send a real credential\n\nInvoke (seller supplied): POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\nCommercial authorization: not established.\n\n### Input highlights\n\n- Request body (required). application/json: object. Fields — length (required): number; width (required): number; height (required): number; unit (required): text. choices: cm (centimetres), in (inches) [1]\n\n### Output highlights\n\n- Response 200: Normalized dimensions; no carrier quote or shipment booking. application/json: object. Fields — length_cm (optional): number; width_cm (optional): number; height_cm (optional): number [1]\n\n### Documented capabilities and limitations\n\n- Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required. [1]\n\n### Third-party documented terms (not seller authority)\n\n- Documentation describes the interface; it grants no resale rights or seller authority. [1]\n\nInterface highlights follow the explicitly seller-stated invocation: POST /normalize.\n\nExtraction coverage is partial/limited, not proof of absence. Full recorded coverage is in export json.\n\n### Sources (documentation claims, not verified behavior)\n\n- [1] https://parcel-example.invalid/openapi.json\n\nFull schemas, statuses and provenance: export buyer readable. Audit: export json. No seller authority, approval, publication, payment or execution is established.",
+  "start_session": {
+    "tool": "start_session",
+    "arguments": {
+      "request_id": "bb3ee030-c486-44fd-b3ce-468db93f1786"
+    },
+    "response": {
+      "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+      "expires_at": "2026-11-10T00:00:00.000Z",
+      "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19"
+    }
+  },
+  "controlled_session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+  "operations": [
+    {
+      "tool": "send_message",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "78266dc1-17bd-4339-9c27-7e75c0435817",
+        "message": "tool_url: https://parcel-example.invalid/\ndocs: https://parcel-example.invalid/openapi.json\nseller_name: Fictional Parcel Workshop\njob: Normalize parcel dimensions for a packing form\ncustomer: Shipping form developers\npricing: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\npayment: Fictional invoice; no payment connection exists\naccess: Fictional seller-issued API key; do not send a real credential\ninvocation: POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>"
+      },
+      "result": {
+        "request_id": "78266dc1-17bd-4339-9c27-7e75c0435817",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "Commercial authorization: not established.\n\nDraft v1 — not published; state revision 1\n\nState revision advances for changed intake and explicit draft rebuilds; Draft v counts generated drafts.\n\nDocumented details available for review; behavior, payment operation and seller authorization remain unverified.\n\n## Seller-stated context\n\n- Seller label (not authenticated): Fictional Parcel Workshop\n- Tool: https://parcel-example.invalid/\n- Customer: Shipping form developers\n- One proposed job: Normalize parcel dimensions for a packing form\n\n## Capabilities (documentation claims, not verified)\n\n- POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post\n\n## Inputs (documentation claims, not verified)\n\n- Request body (required). application/json: object. Fields — length (required): number; width (required): number; height (required): number; unit (required): text. choices: cm (centimetres), in (inches)\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post/requestBody\n\n## Outputs (documentation claims, not verified)\n\n- Response 200: Normalized dimensions; no carrier quote or shipment booking. application/json: object. Fields — length_cm (optional): number; width_cm (optional): number; height_cm (optional): number\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post/responses\n\n## Limitations (documentation claims, not verified)\n\n- Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n  Source: https://parcel-example.invalid/openapi.json#/x-limitations\n\n## Documented Commercial Terms (documentation claims, not verified)\n\n- Documentation describes the interface; it grants no resale rights or seller authority.\n  Source: https://parcel-example.invalid/openapi.json#/x-commercial-terms\n\n## Pricing (seller supplied)\n\nFictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n## Payment Instructions (seller supplied)\n\nFictional invoice; no payment connection exists\n\n## Access Instructions (seller supplied)\n\nFictional seller-issued API key; do not send a real credential\n\n## Invocation Instructions (seller supplied)\n\nPOST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n## Sources and authorization boundaries\n\nCommercial authorization: not established.\n\nSources:\n- https://parcel-example.invalid/openapi.json\n\n## Extraction coverage\n\nLIMITED deterministic extraction only; no model quotes verified. Unextracted information is unknown, not absent.\nDeterministic extraction: capabilities 1, inputs 1, outputs 1, limitations 1, commercial_terms 1. Not an exhaustive review.\n\n## Boundaries\n\n- Documentation and seller statements are untrusted claims, not verified capabilities.\n- No publication, purchase, invocation, or seller trust certification has occurred.\n- FAHCE evaluates supplied evidence, not authenticity or trust.\n\nFAHCE evaluation not requested for this draft. This status does not assess transport configuration. FAHCE checks supplied evidence, not source authenticity, seller trust, publication, purchases, or external execution.\n\nUse review offer, review intake, revise field: value (or job: one specific outcome), or export json. Optional: wallet or purchase guide explains setup; preflight screens input for free. Only explicit check requests eligible checkout preparation; payment needs separate buyer authorization.\n\nWould you like a listing preparation checklist for your tool, with requirements and next steps?",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "01481551-7c26-4a6f-bd69-1cdf10bbf6f1",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "01481551-7c26-4a6f-bd69-1cdf10bbf6f1"
+        },
+        "response": {
+          "job_id": "01481551-7c26-4a6f-bd69-1cdf10bbf6f1",
+          "request_id": "78266dc1-17bd-4339-9c27-7e75c0435817",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "Commercial authorization: not established.\n\nDraft v1 — not published; state revision 1\n\nState revision advances for changed intake and explicit draft rebuilds; Draft v counts generated drafts.\n\nDocumented details available for review; behavior, payment operation and seller authorization remain unverified.\n\n## Seller-stated context\n\n- Seller label (not authenticated): Fictional Parcel Workshop\n- Tool: https://parcel-example.invalid/\n- Customer: Shipping form developers\n- One proposed job: Normalize parcel dimensions for a packing form\n\n## Capabilities (documentation claims, not verified)\n\n- POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post\n\n## Inputs (documentation claims, not verified)\n\n- Request body (required). application/json: object. Fields — length (required): number; width (required): number; height (required): number; unit (required): text. choices: cm (centimetres), in (inches)\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post/requestBody\n\n## Outputs (documentation claims, not verified)\n\n- Response 200: Normalized dimensions; no carrier quote or shipment booking. application/json: object. Fields — length_cm (optional): number; width_cm (optional): number; height_cm (optional): number\n  Source: https://parcel-example.invalid/openapi.json#/paths/~1normalize/post/responses\n\n## Limitations (documentation claims, not verified)\n\n- Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n  Source: https://parcel-example.invalid/openapi.json#/x-limitations\n\n## Documented Commercial Terms (documentation claims, not verified)\n\n- Documentation describes the interface; it grants no resale rights or seller authority.\n  Source: https://parcel-example.invalid/openapi.json#/x-commercial-terms\n\n## Pricing (seller supplied)\n\nFictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n## Payment Instructions (seller supplied)\n\nFictional invoice; no payment connection exists\n\n## Access Instructions (seller supplied)\n\nFictional seller-issued API key; do not send a real credential\n\n## Invocation Instructions (seller supplied)\n\nPOST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n## Sources and authorization boundaries\n\nCommercial authorization: not established.\n\nSources:\n- https://parcel-example.invalid/openapi.json\n\n## Extraction coverage\n\nLIMITED deterministic extraction only; no model quotes verified. Unextracted information is unknown, not absent.\nDeterministic extraction: capabilities 1, inputs 1, outputs 1, limitations 1, commercial_terms 1. Not an exhaustive review.\n\n## Boundaries\n\n- Documentation and seller statements are untrusted claims, not verified capabilities.\n- No publication, purchase, invocation, or seller trust certification has occurred.\n- FAHCE evaluates supplied evidence, not authenticity or trust.\n\nFAHCE evaluation not requested for this draft. This status does not assess transport configuration. FAHCE checks supplied evidence, not source authenticity, seller trust, publication, purchases, or external execution.\n\nUse review offer, review intake, revise field: value (or job: one specific outcome), or export json. Optional: wallet or purchase guide explains setup; preflight screens input for free. Only explicit check requests eligible checkout preparation; payment needs separate buyer authorization.\n\nWould you like a listing preparation checklist for your tool, with requirements and next steps?",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "assess_offer_readiness",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "eb362fb9-00c0-4272-af8a-b7f98bb4f49f"
+      },
+      "result": {
+        "request_id": "eb362fb9-00c0-4272-af8a-b7f98bb4f49f",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "Offer readiness: reviewable with caveats\n\nPreparation for review only — not certification, seller permission, approval or payment readiness.\n\nSnapshot: f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a\n\nAssessed intake revision: 1\n\nSaved draft revision: 1\n\nNo pending intake corrections.\n\nRelease: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19\n\nCommercial authorization: not_established\n\nRecorded seller approval: not_recorded\n\n\n\nRecorded facts and source alignment (quotations are not verified truth):\n\n- /draft/offer/capabilities/0/text [source_backed_derived; doc_1]: POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\n- /draft/offer/inputs/0/text [source_backed_derived; doc_1]: {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}\n\n- /draft/offer/outputs/0/text [source_backed_derived; doc_1]: {\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}\n\n- /draft/offer/limitations/0/text [source_backed_derived; doc_1]: Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n\n- /draft/offer/documented_commercial_terms/0/text [source_backed_derived; doc_1]: Documentation describes the interface; it grants no resale rights or seller authority.\n\n- /draft/revision [seller_or_record_declaration; no document reference]: 1\n\n- /fields/access [seller_or_record_declaration; no document reference]: Fictional seller-issued API key; do not send a real credential\n\n- /fields/customer [seller_or_record_declaration; no document reference]: Shipping form developers\n\n- /fields/docs [seller_or_record_declaration; no document reference]: [\"https://parcel-example.invalid/openapi.json\"]\n\n- /fields/invocation [seller_or_record_declaration; no document reference]: POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n- /fields/job [seller_or_record_declaration; no document reference]: Normalize parcel dimensions for a packing form\n\n- /fields/payment [seller_or_record_declaration; no document reference]: Fictional invoice; no payment connection exists\n\n- /fields/pricing [seller_or_record_declaration; no document reference]: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n- /fields/seller_name [seller_or_record_declaration; no document reference]: Fictional Parcel Workshop\n\n- /fields/tool_url [seller_or_record_declaration; no document reference]: https://parcel-example.invalid/\n\n- /guided_actions [seller_or_record_declaration; no document reference]: not_recorded\n\n\n\nSources:\n\n- doc_1: https://parcel-example.invalid/openapi.json [SHA-256 4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1]\n\n\n\nFindings and missing information:\n\n- EXTRACTION_COVERAGE at /draft/deterministic_extraction: {\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}\n  Next: Treat extraction coverage as recorded, not an exhaustive audit.\n\n- AUTHORIZATION_NOT_ESTABLISHED at /restrictions: {\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}\n  Next: Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.\n\n\n\nSaved planning (not implemented or commercial facts):\n\n\n\nChecks performed: retained_intake, quote_alignment, recorded_extraction_coverage, draft_currency, recorded_restrictions, sender_bound_approval, saved_planning\n\nNot assessed: claim_truth_or_general_semantic_entailment, live_tool_behavior, seller_identity_or_resale_rights, exhaustive_contradiction_detection, FAHCE, payment_eligibility_or_readiness\n\n\n\nOne next step: Review source alignment and permissions with the seller; this is not commercial clearance.",
+        "readiness": {
+          "schema_version": "TOOL_OFFER_READINESS_DELIVERY_V1",
+          "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+          "report_sha256": "85dfa3521f37917cb6b3b85616402428904dc0c8af8fd363c7cb24fabf82d7c4",
+          "summary": {
+            "status": "reviewable_with_caveats",
+            "scope": "preparation_for_review_only",
+            "basis": {
+              "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+              "draft_sha256": "ecdd86b49c5ac240568ca67f28feb3e9e4d3687be8336ef2a14c661fad4103a4",
+              "revision": 1,
+              "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+              "policy_version": "1.2.0"
+            },
+            "authorization": {
+              "commercial": "not_established",
+              "seller_approval": "not_recorded",
+              "independently_verified": false
+            },
+            "finding_count": 2,
+            "next_step": "Review source alignment and permissions with the seller; this is not commercial clearance."
+          },
+          "delivery": "inline",
+          "report": {
+            "schema_version": "TOOL_OFFER_READINESS_V1",
+            "scope": "preparation_for_review_only",
+            "status": "reviewable_with_caveats",
+            "basis": {
+              "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+              "draft_sha256": "ecdd86b49c5ac240568ca67f28feb3e9e4d3687be8336ef2a14c661fad4103a4",
+              "revision": 1,
+              "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+              "policy_version": "1.2.0"
+            },
+            "authorization": {
+              "commercial": "not_established",
+              "seller_approval": "not_recorded",
+              "independently_verified": false
+            },
+            "sources": [
+              {
+                "id": "doc_1",
+                "url": "https://parcel-example.invalid/openapi.json",
+                "sha256": "4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1"
+              }
+            ],
+            "facts": [
+              {
+                "pointer": "/draft/offer/capabilities/0/text",
+                "value": "POST /normalize: Normalize seller-supplied parcel dimensions into centimetres",
+                "basis": "source_backed_derived",
+                "evidence_refs": [
+                  "doc_1"
+                ],
+                "source_pointers": [
+                  "/paths/~1normalize",
+                  "/paths/~1normalize/post",
+                  "/paths/~1normalize/post/summary"
+                ]
+              },
+              {
+                "pointer": "/draft/offer/inputs/0/text",
+                "value": "{\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}",
+                "basis": "source_backed_derived",
+                "evidence_refs": [
+                  "doc_1"
+                ],
+                "source_pointers": [
+                  "/paths/~1normalize/post/requestBody"
+                ]
+              },
+              {
+                "pointer": "/draft/offer/outputs/0/text",
+                "value": "{\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}",
+                "basis": "source_backed_derived",
+                "evidence_refs": [
+                  "doc_1"
+                ],
+                "source_pointers": [
+                  "/paths/~1normalize/post/responses"
+                ]
+              },
+              {
+                "pointer": "/draft/offer/limitations/0/text",
+                "value": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+                "basis": "source_backed_derived",
+                "evidence_refs": [
+                  "doc_1"
+                ],
+                "source_pointers": [
+                  "/x-limitations"
+                ]
+              },
+              {
+                "pointer": "/draft/offer/documented_commercial_terms/0/text",
+                "value": "Documentation describes the interface; it grants no resale rights or seller authority.",
+                "basis": "source_backed_derived",
+                "evidence_refs": [
+                  "doc_1"
+                ],
+                "source_pointers": [
+                  "/x-commercial-terms"
+                ]
+              },
+              {
+                "pointer": "/draft/revision",
+                "value": "1",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/access",
+                "value": "Fictional seller-issued API key; do not send a real credential",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/customer",
+                "value": "Shipping form developers",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/docs",
+                "value": "[\"https://parcel-example.invalid/openapi.json\"]",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/invocation",
+                "value": "POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/job",
+                "value": "Normalize parcel dimensions for a packing form",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/payment",
+                "value": "Fictional invoice; no payment connection exists",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/pricing",
+                "value": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/seller_name",
+                "value": "Fictional Parcel Workshop",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/fields/tool_url",
+                "value": "https://parcel-example.invalid/",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              },
+              {
+                "pointer": "/guided_actions",
+                "value": "not_recorded",
+                "basis": "seller_or_record_declaration",
+                "evidence_refs": [],
+                "source_pointers": []
+              }
+            ],
+            "findings": [
+              {
+                "code": "EXTRACTION_COVERAGE",
+                "pointer": "/draft/deterministic_extraction",
+                "detail": "{\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}",
+                "next_step": "Treat extraction coverage as recorded, not an exhaustive audit.",
+                "evidence_refs": []
+              },
+              {
+                "code": "AUTHORIZATION_NOT_ESTABLISHED",
+                "pointer": "/restrictions",
+                "detail": "{\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}",
+                "next_step": "Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.",
+                "evidence_refs": []
+              }
+            ],
+            "planning": [],
+            "checks_performed": [
+              "retained_intake",
+              "quote_alignment",
+              "recorded_extraction_coverage",
+              "draft_currency",
+              "recorded_restrictions",
+              "sender_bound_approval",
+              "saved_planning"
+            ],
+            "not_assessed": [
+              "claim_truth_or_general_semantic_entailment",
+              "live_tool_behavior",
+              "seller_identity_or_resale_rights",
+              "exhaustive_contradiction_detection",
+              "FAHCE",
+              "payment_eligibility_or_readiness"
+            ],
+            "next_step": "Review source alignment and permissions with the seller; this is not commercial clearance.",
+            "human_readable": "Offer readiness: reviewable with caveats\n\nPreparation for review only — not certification, seller permission, approval or payment readiness.\n\nSnapshot: f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a\n\nAssessed intake revision: 1\n\nSaved draft revision: 1\n\nNo pending intake corrections.\n\nRelease: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19\n\nCommercial authorization: not_established\n\nRecorded seller approval: not_recorded\n\n\n\nRecorded facts and source alignment (quotations are not verified truth):\n\n- /draft/offer/capabilities/0/text [source_backed_derived; doc_1]: POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\n- /draft/offer/inputs/0/text [source_backed_derived; doc_1]: {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}\n\n- /draft/offer/outputs/0/text [source_backed_derived; doc_1]: {\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}\n\n- /draft/offer/limitations/0/text [source_backed_derived; doc_1]: Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n\n- /draft/offer/documented_commercial_terms/0/text [source_backed_derived; doc_1]: Documentation describes the interface; it grants no resale rights or seller authority.\n\n- /draft/revision [seller_or_record_declaration; no document reference]: 1\n\n- /fields/access [seller_or_record_declaration; no document reference]: Fictional seller-issued API key; do not send a real credential\n\n- /fields/customer [seller_or_record_declaration; no document reference]: Shipping form developers\n\n- /fields/docs [seller_or_record_declaration; no document reference]: [\"https://parcel-example.invalid/openapi.json\"]\n\n- /fields/invocation [seller_or_record_declaration; no document reference]: POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n- /fields/job [seller_or_record_declaration; no document reference]: Normalize parcel dimensions for a packing form\n\n- /fields/payment [seller_or_record_declaration; no document reference]: Fictional invoice; no payment connection exists\n\n- /fields/pricing [seller_or_record_declaration; no document reference]: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n- /fields/seller_name [seller_or_record_declaration; no document reference]: Fictional Parcel Workshop\n\n- /fields/tool_url [seller_or_record_declaration; no document reference]: https://parcel-example.invalid/\n\n- /guided_actions [seller_or_record_declaration; no document reference]: not_recorded\n\n\n\nSources:\n\n- doc_1: https://parcel-example.invalid/openapi.json [SHA-256 4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1]\n\n\n\nFindings and missing information:\n\n- EXTRACTION_COVERAGE at /draft/deterministic_extraction: {\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}\n  Next: Treat extraction coverage as recorded, not an exhaustive audit.\n\n- AUTHORIZATION_NOT_ESTABLISHED at /restrictions: {\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}\n  Next: Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.\n\n\n\nSaved planning (not implemented or commercial facts):\n\n\n\nChecks performed: retained_intake, quote_alignment, recorded_extraction_coverage, draft_currency, recorded_restrictions, sender_bound_approval, saved_planning\n\nNot assessed: claim_truth_or_general_semantic_entailment, live_tool_behavior, seller_identity_or_resale_rights, exhaustive_contradiction_detection, FAHCE, payment_eligibility_or_readiness\n\n\n\nOne next step: Review source alignment and permissions with the seller; this is not commercial clearance."
+          }
+        },
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "2e79f361-c505-4946-ac30-6abbe1362923",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "2e79f361-c505-4946-ac30-6abbe1362923"
+        },
+        "response": {
+          "job_id": "2e79f361-c505-4946-ac30-6abbe1362923",
+          "request_id": "eb362fb9-00c0-4272-af8a-b7f98bb4f49f",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "Offer readiness: reviewable with caveats\n\nPreparation for review only — not certification, seller permission, approval or payment readiness.\n\nSnapshot: f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a\n\nAssessed intake revision: 1\n\nSaved draft revision: 1\n\nNo pending intake corrections.\n\nRelease: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19\n\nCommercial authorization: not_established\n\nRecorded seller approval: not_recorded\n\n\n\nRecorded facts and source alignment (quotations are not verified truth):\n\n- /draft/offer/capabilities/0/text [source_backed_derived; doc_1]: POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\n- /draft/offer/inputs/0/text [source_backed_derived; doc_1]: {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}\n\n- /draft/offer/outputs/0/text [source_backed_derived; doc_1]: {\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}\n\n- /draft/offer/limitations/0/text [source_backed_derived; doc_1]: Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n\n- /draft/offer/documented_commercial_terms/0/text [source_backed_derived; doc_1]: Documentation describes the interface; it grants no resale rights or seller authority.\n\n- /draft/revision [seller_or_record_declaration; no document reference]: 1\n\n- /fields/access [seller_or_record_declaration; no document reference]: Fictional seller-issued API key; do not send a real credential\n\n- /fields/customer [seller_or_record_declaration; no document reference]: Shipping form developers\n\n- /fields/docs [seller_or_record_declaration; no document reference]: [\"https://parcel-example.invalid/openapi.json\"]\n\n- /fields/invocation [seller_or_record_declaration; no document reference]: POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n- /fields/job [seller_or_record_declaration; no document reference]: Normalize parcel dimensions for a packing form\n\n- /fields/payment [seller_or_record_declaration; no document reference]: Fictional invoice; no payment connection exists\n\n- /fields/pricing [seller_or_record_declaration; no document reference]: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n- /fields/seller_name [seller_or_record_declaration; no document reference]: Fictional Parcel Workshop\n\n- /fields/tool_url [seller_or_record_declaration; no document reference]: https://parcel-example.invalid/\n\n- /guided_actions [seller_or_record_declaration; no document reference]: not_recorded\n\n\n\nSources:\n\n- doc_1: https://parcel-example.invalid/openapi.json [SHA-256 4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1]\n\n\n\nFindings and missing information:\n\n- EXTRACTION_COVERAGE at /draft/deterministic_extraction: {\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}\n  Next: Treat extraction coverage as recorded, not an exhaustive audit.\n\n- AUTHORIZATION_NOT_ESTABLISHED at /restrictions: {\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}\n  Next: Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.\n\n\n\nSaved planning (not implemented or commercial facts):\n\n\n\nChecks performed: retained_intake, quote_alignment, recorded_extraction_coverage, draft_currency, recorded_restrictions, sender_bound_approval, saved_planning\n\nNot assessed: claim_truth_or_general_semantic_entailment, live_tool_behavior, seller_identity_or_resale_rights, exhaustive_contradiction_detection, FAHCE, payment_eligibility_or_readiness\n\n\n\nOne next step: Review source alignment and permissions with the seller; this is not commercial clearance.",
+          "readiness": {
+            "schema_version": "TOOL_OFFER_READINESS_DELIVERY_V1",
+            "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+            "report_sha256": "85dfa3521f37917cb6b3b85616402428904dc0c8af8fd363c7cb24fabf82d7c4",
+            "summary": {
+              "status": "reviewable_with_caveats",
+              "scope": "preparation_for_review_only",
+              "basis": {
+                "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+                "draft_sha256": "ecdd86b49c5ac240568ca67f28feb3e9e4d3687be8336ef2a14c661fad4103a4",
+                "revision": 1,
+                "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+                "policy_version": "1.2.0"
+              },
+              "authorization": {
+                "commercial": "not_established",
+                "seller_approval": "not_recorded",
+                "independently_verified": false
+              },
+              "finding_count": 2,
+              "next_step": "Review source alignment and permissions with the seller; this is not commercial clearance."
+            },
+            "delivery": "inline",
+            "report": {
+              "schema_version": "TOOL_OFFER_READINESS_V1",
+              "scope": "preparation_for_review_only",
+              "status": "reviewable_with_caveats",
+              "basis": {
+                "snapshot_sha256": "f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a",
+                "draft_sha256": "ecdd86b49c5ac240568ca67f28feb3e9e4d3687be8336ef2a14c661fad4103a4",
+                "revision": 1,
+                "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+                "policy_version": "1.2.0"
+              },
+              "authorization": {
+                "commercial": "not_established",
+                "seller_approval": "not_recorded",
+                "independently_verified": false
+              },
+              "sources": [
+                {
+                  "id": "doc_1",
+                  "url": "https://parcel-example.invalid/openapi.json",
+                  "sha256": "4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1"
+                }
+              ],
+              "facts": [
+                {
+                  "pointer": "/draft/offer/capabilities/0/text",
+                  "value": "POST /normalize: Normalize seller-supplied parcel dimensions into centimetres",
+                  "basis": "source_backed_derived",
+                  "evidence_refs": [
+                    "doc_1"
+                  ],
+                  "source_pointers": [
+                    "/paths/~1normalize",
+                    "/paths/~1normalize/post",
+                    "/paths/~1normalize/post/summary"
+                  ]
+                },
+                {
+                  "pointer": "/draft/offer/inputs/0/text",
+                  "value": "{\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}",
+                  "basis": "source_backed_derived",
+                  "evidence_refs": [
+                    "doc_1"
+                  ],
+                  "source_pointers": [
+                    "/paths/~1normalize/post/requestBody"
+                  ]
+                },
+                {
+                  "pointer": "/draft/offer/outputs/0/text",
+                  "value": "{\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}",
+                  "basis": "source_backed_derived",
+                  "evidence_refs": [
+                    "doc_1"
+                  ],
+                  "source_pointers": [
+                    "/paths/~1normalize/post/responses"
+                  ]
+                },
+                {
+                  "pointer": "/draft/offer/limitations/0/text",
+                  "value": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+                  "basis": "source_backed_derived",
+                  "evidence_refs": [
+                    "doc_1"
+                  ],
+                  "source_pointers": [
+                    "/x-limitations"
+                  ]
+                },
+                {
+                  "pointer": "/draft/offer/documented_commercial_terms/0/text",
+                  "value": "Documentation describes the interface; it grants no resale rights or seller authority.",
+                  "basis": "source_backed_derived",
+                  "evidence_refs": [
+                    "doc_1"
+                  ],
+                  "source_pointers": [
+                    "/x-commercial-terms"
+                  ]
+                },
+                {
+                  "pointer": "/draft/revision",
+                  "value": "1",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/access",
+                  "value": "Fictional seller-issued API key; do not send a real credential",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/customer",
+                  "value": "Shipping form developers",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/docs",
+                  "value": "[\"https://parcel-example.invalid/openapi.json\"]",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/invocation",
+                  "value": "POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/job",
+                  "value": "Normalize parcel dimensions for a packing form",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/payment",
+                  "value": "Fictional invoice; no payment connection exists",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/pricing",
+                  "value": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/seller_name",
+                  "value": "Fictional Parcel Workshop",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/fields/tool_url",
+                  "value": "https://parcel-example.invalid/",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                },
+                {
+                  "pointer": "/guided_actions",
+                  "value": "not_recorded",
+                  "basis": "seller_or_record_declaration",
+                  "evidence_refs": [],
+                  "source_pointers": []
+                }
+              ],
+              "findings": [
+                {
+                  "code": "EXTRACTION_COVERAGE",
+                  "pointer": "/draft/deterministic_extraction",
+                  "detail": "{\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}",
+                  "next_step": "Treat extraction coverage as recorded, not an exhaustive audit.",
+                  "evidence_refs": []
+                },
+                {
+                  "code": "AUTHORIZATION_NOT_ESTABLISHED",
+                  "pointer": "/restrictions",
+                  "detail": "{\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}",
+                  "next_step": "Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.",
+                  "evidence_refs": []
+                }
+              ],
+              "planning": [],
+              "checks_performed": [
+                "retained_intake",
+                "quote_alignment",
+                "recorded_extraction_coverage",
+                "draft_currency",
+                "recorded_restrictions",
+                "sender_bound_approval",
+                "saved_planning"
+              ],
+              "not_assessed": [
+                "claim_truth_or_general_semantic_entailment",
+                "live_tool_behavior",
+                "seller_identity_or_resale_rights",
+                "exhaustive_contradiction_detection",
+                "FAHCE",
+                "payment_eligibility_or_readiness"
+              ],
+              "next_step": "Review source alignment and permissions with the seller; this is not commercial clearance.",
+              "human_readable": "Offer readiness: reviewable with caveats\n\nPreparation for review only — not certification, seller permission, approval or payment readiness.\n\nSnapshot: f1de6f2cc604421067a6a4abeca156fbc1dd5e0258a152b5582c4bf083c19e3a\n\nAssessed intake revision: 1\n\nSaved draft revision: 1\n\nNo pending intake corrections.\n\nRelease: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19\n\nCommercial authorization: not_established\n\nRecorded seller approval: not_recorded\n\n\n\nRecorded facts and source alignment (quotations are not verified truth):\n\n- /draft/offer/capabilities/0/text [source_backed_derived; doc_1]: POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\n- /draft/offer/inputs/0/text [source_backed_derived; doc_1]: {\"required\": true, \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"required\": [\"length\", \"width\", \"height\", \"unit\"], \"properties\": {\"length\": {\"type\": \"number\"}, \"width\": {\"type\": \"number\"}, \"height\": {\"type\": \"number\"}, \"unit\": {\"enum\": [\"cm\", \"in\"]}}}, \"example\": {\"length\": 10, \"width\": 4, \"height\": 2, \"unit\": \"in\"}}}}\n\n- /draft/offer/outputs/0/text [source_backed_derived; doc_1]: {\"200\": {\"description\": \"Normalized dimensions; no carrier quote or shipment booking\", \"content\": {\"application/json\": {\"schema\": {\"type\": \"object\", \"properties\": {\"length_cm\": {\"type\": \"number\"}, \"width_cm\": {\"type\": \"number\"}, \"height_cm\": {\"type\": \"number\"}}}, \"example\": {\"length_cm\": 25.4, \"width_cm\": 10.16, \"height_cm\": 5.08}}}}}\n\n- /draft/offer/limitations/0/text [source_backed_derived; doc_1]: Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.\n\n- /draft/offer/documented_commercial_terms/0/text [source_backed_derived; doc_1]: Documentation describes the interface; it grants no resale rights or seller authority.\n\n- /draft/revision [seller_or_record_declaration; no document reference]: 1\n\n- /fields/access [seller_or_record_declaration; no document reference]: Fictional seller-issued API key; do not send a real credential\n\n- /fields/customer [seller_or_record_declaration; no document reference]: Shipping form developers\n\n- /fields/docs [seller_or_record_declaration; no document reference]: [\"https://parcel-example.invalid/openapi.json\"]\n\n- /fields/invocation [seller_or_record_declaration; no document reference]: POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\n- /fields/job [seller_or_record_declaration; no document reference]: Normalize parcel dimensions for a packing form\n\n- /fields/payment [seller_or_record_declaration; no document reference]: Fictional invoice; no payment connection exists\n\n- /fields/pricing [seller_or_record_declaration; no document reference]: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\n- /fields/seller_name [seller_or_record_declaration; no document reference]: Fictional Parcel Workshop\n\n- /fields/tool_url [seller_or_record_declaration; no document reference]: https://parcel-example.invalid/\n\n- /guided_actions [seller_or_record_declaration; no document reference]: not_recorded\n\n\n\nSources:\n\n- doc_1: https://parcel-example.invalid/openapi.json [SHA-256 4a5d10bb7962dab3b1a3fa05c8d9bdc65ad29cb00910b1d43e6d4e9aa5910ce1]\n\n\n\nFindings and missing information:\n\n- EXTRACTION_COVERAGE at /draft/deterministic_extraction: {\"candidate_lines\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"not_exhaustive\":true,\"policy\":\"deterministic-labelled-or-schema-v1\",\"retained\":{\"capabilities\":1,\"commercial_terms\":1,\"inputs\":1,\"limitations\":1,\"outputs\":1},\"truncated\":{}}\n  Next: Treat extraction coverage as recorded, not an exhaustive audit.\n\n- AUTHORIZATION_NOT_ESTABLISHED at /restrictions: {\"commercial_authorization\":\"not_established\",\"demonstration_only\":false,\"lifecycle\":\"current_product\",\"not_representing_maintainers\":false,\"schema\":\"TOOL_OFFER_RESTRICTIONS_V1\",\"sources\":[],\"third_party_non_ownership\":false}\n  Next: Keep this material non-authorizing; obtain and separately review seller permissions before commercial use.\n\n\n\nSaved planning (not implemented or commercial facts):\n\n\n\nChecks performed: retained_intake, quote_alignment, recorded_extraction_coverage, draft_currency, recorded_restrictions, sender_bound_approval, saved_planning\n\nNot assessed: claim_truth_or_general_semantic_entailment, live_tool_behavior, seller_identity_or_resale_rights, exhaustive_contradiction_detection, FAHCE, payment_eligibility_or_readiness\n\n\n\nOne next step: Review source alignment and permissions with the seller; this is not commercial clearance."
+            }
+          },
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "export_offer",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "19ae2b9a-0ef1-4e07-819b-04a9827d0d58",
+        "format": "json"
+      },
+      "result": {
+        "request_id": "19ae2b9a-0ef1-4e07-819b-04a9827d0d58",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_MANIFEST_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"kind\":\"export json\",\"revision\":1,\"encoding\":\"utf-8\",\"part_encoding\":\"base64\",\"total_parts\":6,\"total_bytes\":16468,\"sha256\":\"c754a42a3a77cc4b06edc6f9b9f813af54ee503f94d458a2ad35e85075c0bbcc\",\"part_bytes\":3000,\"complete_payload\":false,\"retrieve\":\"export part a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160 <index 1..6>\",\"verification\":\"Decode base64, verify each part, join in index order, then verify total_bytes and sha256. A manifest or single part is not a complete export.\"}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "a5254784-d892-4691-b466-66823f1c6827",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "a5254784-d892-4691-b466-66823f1c6827"
+        },
+        "response": {
+          "job_id": "a5254784-d892-4691-b466-66823f1c6827",
+          "request_id": "19ae2b9a-0ef1-4e07-819b-04a9827d0d58",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_MANIFEST_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"kind\":\"export json\",\"revision\":1,\"encoding\":\"utf-8\",\"part_encoding\":\"base64\",\"total_parts\":6,\"total_bytes\":16468,\"sha256\":\"c754a42a3a77cc4b06edc6f9b9f813af54ee503f94d458a2ad35e85075c0bbcc\",\"part_bytes\":3000,\"complete_payload\":false,\"retrieve\":\"export part a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160 <index 1..6>\",\"verification\":\"Decode base64, verify each part, join in index order, then verify total_bytes and sha256. A manifest or single part is not a complete export.\"}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "015f8067-da1b-4840-b13d-c948c37d5d4f",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 1
+      },
+      "result": {
+        "request_id": "015f8067-da1b-4840-b13d-c948c37d5d4f",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":1,\"total_parts\":6,\"offset_bytes\":0,\"bytes\":3000,\"sha256\":\"0665a745c2e4a8b486c15e8d38ecaa7605cabb7ff6b6b1d3de2904b61223d5cd\",\"data_base64\":\"ewogICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9FWFBPUlRfVjEiLAogICJhZ2VudF9uYW1lIjogIlRvb2wgT2ZmZXIgQWdlbnQiLAogICJkcmFmdF9vdXRkYXRlZCI6IGZhbHNlLAogICJkcmFmdCI6IHsKICAgICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9SRUNPUkRfVjEiLAogICAgInJldmlzaW9uIjogMSwKICAgICJzdGF0dXMiOiAiZHJhZnRfbm90X3B1Ymxpc2hlZCIsCiAgICAiZG9jdW1lbnRhdGlvbl9ldmlkZW5jZSI6IHsKICAgICAgInN0YXR1cyI6ICJkb2N1bWVudGVkX2Zvcl9yZXZpZXciLAogICAgICAiYnV5ZXJfcmVhZHkiOiBmYWxzZSwKICAgICAgIm1pc3NpbmdfY29yZV9jYXRlZ29yaWVzIjogW10sCiAgICAgICJpc3N1ZXMiOiBbXSwKICAgICAgInNjb3BlIjogIlNvdXJjZS1ncm91bmRlZCBjbGFpbXMgZm9yIHJldmlldywgbm90IGluZGVwZW5kZW50IHZlcmlmaWNhdGlvbiBvciBjb21tZXJjaWFsIGF1dGhvcml6YXRpb24uIgogICAgfSwKICAgICJleHRyYWN0aW9uX21vZGUiOiAiZGV0ZXJtaW5pc3RpY19saW1pdGVkIiwKICAgICJkZXRlcm1pbmlzdGljX2V4dHJhY3Rpb24iOiB7CiAgICAgICJwb2xpY3kiOiAiZGV0ZXJtaW5pc3RpYy1sYWJlbGxlZC1vci1zY2hlbWEtdjEiLAogICAgICAicmV0YWluZWQiOiB7CiAgICAgICAgImNhcGFiaWxpdGllcyI6IDEsCiAgICAgICAgImlucHV0cyI6IDEsCiAgICAgICAgIm91dHB1dHMiOiAxLAogICAgICAgICJsaW1pdGF0aW9ucyI6IDEsCiAgICAgICAgImNvbW1lcmNpYWxfdGVybXMiOiAxCiAgICAgIH0sCiAgICAgICJjYW5kaWRhdGVfbGluZXMiOiB7CiAgICAgICAgImNhcGFiaWxpdGllcyI6IDEsCiAgICAgICAgImlucHV0cyI6IDEsCiAgICAgICAgIm91dHB1dHMiOiAxLAogICAgICAgICJsaW1pdGF0aW9ucyI6IDEsCiAgICAgICAgImNvbW1lcmNpYWxfdGVybXMiOiAxCiAgICAgIH0sCiAgICAgICJ0cnVuY2F0ZWQiOiB7fSwKICAgICAgIm5vdF9leGhhdXN0aXZlIjogdHJ1ZQogICAgfSwKICAgICJzZWxsZXIiOiB7CiAgICAgICJuYW1lIjogIkZpY3Rpb25hbCBQYXJjZWwgV29ya3Nob3AiLAogICAgICAiaWRlbnRpdHlfc3RhdHVzIjogInNlbGxlcl9zdXBwbGllZF9ub3RfYXV0aGVudGljYXRlZCIsCiAgICAgICJ0b29sX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvIiwKICAgICAgImludGVuZGVkX2N1c3RvbWVyIjogIlNoaXBwaW5nIGZvcm0gZGV2ZWxvcGVycyIsCiAgICAgICJzb3VyY2VfdXJscyI6IFsKICAgICAgICAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIKICAgICAgXQogICAgfSwKICAgICJvZmZlciI6IHsKICAgICAgImpvYiI6ICJOb3JtYWxpemUgcGFyY2VsIGRpbWVuc2lvbnMgZm9yIGEgcGFja2luZyBmb3JtIiwKICAgICAgImpvYl9zdGF0dXMiOiAicHJvcG9zZWRfbm90X2V4ZWN1dGVkIiwKICAgICAgImNhcGFiaWxpdGllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAidGV4dCI6ICJQT1NUIC9ub3JtYWxpemU6IE5vcm1hbGl6ZSBzZWxsZXItc3VwcGxpZWQgcGFyY2VsIGRpbWVuc2lvbnMgaW50byBjZW50aW1ldHJlcyIsCiAgICAgICAgICAic291cmNlX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFwaS5qc29uIiwKICAgICAgICAgICJsb2NhdGlvbiI6ICJwYXRoc1svbm9ybWFsaXplXS5wb3N0IiwKICAgICAgICAgICJldmlkZW5jZV9zdGF0dXMiOiAiZG9jdW1lbnRhdGlvbl9jbGFpbV9ub3RfdmVyaWZpZWQiLAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0IiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJvcGVuYXBpX2VuZHBvaW50IiwKICAgICAgICAgICAgInBhdGgiOiAiL25vcm1hbGl6ZSIsCiAgICAgICAgICAgICJtZXRob2QiOiAicG9zdCIsCiAgICAgICAgICAgICJzdW1tYXJ5X2ZpZWxkIjogInN1bW1hcnkiLAogICAgICAgICAgICAic291cmNlX3BvaW50ZXJzIjogWwogICAgICAgICAgICAgICIvcGF0aHMvfjFub3JtYWxpemUiLAogICAgICAgICAgICAgICIvcGF0aHMvfjFub3JtYWxpemUvcG9zdCIsCiAgICAgICAgICAgICAgIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3N1bW1hcnkiCiAgICAgICAgICAgIF0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJpbnB1dHMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAie1wicmVxdWlyZWRcIjogdHJ1ZSwgXCJjb250ZW50XCI6IHtcImFwcGxpY2F0aW9uL2pzb25cIjoge1wic2NoZW1hXCI6IHtcInR5cGVcIjogXCJvYmplY3RcIiwgXCJyZXF1aXJlZFwiOiBbXCJsZW5ndGhcIiwgXCJ3aWR0aFwiLCBcImhlaWdodFwiLCBcInVuaXRcIl0sIFwicHJvcGVydGllc1wiOiB7XCJsZW5ndGhcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ3aWR0aFwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcImhlaWdodFwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcInVuaXRcIjoge1wiZW51bVwiOiBbXCJjbVwiLCBcImluXCJdfX19LCBcImV4YW1wbGVcIjoge1wibGVuZ3RoXCI6IDEwLCBcIndpZHRoXCI6IDQsIFwiaGVpZ2h0XCI6IDIsIFwidW5pdFwiOiBcImluXCJ9fX19IiwKICAgICAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAgICAgImxvY2F0aW9uIjogInBhdGhzWy9ub3JtYWxpemVdLnBvc3QucmVxdWVzdEJvZHkiLAogICAgICAgICAgImV2aWRlbmNlX3N0YXR1cyI6ICJkb2N1bWVudGF0aW9uX2NsYWltX25vdF92ZXJpZmllZCIsCiAgICAgICAgICAic2NoZW1hX3ZhbHVlIjogewogICAgICAgICAgICAicmVxdWlyZWQiOiB0cnVlLAogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJ0eXBl\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "5073064e-5ef4-42dd-b363-1b9ae425f970",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "5073064e-5ef4-42dd-b363-1b9ae425f970"
+        },
+        "response": {
+          "job_id": "5073064e-5ef4-42dd-b363-1b9ae425f970",
+          "request_id": "015f8067-da1b-4840-b13d-c948c37d5d4f",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":1,\"total_parts\":6,\"offset_bytes\":0,\"bytes\":3000,\"sha256\":\"0665a745c2e4a8b486c15e8d38ecaa7605cabb7ff6b6b1d3de2904b61223d5cd\",\"data_base64\":\"ewogICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9FWFBPUlRfVjEiLAogICJhZ2VudF9uYW1lIjogIlRvb2wgT2ZmZXIgQWdlbnQiLAogICJkcmFmdF9vdXRkYXRlZCI6IGZhbHNlLAogICJkcmFmdCI6IHsKICAgICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9SRUNPUkRfVjEiLAogICAgInJldmlzaW9uIjogMSwKICAgICJzdGF0dXMiOiAiZHJhZnRfbm90X3B1Ymxpc2hlZCIsCiAgICAiZG9jdW1lbnRhdGlvbl9ldmlkZW5jZSI6IHsKICAgICAgInN0YXR1cyI6ICJkb2N1bWVudGVkX2Zvcl9yZXZpZXciLAogICAgICAiYnV5ZXJfcmVhZHkiOiBmYWxzZSwKICAgICAgIm1pc3NpbmdfY29yZV9jYXRlZ29yaWVzIjogW10sCiAgICAgICJpc3N1ZXMiOiBbXSwKICAgICAgInNjb3BlIjogIlNvdXJjZS1ncm91bmRlZCBjbGFpbXMgZm9yIHJldmlldywgbm90IGluZGVwZW5kZW50IHZlcmlmaWNhdGlvbiBvciBjb21tZXJjaWFsIGF1dGhvcml6YXRpb24uIgogICAgfSwKICAgICJleHRyYWN0aW9uX21vZGUiOiAiZGV0ZXJtaW5pc3RpY19saW1pdGVkIiwKICAgICJkZXRlcm1pbmlzdGljX2V4dHJhY3Rpb24iOiB7CiAgICAgICJwb2xpY3kiOiAiZGV0ZXJtaW5pc3RpYy1sYWJlbGxlZC1vci1zY2hlbWEtdjEiLAogICAgICAicmV0YWluZWQiOiB7CiAgICAgICAgImNhcGFiaWxpdGllcyI6IDEsCiAgICAgICAgImlucHV0cyI6IDEsCiAgICAgICAgIm91dHB1dHMiOiAxLAogICAgICAgICJsaW1pdGF0aW9ucyI6IDEsCiAgICAgICAgImNvbW1lcmNpYWxfdGVybXMiOiAxCiAgICAgIH0sCiAgICAgICJjYW5kaWRhdGVfbGluZXMiOiB7CiAgICAgICAgImNhcGFiaWxpdGllcyI6IDEsCiAgICAgICAgImlucHV0cyI6IDEsCiAgICAgICAgIm91dHB1dHMiOiAxLAogICAgICAgICJsaW1pdGF0aW9ucyI6IDEsCiAgICAgICAgImNvbW1lcmNpYWxfdGVybXMiOiAxCiAgICAgIH0sCiAgICAgICJ0cnVuY2F0ZWQiOiB7fSwKICAgICAgIm5vdF9leGhhdXN0aXZlIjogdHJ1ZQogICAgfSwKICAgICJzZWxsZXIiOiB7CiAgICAgICJuYW1lIjogIkZpY3Rpb25hbCBQYXJjZWwgV29ya3Nob3AiLAogICAgICAiaWRlbnRpdHlfc3RhdHVzIjogInNlbGxlcl9zdXBwbGllZF9ub3RfYXV0aGVudGljYXRlZCIsCiAgICAgICJ0b29sX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvIiwKICAgICAgImludGVuZGVkX2N1c3RvbWVyIjogIlNoaXBwaW5nIGZvcm0gZGV2ZWxvcGVycyIsCiAgICAgICJzb3VyY2VfdXJscyI6IFsKICAgICAgICAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIKICAgICAgXQogICAgfSwKICAgICJvZmZlciI6IHsKICAgICAgImpvYiI6ICJOb3JtYWxpemUgcGFyY2VsIGRpbWVuc2lvbnMgZm9yIGEgcGFja2luZyBmb3JtIiwKICAgICAgImpvYl9zdGF0dXMiOiAicHJvcG9zZWRfbm90X2V4ZWN1dGVkIiwKICAgICAgImNhcGFiaWxpdGllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAidGV4dCI6ICJQT1NUIC9ub3JtYWxpemU6IE5vcm1hbGl6ZSBzZWxsZXItc3VwcGxpZWQgcGFyY2VsIGRpbWVuc2lvbnMgaW50byBjZW50aW1ldHJlcyIsCiAgICAgICAgICAic291cmNlX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFwaS5qc29uIiwKICAgICAgICAgICJsb2NhdGlvbiI6ICJwYXRoc1svbm9ybWFsaXplXS5wb3N0IiwKICAgICAgICAgICJldmlkZW5jZV9zdGF0dXMiOiAiZG9jdW1lbnRhdGlvbl9jbGFpbV9ub3RfdmVyaWZpZWQiLAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0IiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJvcGVuYXBpX2VuZHBvaW50IiwKICAgICAgICAgICAgInBhdGgiOiAiL25vcm1hbGl6ZSIsCiAgICAgICAgICAgICJtZXRob2QiOiAicG9zdCIsCiAgICAgICAgICAgICJzdW1tYXJ5X2ZpZWxkIjogInN1bW1hcnkiLAogICAgICAgICAgICAic291cmNlX3BvaW50ZXJzIjogWwogICAgICAgICAgICAgICIvcGF0aHMvfjFub3JtYWxpemUiLAogICAgICAgICAgICAgICIvcGF0aHMvfjFub3JtYWxpemUvcG9zdCIsCiAgICAgICAgICAgICAgIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3N1bW1hcnkiCiAgICAgICAgICAgIF0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJpbnB1dHMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAie1wicmVxdWlyZWRcIjogdHJ1ZSwgXCJjb250ZW50XCI6IHtcImFwcGxpY2F0aW9uL2pzb25cIjoge1wic2NoZW1hXCI6IHtcInR5cGVcIjogXCJvYmplY3RcIiwgXCJyZXF1aXJlZFwiOiBbXCJsZW5ndGhcIiwgXCJ3aWR0aFwiLCBcImhlaWdodFwiLCBcInVuaXRcIl0sIFwicHJvcGVydGllc1wiOiB7XCJsZW5ndGhcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ3aWR0aFwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcImhlaWdodFwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcInVuaXRcIjoge1wiZW51bVwiOiBbXCJjbVwiLCBcImluXCJdfX19LCBcImV4YW1wbGVcIjoge1wibGVuZ3RoXCI6IDEwLCBcIndpZHRoXCI6IDQsIFwiaGVpZ2h0XCI6IDIsIFwidW5pdFwiOiBcImluXCJ9fX19IiwKICAgICAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAgICAgImxvY2F0aW9uIjogInBhdGhzWy9ub3JtYWxpemVdLnBvc3QucmVxdWVzdEJvZHkiLAogICAgICAgICAgImV2aWRlbmNlX3N0YXR1cyI6ICJkb2N1bWVudGF0aW9uX2NsYWltX25vdF92ZXJpZmllZCIsCiAgICAgICAgICAic2NoZW1hX3ZhbHVlIjogewogICAgICAgICAgICAicmVxdWlyZWQiOiB0cnVlLAogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJ0eXBl\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "ff603413-74ad-4a0e-b92d-40a37f0b4bbf",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 2
+      },
+      "result": {
+        "request_id": "ff603413-74ad-4a0e-b92d-40a37f0b4bbf",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":2,\"total_parts\":6,\"offset_bytes\":3000,\"bytes\":3000,\"sha256\":\"c5dbfbecdc5ed636e8d449f70e2a6c5eea624e904b502ae294d86b63f5727113\",\"data_base64\":\"IjogIm9iamVjdCIsCiAgICAgICAgICAgICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoIiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiLAogICAgICAgICAgICAgICAgICAgICJ1bml0IgogICAgICAgICAgICAgICAgICBdLAogICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoIjogewogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAibnVtYmVyIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogewogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAibnVtYmVyIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6IHsKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJ1bml0IjogewogICAgICAgICAgICAgICAgICAgICAgImVudW0iOiBbCiAgICAgICAgICAgICAgICAgICAgICAgICJjbSIsCiAgICAgICAgICAgICAgICAgICAgICAgICJpbiIKICAgICAgICAgICAgICAgICAgICAgIF0KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAiZXhhbXBsZSI6IHsKICAgICAgICAgICAgICAgICAgImxlbmd0aCI6IDEwLAogICAgICAgICAgICAgICAgICAid2lkdGgiOiA0LAogICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogMiwKICAgICAgICAgICAgICAgICAgInVuaXQiOiAiaW4iCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9LAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3JlcXVlc3RCb2R5IiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJzY2hlbWFfc2VyaWFsaXphdGlvbiIKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJvdXRwdXRzIjogWwogICAgICAgIHsKICAgICAgICAgICJ0ZXh0IjogIntcIjIwMFwiOiB7XCJkZXNjcmlwdGlvblwiOiBcIk5vcm1hbGl6ZWQgZGltZW5zaW9uczsgbm8gY2FycmllciBxdW90ZSBvciBzaGlwbWVudCBib29raW5nXCIsIFwiY29udGVudFwiOiB7XCJhcHBsaWNhdGlvbi9qc29uXCI6IHtcInNjaGVtYVwiOiB7XCJ0eXBlXCI6IFwib2JqZWN0XCIsIFwicHJvcGVydGllc1wiOiB7XCJsZW5ndGhfY21cIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ3aWR0aF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcImhlaWdodF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9fX0sIFwiZXhhbXBsZVwiOiB7XCJsZW5ndGhfY21cIjogMjUuNCwgXCJ3aWR0aF9jbVwiOiAxMC4xNiwgXCJoZWlnaHRfY21cIjogNS4wOH19fX19IiwKICAgICAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAgICAgImxvY2F0aW9uIjogInBhdGhzWy9ub3JtYWxpemVdLnBvc3QucmVzcG9uc2VzIiwKICAgICAgICAgICJldmlkZW5jZV9zdGF0dXMiOiAiZG9jdW1lbnRhdGlvbl9jbGFpbV9ub3RfdmVyaWZpZWQiLAogICAgICAgICAgInNjaGVtYV92YWx1ZSI6IHsKICAgICAgICAgICAgIjIwMCI6IHsKICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiTm9ybWFsaXplZCBkaW1lbnNpb25zOyBubyBjYXJyaWVyIHF1b3RlIG9yIHNoaXBtZW50IGJvb2tpbmciLAogICAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IiwKICAgICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAgICJsZW5ndGhfY20iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgICAid2lkdGhfY20iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0X2NtIjogewogICAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJudW1iZXIiCiAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAiZXhhbXBsZSI6IHsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoX2NtIjogMjUuNCwKICAgICAgICAgICAgICAgICAgICAid2lkdGhfY20iOiAxMC4xNiwKICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0X2NtIjogNS4wOAogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9LAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3Jlc3BvbnNlcyIsCiAgICAgICAgICAiZGVyaXZhdGlvbiI6IHsKICAgICAgICAgICAgImtpbmQiOiAic2NoZW1hX3NlcmlhbGl6YXRpb24iCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICBdLAogICAgICAibGltaXRhdGlvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAiRGltZW5zaW9ucyBvbmx5LiBObyBjYXJyaWVyIHByaWNlcywgc2hpcG1lbnQgYm9va2luZywgaW5zdXJhbmNlIG9yIGRlbGl2ZXJ5IGd1YXJhbnRlZXMuIFBvc2l0aXZlIGZpbml0ZSBudW1iZXJzIHJlcXVpcmVkLiIsCiAgICAgICAgICAic291cmNlX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFw\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "fe2c40d6-d6c9-4c52-8af8-a74fafc1d0d9",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "fe2c40d6-d6c9-4c52-8af8-a74fafc1d0d9"
+        },
+        "response": {
+          "job_id": "fe2c40d6-d6c9-4c52-8af8-a74fafc1d0d9",
+          "request_id": "ff603413-74ad-4a0e-b92d-40a37f0b4bbf",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":2,\"total_parts\":6,\"offset_bytes\":3000,\"bytes\":3000,\"sha256\":\"c5dbfbecdc5ed636e8d449f70e2a6c5eea624e904b502ae294d86b63f5727113\",\"data_base64\":\"IjogIm9iamVjdCIsCiAgICAgICAgICAgICAgICAgICJyZXF1aXJlZCI6IFsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoIiwKICAgICAgICAgICAgICAgICAgICAid2lkdGgiLAogICAgICAgICAgICAgICAgICAgICJoZWlnaHQiLAogICAgICAgICAgICAgICAgICAgICJ1bml0IgogICAgICAgICAgICAgICAgICBdLAogICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoIjogewogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAibnVtYmVyIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgIndpZHRoIjogewogICAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAibnVtYmVyIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgImhlaWdodCI6IHsKICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAgICJ1bml0IjogewogICAgICAgICAgICAgICAgICAgICAgImVudW0iOiBbCiAgICAgICAgICAgICAgICAgICAgICAgICJjbSIsCiAgICAgICAgICAgICAgICAgICAgICAgICJpbiIKICAgICAgICAgICAgICAgICAgICAgIF0KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAiZXhhbXBsZSI6IHsKICAgICAgICAgICAgICAgICAgImxlbmd0aCI6IDEwLAogICAgICAgICAgICAgICAgICAid2lkdGgiOiA0LAogICAgICAgICAgICAgICAgICAiaGVpZ2h0IjogMiwKICAgICAgICAgICAgICAgICAgInVuaXQiOiAiaW4iCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9LAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3JlcXVlc3RCb2R5IiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJzY2hlbWFfc2VyaWFsaXphdGlvbiIKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJvdXRwdXRzIjogWwogICAgICAgIHsKICAgICAgICAgICJ0ZXh0IjogIntcIjIwMFwiOiB7XCJkZXNjcmlwdGlvblwiOiBcIk5vcm1hbGl6ZWQgZGltZW5zaW9uczsgbm8gY2FycmllciBxdW90ZSBvciBzaGlwbWVudCBib29raW5nXCIsIFwiY29udGVudFwiOiB7XCJhcHBsaWNhdGlvbi9qc29uXCI6IHtcInNjaGVtYVwiOiB7XCJ0eXBlXCI6IFwib2JqZWN0XCIsIFwicHJvcGVydGllc1wiOiB7XCJsZW5ndGhfY21cIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ3aWR0aF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcImhlaWdodF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9fX0sIFwiZXhhbXBsZVwiOiB7XCJsZW5ndGhfY21cIjogMjUuNCwgXCJ3aWR0aF9jbVwiOiAxMC4xNiwgXCJoZWlnaHRfY21cIjogNS4wOH19fX19IiwKICAgICAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAgICAgImxvY2F0aW9uIjogInBhdGhzWy9ub3JtYWxpemVdLnBvc3QucmVzcG9uc2VzIiwKICAgICAgICAgICJldmlkZW5jZV9zdGF0dXMiOiAiZG9jdW1lbnRhdGlvbl9jbGFpbV9ub3RfdmVyaWZpZWQiLAogICAgICAgICAgInNjaGVtYV92YWx1ZSI6IHsKICAgICAgICAgICAgIjIwMCI6IHsKICAgICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiTm9ybWFsaXplZCBkaW1lbnNpb25zOyBubyBjYXJyaWVyIHF1b3RlIG9yIHNoaXBtZW50IGJvb2tpbmciLAogICAgICAgICAgICAgICJjb250ZW50IjogewogICAgICAgICAgICAgICAgImFwcGxpY2F0aW9uL2pzb24iOiB7CiAgICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICAgInR5cGUiOiAib2JqZWN0IiwKICAgICAgICAgICAgICAgICAgICAicHJvcGVydGllcyI6IHsKICAgICAgICAgICAgICAgICAgICAgICJsZW5ndGhfY20iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgICAid2lkdGhfY20iOiB7CiAgICAgICAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm51bWJlciIKICAgICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0X2NtIjogewogICAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJudW1iZXIiCiAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgICAiZXhhbXBsZSI6IHsKICAgICAgICAgICAgICAgICAgICAibGVuZ3RoX2NtIjogMjUuNCwKICAgICAgICAgICAgICAgICAgICAid2lkdGhfY20iOiAxMC4xNiwKICAgICAgICAgICAgICAgICAgICAiaGVpZ2h0X2NtIjogNS4wOAogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9LAogICAgICAgICAgInNvdXJjZV9wb2ludGVyIjogIi9wYXRocy9+MW5vcm1hbGl6ZS9wb3N0L3Jlc3BvbnNlcyIsCiAgICAgICAgICAiZGVyaXZhdGlvbiI6IHsKICAgICAgICAgICAgImtpbmQiOiAic2NoZW1hX3NlcmlhbGl6YXRpb24iCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICBdLAogICAgICAibGltaXRhdGlvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAiRGltZW5zaW9ucyBvbmx5LiBObyBjYXJyaWVyIHByaWNlcywgc2hpcG1lbnQgYm9va2luZywgaW5zdXJhbmNlIG9yIGRlbGl2ZXJ5IGd1YXJhbnRlZXMuIFBvc2l0aXZlIGZpbml0ZSBudW1iZXJzIHJlcXVpcmVkLiIsCiAgICAgICAgICAic291cmNlX3VybCI6ICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFw\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "a265464d-32da-4f18-8fb6-9368176dcb63",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 3
+      },
+      "result": {
+        "request_id": "a265464d-32da-4f18-8fb6-9368176dcb63",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":3,\"total_parts\":6,\"offset_bytes\":6000,\"bytes\":3000,\"sha256\":\"7fdd629ec6579c7b705f100dc8296273379d1940f52d9ae1ca892a0bc24eff23\",\"data_base64\":\"aS5qc29uIiwKICAgICAgICAgICJsb2NhdGlvbiI6ICIveC1saW1pdGF0aW9ucyIsCiAgICAgICAgICAiZXZpZGVuY2Vfc3RhdHVzIjogImRvY3VtZW50YXRpb25fY2xhaW1fbm90X3ZlcmlmaWVkIiwKICAgICAgICAgICJzb3VyY2VfcG9pbnRlciI6ICIveC1saW1pdGF0aW9ucyIsCiAgICAgICAgICAiZGVyaXZhdGlvbiI6IHsKICAgICAgICAgICAgImtpbmQiOiAianNvbl92YWx1ZV90ZXh0IiwKICAgICAgICAgICAgInNvdXJjZV9wb2ludGVycyI6IFsKICAgICAgICAgICAgICAiL3gtbGltaXRhdGlvbnMiCiAgICAgICAgICAgIF0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJkb2N1bWVudGVkX2NvbW1lcmNpYWxfdGVybXMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAiRG9jdW1lbnRhdGlvbiBkZXNjcmliZXMgdGhlIGludGVyZmFjZTsgaXQgZ3JhbnRzIG5vIHJlc2FsZSByaWdodHMgb3Igc2VsbGVyIGF1dGhvcml0eS4iLAogICAgICAgICAgInNvdXJjZV91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICAgICAibG9jYXRpb24iOiAiL3gtY29tbWVyY2lhbC10ZXJtcyIsCiAgICAgICAgICAiZXZpZGVuY2Vfc3RhdHVzIjogImRvY3VtZW50YXRpb25fY2xhaW1fbm90X3ZlcmlmaWVkIiwKICAgICAgICAgICJzb3VyY2VfcG9pbnRlciI6ICIveC1jb21tZXJjaWFsLXRlcm1zIiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJqc29uX3ZhbHVlX3RleHQiLAogICAgICAgICAgICAic291cmNlX3BvaW50ZXJzIjogWwogICAgICAgICAgICAgICIveC1jb21tZXJjaWFsLXRlcm1zIgogICAgICAgICAgICBdCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICBdLAogICAgICAicHJpY2luZyI6ICJGaWN0aW9uYWwgc2VsbGVyIHByb3Bvc2VzIFVTRCA5IHBlciBtb250aCBmb3IgMTAwMCBjYWxsczsgb3ZlcmFnZSBkaXNhYmxlZCIsCiAgICAgICJwYXltZW50X2luc3RydWN0aW9ucyI6ICJGaWN0aW9uYWwgaW52b2ljZTsgbm8gcGF5bWVudCBjb25uZWN0aW9uIGV4aXN0cyIsCiAgICAgICJhY2Nlc3NfaW5zdHJ1Y3Rpb25zIjogIkZpY3Rpb25hbCBzZWxsZXItaXNzdWVkIEFQSSBrZXk7IGRvIG5vdCBzZW5kIGEgcmVhbCBjcmVkZW50aWFsIiwKICAgICAgImludm9jYXRpb25faW5zdHJ1Y3Rpb25zIjogIlBPU1QgL25vcm1hbGl6ZSB3aXRoIEpTT04gbGVuZ3RoLCB3aWR0aCwgaGVpZ2h0LCB1bml0OyBBdXRob3JpemF0aW9uOiBCZWFyZXIgPEFQSV9LRVk+IiwKICAgICAgImNvbW1lcmNpYWxfaW5zdHJ1Y3Rpb25fc291cmNlIjogInNlbGxlcl9zdXBwbGllZF9ub3RfdmVyaWZpZWQiLAogICAgICAicGF5bWVudF9zdGF0dXMiOiAic2VsbGVyX3N0YXRlbWVudF91bnZlcmlmaWVkIiwKICAgICAgInNvdXJjZV91cmxzIjogWwogICAgICAgICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFwaS5qc29uIgogICAgICBdLAogICAgICAidW5rbm93bl9vcl91bmV4dHJhY3RlZCI6IFtdCiAgICB9LAogICAgImJvdW5kYXJpZXMiOiBbCiAgICAgICJEb2N1bWVudGF0aW9uIGFuZCBzZWxsZXIgc3RhdGVtZW50cyBhcmUgdW50cnVzdGVkIGNsYWltcywgbm90IHZlcmlmaWVkIGNhcGFiaWxpdGllcy4iLAogICAgICAiTm8gcHVibGljYXRpb24sIHB1cmNoYXNlLCBpbnZvY2F0aW9uLCBvciBzZWxsZXIgdHJ1c3QgY2VydGlmaWNhdGlvbiBoYXMgb2NjdXJyZWQuIiwKICAgICAgIkZBSENFIGV2YWx1YXRlcyBzdXBwbGllZCBldmlkZW5jZSwgbm90IGF1dGhlbnRpY2l0eSBvciB0cnVzdC4iCiAgICBdLAogICAgImRyYWZ0X3ZlcnNpb24iOiAxLAogICAgImRyYWZ0X3ZlcnNpb25fc2NvcGUiOiAiZ2VuZXJhdGVkX2luX3RoaXNfY29udmVyc2F0aW9uIiwKICAgICJyZXN0cmljdGlvbnMiOiB7CiAgICAgICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9SRVNUUklDVElPTlNfVjEiLAogICAgICAiZGVtb25zdHJhdGlvbl9vbmx5IjogZmFsc2UsCiAgICAgICJ0aGlyZF9wYXJ0eV9ub25fb3duZXJzaGlwIjogZmFsc2UsCiAgICAgICJub3RfcmVwcmVzZW50aW5nX21haW50YWluZXJzIjogZmFsc2UsCiAgICAgICJjb21tZXJjaWFsX2F1dGhvcml6YXRpb24iOiAibm90X2VzdGFibGlzaGVkIiwKICAgICAgImxpZmVjeWNsZSI6ICJjdXJyZW50X3Byb2R1Y3QiLAogICAgICAic291cmNlcyI6IFtdCiAgICB9LAogICAgImNvbW1lcmNpYWxfdGVybXNfcHJvdmVuYW5jZSI6IHsKICAgICAgInNlbGxlcl90ZXJtcyI6ICJzZWxsZXJfc3VwcGxpZWRfbm90X2luZGVwZW5kZW50bHlfYXV0aG9yaXplZCIsCiAgICAgICJkb2N1bWVudGVkX3RoaXJkX3BhcnR5X3Rlcm1zIjogInNvdXJjZV9jbGFpbXNfbm90X3NlbGxlcl9wZXJtaXNzaW9uIiwKICAgICAgImF1dGhvcml6YXRpb25fc3RhdHVzIjogIm5vdF9lc3RhYmxpc2hlZCIKICAgIH0KICB9LAogICJyZXN0cmljdGlvbnMiOiB7CiAgICAic2NoZW1hIjogIlRPT0xfT0ZGRVJfUkVTVFJJQ1RJT05TX1YxIiwKICAgICJkZW1vbnN0cmF0aW9uX29ubHkiOiBmYWxzZSwKICAgICJ0aGlyZF9wYXJ0eV9ub25fb3duZXJzaGlwIjogZmFsc2UsCiAgICAibm90X3JlcHJlc2VudGluZ19tYWludGFpbmVycyI6IGZhbHNlLAogICAgImNvbW1lcmNpYWxfYXV0aG9yaXphdGlvbiI6ICJub3RfZXN0YWJsaXNoZWQiLAogICAgImxpZmVjeWNsZSI6ICJjdXJyZW50X3Byb2R1Y3QiLAogICAgInNvdXJjZXMiOiBbXQogIH0sCiAgInBlbmRpbmdfaW50YWtlIjogbnVsbCwKICAic291cmNlX2RvY3VtZW50cyI6IFsKICAgIHsKICAgICAgInJlcXVlc3RlZF91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAidGV4dCI6ICJ7XCJvcGVuYXBpXCI6IFwiMy4xLjBcIiwgXCJpbmZvXCI6\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "03ed1fc1-f5f7-4b21-8a70-01c8caa72425",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "03ed1fc1-f5f7-4b21-8a70-01c8caa72425"
+        },
+        "response": {
+          "job_id": "03ed1fc1-f5f7-4b21-8a70-01c8caa72425",
+          "request_id": "a265464d-32da-4f18-8fb6-9368176dcb63",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":3,\"total_parts\":6,\"offset_bytes\":6000,\"bytes\":3000,\"sha256\":\"7fdd629ec6579c7b705f100dc8296273379d1940f52d9ae1ca892a0bc24eff23\",\"data_base64\":\"aS5qc29uIiwKICAgICAgICAgICJsb2NhdGlvbiI6ICIveC1saW1pdGF0aW9ucyIsCiAgICAgICAgICAiZXZpZGVuY2Vfc3RhdHVzIjogImRvY3VtZW50YXRpb25fY2xhaW1fbm90X3ZlcmlmaWVkIiwKICAgICAgICAgICJzb3VyY2VfcG9pbnRlciI6ICIveC1saW1pdGF0aW9ucyIsCiAgICAgICAgICAiZGVyaXZhdGlvbiI6IHsKICAgICAgICAgICAgImtpbmQiOiAianNvbl92YWx1ZV90ZXh0IiwKICAgICAgICAgICAgInNvdXJjZV9wb2ludGVycyI6IFsKICAgICAgICAgICAgICAiL3gtbGltaXRhdGlvbnMiCiAgICAgICAgICAgIF0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIF0sCiAgICAgICJkb2N1bWVudGVkX2NvbW1lcmNpYWxfdGVybXMiOiBbCiAgICAgICAgewogICAgICAgICAgInRleHQiOiAiRG9jdW1lbnRhdGlvbiBkZXNjcmliZXMgdGhlIGludGVyZmFjZTsgaXQgZ3JhbnRzIG5vIHJlc2FsZSByaWdodHMgb3Igc2VsbGVyIGF1dGhvcml0eS4iLAogICAgICAgICAgInNvdXJjZV91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICAgICAibG9jYXRpb24iOiAiL3gtY29tbWVyY2lhbC10ZXJtcyIsCiAgICAgICAgICAiZXZpZGVuY2Vfc3RhdHVzIjogImRvY3VtZW50YXRpb25fY2xhaW1fbm90X3ZlcmlmaWVkIiwKICAgICAgICAgICJzb3VyY2VfcG9pbnRlciI6ICIveC1jb21tZXJjaWFsLXRlcm1zIiwKICAgICAgICAgICJkZXJpdmF0aW9uIjogewogICAgICAgICAgICAia2luZCI6ICJqc29uX3ZhbHVlX3RleHQiLAogICAgICAgICAgICAic291cmNlX3BvaW50ZXJzIjogWwogICAgICAgICAgICAgICIveC1jb21tZXJjaWFsLXRlcm1zIgogICAgICAgICAgICBdCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICBdLAogICAgICAicHJpY2luZyI6ICJGaWN0aW9uYWwgc2VsbGVyIHByb3Bvc2VzIFVTRCA5IHBlciBtb250aCBmb3IgMTAwMCBjYWxsczsgb3ZlcmFnZSBkaXNhYmxlZCIsCiAgICAgICJwYXltZW50X2luc3RydWN0aW9ucyI6ICJGaWN0aW9uYWwgaW52b2ljZTsgbm8gcGF5bWVudCBjb25uZWN0aW9uIGV4aXN0cyIsCiAgICAgICJhY2Nlc3NfaW5zdHJ1Y3Rpb25zIjogIkZpY3Rpb25hbCBzZWxsZXItaXNzdWVkIEFQSSBrZXk7IGRvIG5vdCBzZW5kIGEgcmVhbCBjcmVkZW50aWFsIiwKICAgICAgImludm9jYXRpb25faW5zdHJ1Y3Rpb25zIjogIlBPU1QgL25vcm1hbGl6ZSB3aXRoIEpTT04gbGVuZ3RoLCB3aWR0aCwgaGVpZ2h0LCB1bml0OyBBdXRob3JpemF0aW9uOiBCZWFyZXIgPEFQSV9LRVk+IiwKICAgICAgImNvbW1lcmNpYWxfaW5zdHJ1Y3Rpb25fc291cmNlIjogInNlbGxlcl9zdXBwbGllZF9ub3RfdmVyaWZpZWQiLAogICAgICAicGF5bWVudF9zdGF0dXMiOiAic2VsbGVyX3N0YXRlbWVudF91bnZlcmlmaWVkIiwKICAgICAgInNvdXJjZV91cmxzIjogWwogICAgICAgICJodHRwczovL3BhcmNlbC1leGFtcGxlLmludmFsaWQvb3BlbmFwaS5qc29uIgogICAgICBdLAogICAgICAidW5rbm93bl9vcl91bmV4dHJhY3RlZCI6IFtdCiAgICB9LAogICAgImJvdW5kYXJpZXMiOiBbCiAgICAgICJEb2N1bWVudGF0aW9uIGFuZCBzZWxsZXIgc3RhdGVtZW50cyBhcmUgdW50cnVzdGVkIGNsYWltcywgbm90IHZlcmlmaWVkIGNhcGFiaWxpdGllcy4iLAogICAgICAiTm8gcHVibGljYXRpb24sIHB1cmNoYXNlLCBpbnZvY2F0aW9uLCBvciBzZWxsZXIgdHJ1c3QgY2VydGlmaWNhdGlvbiBoYXMgb2NjdXJyZWQuIiwKICAgICAgIkZBSENFIGV2YWx1YXRlcyBzdXBwbGllZCBldmlkZW5jZSwgbm90IGF1dGhlbnRpY2l0eSBvciB0cnVzdC4iCiAgICBdLAogICAgImRyYWZ0X3ZlcnNpb24iOiAxLAogICAgImRyYWZ0X3ZlcnNpb25fc2NvcGUiOiAiZ2VuZXJhdGVkX2luX3RoaXNfY29udmVyc2F0aW9uIiwKICAgICJyZXN0cmljdGlvbnMiOiB7CiAgICAgICJzY2hlbWEiOiAiVE9PTF9PRkZFUl9SRVNUUklDVElPTlNfVjEiLAogICAgICAiZGVtb25zdHJhdGlvbl9vbmx5IjogZmFsc2UsCiAgICAgICJ0aGlyZF9wYXJ0eV9ub25fb3duZXJzaGlwIjogZmFsc2UsCiAgICAgICJub3RfcmVwcmVzZW50aW5nX21haW50YWluZXJzIjogZmFsc2UsCiAgICAgICJjb21tZXJjaWFsX2F1dGhvcml6YXRpb24iOiAibm90X2VzdGFibGlzaGVkIiwKICAgICAgImxpZmVjeWNsZSI6ICJjdXJyZW50X3Byb2R1Y3QiLAogICAgICAic291cmNlcyI6IFtdCiAgICB9LAogICAgImNvbW1lcmNpYWxfdGVybXNfcHJvdmVuYW5jZSI6IHsKICAgICAgInNlbGxlcl90ZXJtcyI6ICJzZWxsZXJfc3VwcGxpZWRfbm90X2luZGVwZW5kZW50bHlfYXV0aG9yaXplZCIsCiAgICAgICJkb2N1bWVudGVkX3RoaXJkX3BhcnR5X3Rlcm1zIjogInNvdXJjZV9jbGFpbXNfbm90X3NlbGxlcl9wZXJtaXNzaW9uIiwKICAgICAgImF1dGhvcml6YXRpb25fc3RhdHVzIjogIm5vdF9lc3RhYmxpc2hlZCIKICAgIH0KICB9LAogICJyZXN0cmljdGlvbnMiOiB7CiAgICAic2NoZW1hIjogIlRPT0xfT0ZGRVJfUkVTVFJJQ1RJT05TX1YxIiwKICAgICJkZW1vbnN0cmF0aW9uX29ubHkiOiBmYWxzZSwKICAgICJ0aGlyZF9wYXJ0eV9ub25fb3duZXJzaGlwIjogZmFsc2UsCiAgICAibm90X3JlcHJlc2VudGluZ19tYWludGFpbmVycyI6IGZhbHNlLAogICAgImNvbW1lcmNpYWxfYXV0aG9yaXphdGlvbiI6ICJub3RfZXN0YWJsaXNoZWQiLAogICAgImxpZmVjeWNsZSI6ICJjdXJyZW50X3Byb2R1Y3QiLAogICAgInNvdXJjZXMiOiBbXQogIH0sCiAgInBlbmRpbmdfaW50YWtlIjogbnVsbCwKICAic291cmNlX2RvY3VtZW50cyI6IFsKICAgIHsKICAgICAgInJlcXVlc3RlZF91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJzb3VyY2VfdXJsIjogImh0dHBzOi8vcGFyY2VsLWV4YW1wbGUuaW52YWxpZC9vcGVuYXBpLmpzb24iLAogICAgICAidGV4dCI6ICJ7XCJvcGVuYXBpXCI6IFwiMy4xLjBcIiwgXCJpbmZvXCI6\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "faa914d8-2b37-428e-9602-083baf3eea77",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 4
+      },
+      "result": {
+        "request_id": "faa914d8-2b37-428e-9602-083baf3eea77",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":4,\"total_parts\":6,\"offset_bytes\":9000,\"bytes\":3000,\"sha256\":\"970b0f879f5c2e3c0f6609c5c0e7387a49fcf9347bb6003bff0cbeca2646ce5f\",\"data_base64\":\"IHtcInRpdGxlXCI6IFwiRmljdGlvbmFsIFBhcmNlbCBGb3JtYXQgQVBJXCIsIFwidmVyc2lvblwiOiBcIjEuMFwifSwgXCJwYXRoc1wiOiB7XCIvbm9ybWFsaXplXCI6IHtcInBvc3RcIjoge1wic3VtbWFyeVwiOiBcIk5vcm1hbGl6ZSBzZWxsZXItc3VwcGxpZWQgcGFyY2VsIGRpbWVuc2lvbnMgaW50byBjZW50aW1ldHJlc1wiLCBcInJlcXVlc3RCb2R5XCI6IHtcInJlcXVpcmVkXCI6IHRydWUsIFwiY29udGVudFwiOiB7XCJhcHBsaWNhdGlvbi9qc29uXCI6IHtcInNjaGVtYVwiOiB7XCJ0eXBlXCI6IFwib2JqZWN0XCIsIFwicmVxdWlyZWRcIjogW1wibGVuZ3RoXCIsIFwid2lkdGhcIiwgXCJoZWlnaHRcIiwgXCJ1bml0XCJdLCBcInByb3BlcnRpZXNcIjoge1wibGVuZ3RoXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn0sIFwid2lkdGhcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJoZWlnaHRcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ1bml0XCI6IHtcImVudW1cIjogW1wiY21cIiwgXCJpblwiXX19fSwgXCJleGFtcGxlXCI6IHtcImxlbmd0aFwiOiAxMCwgXCJ3aWR0aFwiOiA0LCBcImhlaWdodFwiOiAyLCBcInVuaXRcIjogXCJpblwifX19fSwgXCJyZXNwb25zZXNcIjoge1wiMjAwXCI6IHtcImRlc2NyaXB0aW9uXCI6IFwiTm9ybWFsaXplZCBkaW1lbnNpb25zOyBubyBjYXJyaWVyIHF1b3RlIG9yIHNoaXBtZW50IGJvb2tpbmdcIiwgXCJjb250ZW50XCI6IHtcImFwcGxpY2F0aW9uL2pzb25cIjoge1wic2NoZW1hXCI6IHtcInR5cGVcIjogXCJvYmplY3RcIiwgXCJwcm9wZXJ0aWVzXCI6IHtcImxlbmd0aF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcIndpZHRoX2NtXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn0sIFwiaGVpZ2h0X2NtXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn19fSwgXCJleGFtcGxlXCI6IHtcImxlbmd0aF9jbVwiOiAyNS40LCBcIndpZHRoX2NtXCI6IDEwLjE2LCBcImhlaWdodF9jbVwiOiA1LjA4fX19fX19fX0sIFwieC1saW1pdGF0aW9uc1wiOiBcIkRpbWVuc2lvbnMgb25seS4gTm8gY2FycmllciBwcmljZXMsIHNoaXBtZW50IGJvb2tpbmcsIGluc3VyYW5jZSBvciBkZWxpdmVyeSBndWFyYW50ZWVzLiBQb3NpdGl2ZSBmaW5pdGUgbnVtYmVycyByZXF1aXJlZC5cIiwgXCJ4LWNvbW1lcmNpYWwtdGVybXNcIjogXCJEb2N1bWVudGF0aW9uIGRlc2NyaWJlcyB0aGUgaW50ZXJmYWNlOyBpdCBncmFudHMgbm8gcmVzYWxlIHJpZ2h0cyBvciBzZWxsZXIgYXV0aG9yaXR5LlwiLCBcIngtc3ludGhldGljLW5vdGVzXCI6IFtcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiAwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDFcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gMlwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiAzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDRcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gNVwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiA2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDdcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gOFwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiA5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDExXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIwXCIsIFwiRmljdGlvbmFsIGRvY3Vt\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "9329fbf7-c378-4214-af9a-c000ffe322ad",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "9329fbf7-c378-4214-af9a-c000ffe322ad"
+        },
+        "response": {
+          "job_id": "9329fbf7-c378-4214-af9a-c000ffe322ad",
+          "request_id": "faa914d8-2b37-428e-9602-083baf3eea77",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":4,\"total_parts\":6,\"offset_bytes\":9000,\"bytes\":3000,\"sha256\":\"970b0f879f5c2e3c0f6609c5c0e7387a49fcf9347bb6003bff0cbeca2646ce5f\",\"data_base64\":\"IHtcInRpdGxlXCI6IFwiRmljdGlvbmFsIFBhcmNlbCBGb3JtYXQgQVBJXCIsIFwidmVyc2lvblwiOiBcIjEuMFwifSwgXCJwYXRoc1wiOiB7XCIvbm9ybWFsaXplXCI6IHtcInBvc3RcIjoge1wic3VtbWFyeVwiOiBcIk5vcm1hbGl6ZSBzZWxsZXItc3VwcGxpZWQgcGFyY2VsIGRpbWVuc2lvbnMgaW50byBjZW50aW1ldHJlc1wiLCBcInJlcXVlc3RCb2R5XCI6IHtcInJlcXVpcmVkXCI6IHRydWUsIFwiY29udGVudFwiOiB7XCJhcHBsaWNhdGlvbi9qc29uXCI6IHtcInNjaGVtYVwiOiB7XCJ0eXBlXCI6IFwib2JqZWN0XCIsIFwicmVxdWlyZWRcIjogW1wibGVuZ3RoXCIsIFwid2lkdGhcIiwgXCJoZWlnaHRcIiwgXCJ1bml0XCJdLCBcInByb3BlcnRpZXNcIjoge1wibGVuZ3RoXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn0sIFwid2lkdGhcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJoZWlnaHRcIjoge1widHlwZVwiOiBcIm51bWJlclwifSwgXCJ1bml0XCI6IHtcImVudW1cIjogW1wiY21cIiwgXCJpblwiXX19fSwgXCJleGFtcGxlXCI6IHtcImxlbmd0aFwiOiAxMCwgXCJ3aWR0aFwiOiA0LCBcImhlaWdodFwiOiAyLCBcInVuaXRcIjogXCJpblwifX19fSwgXCJyZXNwb25zZXNcIjoge1wiMjAwXCI6IHtcImRlc2NyaXB0aW9uXCI6IFwiTm9ybWFsaXplZCBkaW1lbnNpb25zOyBubyBjYXJyaWVyIHF1b3RlIG9yIHNoaXBtZW50IGJvb2tpbmdcIiwgXCJjb250ZW50XCI6IHtcImFwcGxpY2F0aW9uL2pzb25cIjoge1wic2NoZW1hXCI6IHtcInR5cGVcIjogXCJvYmplY3RcIiwgXCJwcm9wZXJ0aWVzXCI6IHtcImxlbmd0aF9jbVwiOiB7XCJ0eXBlXCI6IFwibnVtYmVyXCJ9LCBcIndpZHRoX2NtXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn0sIFwiaGVpZ2h0X2NtXCI6IHtcInR5cGVcIjogXCJudW1iZXJcIn19fSwgXCJleGFtcGxlXCI6IHtcImxlbmd0aF9jbVwiOiAyNS40LCBcIndpZHRoX2NtXCI6IDEwLjE2LCBcImhlaWdodF9jbVwiOiA1LjA4fX19fX19fX0sIFwieC1saW1pdGF0aW9uc1wiOiBcIkRpbWVuc2lvbnMgb25seS4gTm8gY2FycmllciBwcmljZXMsIHNoaXBtZW50IGJvb2tpbmcsIGluc3VyYW5jZSBvciBkZWxpdmVyeSBndWFyYW50ZWVzLiBQb3NpdGl2ZSBmaW5pdGUgbnVtYmVycyByZXF1aXJlZC5cIiwgXCJ4LWNvbW1lcmNpYWwtdGVybXNcIjogXCJEb2N1bWVudGF0aW9uIGRlc2NyaWJlcyB0aGUgaW50ZXJmYWNlOyBpdCBncmFudHMgbm8gcmVzYWxlIHJpZ2h0cyBvciBzZWxsZXIgYXV0aG9yaXR5LlwiLCBcIngtc3ludGhldGljLW5vdGVzXCI6IFtcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiAwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDFcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gMlwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiAzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDRcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gNVwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiA2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDdcIiwgXCJGaWN0aW9uYWwgZG9jdW1lbnRhdGlvbiByZXRhaW5lZCB0byBkZW1vbnN0cmF0ZSBtdWx0aXBhcnQgc291cmNlIGV4cG9ydC4gOFwiLCBcIkZpY3Rpb25hbCBkb2N1bWVudGF0aW9uIHJldGFpbmVkIHRvIGRlbW9uc3RyYXRlIG11bHRpcGFydCBzb3VyY2UgZXhwb3J0LiA5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDExXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDEzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDE5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIwXCIsIFwiRmljdGlvbmFsIGRvY3Vt\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "301910dc-c024-4666-b3ff-436bddf9973b",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 5
+      },
+      "result": {
+        "request_id": "301910dc-c024-4666-b3ff-436bddf9973b",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":5,\"total_parts\":6,\"offset_bytes\":12000,\"bytes\":3000,\"sha256\":\"7c7559638378418cc1f5bbe335ef07850a6ec910826d0e25f789d8b637dd9394\",\"data_base64\":\"ZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "0e24cfa0-7e12-4226-bc76-87200b6e52a9",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "0e24cfa0-7e12-4226-bc76-87200b6e52a9"
+        },
+        "response": {
+          "job_id": "0e24cfa0-7e12-4226-bc76-87200b6e52a9",
+          "request_id": "301910dc-c024-4666-b3ff-436bddf9973b",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":5,\"total_parts\":6,\"offset_bytes\":12000,\"bytes\":3000,\"sha256\":\"7c7559638378418cc1f5bbe335ef07850a6ec910826d0e25f789d8b637dd9394\",\"data_base64\":\"ZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDIzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDI5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDMzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDM5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDQ5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDUzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU0XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU1XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU2XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU3XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    },
+    {
+      "tool": "get_export_part",
+      "arguments": {
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "request_id": "7b586cea-6621-4af5-bbe0-0f3a2fd920d6",
+        "export_id": "a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160",
+        "index": 6
+      },
+      "result": {
+        "request_id": "7b586cea-6621-4af5-bbe0-0f3a2fd920d6",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "complete",
+        "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":6,\"total_parts\":6,\"offset_bytes\":15000,\"bytes\":1468,\"sha256\":\"4b9272155c222221cbbd3df1be6b95838e54776f21a363ea694e6483dc9ec3c0\",\"data_base64\":\"YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDY0XCJdfSIsCiAgICAgICJtZWRpYV90eXBlIjogImFwcGxpY2F0aW9uL2pzb24iCiAgICB9CiAgXSwKICAiZG9jdW1lbnRfYXR0ZW1wdHMiOiBbCiAgICB7CiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJyZXN1bHQiOiAicmVhZF9zdWNjZXNzIiwKICAgICAgInNvdXJjZV91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJyZXZpc2lvbiI6IDEKICAgIH0KICBdLAogICJkb2N1bWVudF9oaXN0b3J5IjogW10sCiAgImZhaGNlIjogewogICAgInN0YXR1cyI6ICJub3RfcmVxdWVzdGVkIiwKICAgICJleGVjdXRlZCI6IGZhbHNlLAogICAgIm1hY2hpbmVfYWRhcHRlcl9leGVjdXRpb24iOiAidW5hdmFpbGFibGVfYnlfZGVzaWduIiwKICAgICJodW1hbl9jaGVja291dCI6ICJzZXBhcmF0ZV9uYXRpdmVfZmxvd19ub3RfYXNzZXNzZWRfaGVyZSIsCiAgICAidHJhbnNwb3J0X2NvbmZpZ3VyYXRpb24iOiAibm90X2Fzc2Vzc2VkX2J5X3RoaXNfZXhwb3J0IiwKICAgICJtZXNzYWdlIjogIkZBSENFIGV2YWx1YXRpb24gbm90IHJlcXVlc3RlZCBmb3IgdGhpcyBkcmFmdC4gVGhpcyBzdGF0dXMgZG9lcyBub3QgYXNzZXNzIHRyYW5zcG9ydCBjb25maWd1cmF0aW9uLiBGQUhDRSBjaGVja3Mgc3VwcGxpZWQgZXZpZGVuY2UsIG5vdCBzb3VyY2UgYXV0aGVudGljaXR5LCBzZWxsZXIgdHJ1c3QsIHB1YmxpY2F0aW9uLCBwdXJjaGFzZXMsIG9yIGV4dGVybmFsIGV4ZWN1dGlvbi4iCiAgfSwKICAiYXBwcm92ZWRfb2ZmZXIiOiBudWxsLAogICJjb21tZXJjaWFsX3RyYW5zYWN0aW9uX2lkcyI6IFtdLAogICJyZWNvdmVyeSI6IG51bGwsCiAgInByb2R1Y3RfaGlzdG9yeSI6IFtdLAogICJvZmZlcl9saW5lYWdlIjogW10KfQ==\",\"complete_payload\":false}",
+        "model_attempts": 0
+      },
+      "accepted_response": {
+        "job_id": "d960417b-4494-47db-9af9-db5afcb18264",
+        "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+        "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+        "status": "pending"
+      },
+      "poll": {
+        "tool": "get_result",
+        "arguments": {
+          "job_id": "d960417b-4494-47db-9af9-db5afcb18264"
+        },
+        "response": {
+          "job_id": "d960417b-4494-47db-9af9-db5afcb18264",
+          "request_id": "7b586cea-6621-4af5-bbe0-0f3a2fd920d6",
+          "session_id": "b8d164fa-706f-4c33-86d9-b393f7d3212c",
+          "transport_sender": "agent1q27ct89rtzr7y63s3e73qmslxmjgqlkejmpkmdhd9q94c9y8p4uhcafkg8p",
+          "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+          "status": "complete",
+          "text": "{\"schema\":\"TOOL_OFFER_EXPORT_PART_V1\",\"export_id\":\"a7d266f6da45117abd126a1ed2e9d9c9b9f32722b4aeca810fdb36b7b3a3e160\",\"revision\":1,\"index\":6,\"total_parts\":6,\"offset_bytes\":15000,\"bytes\":1468,\"sha256\":\"4b9272155c222221cbbd3df1be6b95838e54776f21a363ea694e6483dc9ec3c0\",\"data_base64\":\"YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU4XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDU5XCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYwXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYxXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYyXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDYzXCIsIFwiRmljdGlvbmFsIGRvY3VtZW50YXRpb24gcmV0YWluZWQgdG8gZGVtb25zdHJhdGUgbXVsdGlwYXJ0IHNvdXJjZSBleHBvcnQuIDY0XCJdfSIsCiAgICAgICJtZWRpYV90eXBlIjogImFwcGxpY2F0aW9uL2pzb24iCiAgICB9CiAgXSwKICAiZG9jdW1lbnRfYXR0ZW1wdHMiOiBbCiAgICB7CiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJyZXN1bHQiOiAicmVhZF9zdWNjZXNzIiwKICAgICAgInNvdXJjZV91cmwiOiAiaHR0cHM6Ly9wYXJjZWwtZXhhbXBsZS5pbnZhbGlkL29wZW5hcGkuanNvbiIsCiAgICAgICJyZXZpc2lvbiI6IDEKICAgIH0KICBdLAogICJkb2N1bWVudF9oaXN0b3J5IjogW10sCiAgImZhaGNlIjogewogICAgInN0YXR1cyI6ICJub3RfcmVxdWVzdGVkIiwKICAgICJleGVjdXRlZCI6IGZhbHNlLAogICAgIm1hY2hpbmVfYWRhcHRlcl9leGVjdXRpb24iOiAidW5hdmFpbGFibGVfYnlfZGVzaWduIiwKICAgICJodW1hbl9jaGVja291dCI6ICJzZXBhcmF0ZV9uYXRpdmVfZmxvd19ub3RfYXNzZXNzZWRfaGVyZSIsCiAgICAidHJhbnNwb3J0X2NvbmZpZ3VyYXRpb24iOiAibm90X2Fzc2Vzc2VkX2J5X3RoaXNfZXhwb3J0IiwKICAgICJtZXNzYWdlIjogIkZBSENFIGV2YWx1YXRpb24gbm90IHJlcXVlc3RlZCBmb3IgdGhpcyBkcmFmdC4gVGhpcyBzdGF0dXMgZG9lcyBub3QgYXNzZXNzIHRyYW5zcG9ydCBjb25maWd1cmF0aW9uLiBGQUhDRSBjaGVja3Mgc3VwcGxpZWQgZXZpZGVuY2UsIG5vdCBzb3VyY2UgYXV0aGVudGljaXR5LCBzZWxsZXIgdHJ1c3QsIHB1YmxpY2F0aW9uLCBwdXJjaGFzZXMsIG9yIGV4dGVybmFsIGV4ZWN1dGlvbi4iCiAgfSwKICAiYXBwcm92ZWRfb2ZmZXIiOiBudWxsLAogICJjb21tZXJjaWFsX3RyYW5zYWN0aW9uX2lkcyI6IFtdLAogICJyZWNvdmVyeSI6IG51bGwsCiAgInByb2R1Y3RfaGlzdG9yeSI6IFtdLAogICJvZmZlcl9saW5lYWdlIjogW10KfQ==\",\"complete_payload\":false}",
+          "model_attempts": 0
+        }
+      }
+    }
+  ],
+  "polling": {
+    "tool": "get_result",
+    "arguments": {
+      "job_id": "01481551-7c26-4a6f-bd69-1cdf10bbf6f1"
+    },
+    "completion": "Only complete is complete; preserve request IDs and verify proof. Static IDs illustrate the controlled fixture. The real gateway test creates and polls fresh jobs."
+  },
+  "multipart_verification": {
+    "verified": true,
+    "parts": 6,
+    "sha256": "c754a42a3a77cc4b06edc6f9b9f813af54ee503f94d458a2ad35e85075c0bbcc",
+    "bytes": 16468
+  },
+  "version": "1.4.9"
+}

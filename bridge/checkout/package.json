@@ -1,0 +1,20 @@
+{
+  "name": "tool-offer-wallet-approval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild browser.mjs --bundle --format=esm --target=es2022 --outfile=public/app.js",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@base-org/account": "2.6.0",
+    "@x402/core": "2.29.0",
+    "@x402/evm": "2.29.0",
+    "viem": "2.57.13"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

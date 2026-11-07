@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tooloffer.kinganlogic.com/sitemap.xml

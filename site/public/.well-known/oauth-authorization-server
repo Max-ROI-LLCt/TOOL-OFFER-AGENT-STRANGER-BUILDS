@@ -1,0 +1,23 @@
+{
+  "issuer": "https://tooloffer.kinganlogic.com",
+  "token_endpoint": "https://tooloffer.kinganlogic.com/oauth/token",
+  "registration_endpoint": "https://tooloffer.kinganlogic.com/oauth/register",
+  "grant_types_supported": [
+    "client_credentials"
+  ],
+  "response_types_supported": [],
+  "token_endpoint_auth_methods_supported": [
+    "private_key_jwt"
+  ],
+  "token_endpoint_auth_signing_alg_values_supported": [
+    "ES256"
+  ],
+  "scopes_supported": [
+    "tool_offer:machine"
+  ],
+  "client_id_metadata_document_supported": false,
+  "service_documentation": "https://tooloffer.kinganlogic.com/machine/",
+  "x-status-endpoint": "https://tooloffer.kinganlogic.com/oauth/status",
+  "x-release-id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "x-tool-offer-version": "1.4.9"
+}

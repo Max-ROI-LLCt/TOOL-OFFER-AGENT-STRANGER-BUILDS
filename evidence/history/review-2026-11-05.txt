@@ -1,0 +1,310 @@
+TOOL OFFER AGENT — CONSOLIDATED LOCAL REVIEW REPORT
+Prepared: November 5, 2026 (UTC)
+Baseline: revision 79 / product 1.4.6
+Status: LOCAL REVIEW CANDIDATE — NOT PUBLISHED OR DEPLOYED
+
+FINAL SELECTED PACKAGE
+/workspaces/tool-offer-judging-package-2026-11-05
+
+This report is inside that directory as REVIEW-REPORT.txt. Start with README.md
+and docs/BRIDGE.md for the judging presentation. A credential-free per-file
+manifest is evidence/package-manifest.json. No Git repository was initialized.
+
+1. RESULT AND PRESERVATION
+
+The remaining observed presentation issues are implemented locally. The selected
+judging package includes the complete tested agent, public profile/starters,
+machine gateway/site, the actual companion payment checkout/relay/wallet code,
+commercial custody code, public FAHCE contracts, tests and sanitized evidence.
+
+Nothing was committed, pushed, deployed, submitted, deleted from the original
+checkouts, made public, or shared with judges. No payments, wallet actions or
+FAHCE modifications were performed. Workbook, model choice, saved customer
+records, historical exports and unrelated work were not edited. The original
+private repositories and history remain in place.
+
+The package is ready for a source/privacy/publication DECISION, not an automatic
+publication, security approval or assertion that the local changes are live.
+Important remaining limits are listed in section 8.
+
+2. PRODUCT POLISH AND DEMONSTRATED CAUSES
+
+Native offer review used label/value summary rows, which produced the reported
+narrow right-aligned descriptions. The new card uses the supported custom
+section/text components for long content, plus the existing review/correction
+actions. Seller values remain concise and their retained content is unchanged.
+
+Navigation was coupled to truncated excerpts. Complete commands now have their
+own untruncated section: buyer explanation, export buyer readable, export json;
+readiness text and readiness json on readiness cards. UTF-8 budgets and deliberate
+multipart delivery remain in force.
+
+The derived renderer now says "1 more detail" and removes duplicated terminal
+punctuation from derived schema highlights. It does not rewrite raw seller text,
+retained source excerpts, previously stored exports or the detailed audit data.
+
+Runtime files changed for this polish:
+  tool_offer_agent/guided_cards.py
+  tool_offer_agent/readiness_cards.py
+  tool_offer_agent/offer_representation.py
+
+Related selectors/schema tests were updated and tests/test_judging_polish.py was
+added. Existing correction validation, current/outdated revision relationships,
+Finish review, cancellation, stale/cross-session rejection, replay behavior,
+restrictions and payment boundaries remain covered by regression tests.
+
+Actual ASI rendering of the NEW card layout was not observed. Supported schema
+validation and protocol/replay checks are evidence, not browser screenshots.
+No new manual correction/Finish cycle is requested from the founder.
+
+3. LEGACY FAHCE EVIDENCE COUNTS
+
+Read-only assessment of the retained revision-6 snapshot reproduced:
+  Exact source-aligned quotation entries: 22
+  Stored source-backed derived entries:   0
+  Unresolved schema/alignment entries:   48
+  Separate seller/record declarations:    9
+  Saved intake revision: 6; draft revision: 6; outdated: false
+
+The classifier examines STORED leaf claims. A structured derivation needs its
+supported pointer/metadata and recomputation; unresolved legacy fragments do not
+become supported simply because they resemble a schema.
+
+The buyer renderer also performs an EPHEMERAL projection using matching retained
+sources. It can recover selected-operation schemas and show readable summaries
+without saving those as newly supported claims in the original draft. This is
+why recovered summaries coexist with zero stored-derived claims. No established
+classification defect justified promoting the unresolved 48 entries.
+
+The reported legacy incomplete-excerpt markers represent 10 appearances of 7
+unique fragments, not 10 unique documents missing information. Original fragments
+remain preserved. No conclusion that the documentation lacks information follows
+from partial extraction.
+
+Evidence: evidence/legacy-classification.json; docs/EVIDENCE.md. The assessment
+did not mutate the in-memory record. This is retained-snapshot analysis, NOT a
+new authenticated readback of the live founder conversation.
+
+4. PAYMENT BRIDGE — CENTRAL TECHNICAL CONTRIBUTION
+
+README.md leads with the bridge's problem and implemented mechanism.
+docs/BRIDGE.md contains the architecture sequence and source/test map.
+
+The Tool Offer contribution is the binding and recovery across the ASI workflow,
+exact draft/request bytes, durable checkout, external buyer authorization,
+validated x402 attempt and subsequent result retrieval. It includes the actual
+outer-checkout Worker, payment relay, wallet UI, policy/receipt verification and
+reconciliation code, plus the inner commercial custody Worker and Python client.
+
+Actual order:
+  Free ASI intake/drafting/review/readiness
+  -> optional, restriction-gated evaluation request
+  -> exact-request/draft-bound durable checkout creation or recovery
+  -> free input compatibility screening (checkout may be input_blocked)
+  -> external buyer connection and separate policy consent
+  -> fresh screening and unsigned 402 challenge
+  -> pinned payment-policy checks and persisted authorization stage
+  -> buyer wallet signature
+  -> retained signed payload, request/policy/signature validation
+  -> persisted submitting stage, then one signed delivery attempt via relay
+  -> separately retained response metadata, service result and proof outcome
+  -> same-checkout status retrieval back through the ASI conversation.
+
+Checkout creation, wallet connection and Finish review are NOT payment approval.
+Current draft status alone is not payment eligibility. Explicit demonstrations
+remain restricted. The free demonstration instructions never call check.
+
+Duplicate preparation recovers a bound checkout. Signed-delivery uncertainty
+locks another automatic payment attempt. Narrow retained-authorization retry and
+expired/non-billable reconciliation paths have explicit predicates; expiry
+reconciliation requires two independent finalized unused-nonce observations and
+atomic preservation of the original attempt. No global exactly-once settlement
+guarantee is claimed. Owner tokens, checkout capabilities and retained signed
+material require protected custody; wallet private keys remain in the wallet.
+
+Fetch/ASI provides chat/planner surfaces, ACP transport, cards, hosted execution
+and discovery. FAHCE provides the external Diagnose computation and published
+service/payment/attestation contracts. Wallet SDKs, x402 libraries/gateway and
+Base/USDC provide the underlying signing/payment infrastructure. The package
+does not claim native Fetch Payment Protocol, first-of-kind status, patentability,
+independent novelty proof, seller certification or authority over buyer funds.
+
+Current source map:
+  tool_offer_agent/fahce_checkout.py and workflow.py
+  bridge/checkout/checkout-worker.mjs
+  bridge/checkout/browser.mjs and payment-policy.mjs
+  bridge/checkout/expired-authorization.mjs
+  bridge/checkout/attestation-verifier.mjs
+  bridge/custody/transaction_custody.mjs
+  tool_offer_agent/cloudflare_custody.py and commerce.py
+
+The outer wallet-approval implementation is authoritative for current checkout.
+The similarly named older inner adapter is excluded. Included server.mjs is a
+historical local helper with regression tests, explicitly not the hosted backend.
+Agent commercial custody and checkout wallet-state custody are distinct stores.
+
+5. SANITIZED RETAINED LIVE EVIDENCE
+
+The November 1 retained operation reports a recorded signed payload, completed
+HTTP-200 Diagnose result and DETERMINATION_COMPLETE_NEGATIVE, offerVerified=false.
+Completion is not a positive offer verification.
+
+Gateway success, independent chain observations and origin receipt state are
+kept separate. The immutable receipt says AUTHORIZED_PENDING_GATEWAY_SETTLEMENT.
+Later matching successful transaction observations do not rewrite that receipt.
+Initial checks were not finalized; only one of two later RPC observations was
+at/before its finalized head. Two-provider finality convergence is NOT claimed.
+
+The prior independent receipt audit reported historical proof verification, with
+explicit exclusions for fresh execution, evidence truth, original caller input,
+external actions and full service-TEE certification. Prior chat/hash agreement
+is retained audit evidence, not a fresh native rendering observation.
+
+evidence/bridge-observations.json contains only allowlisted stage metadata and
+hash commitments. Raw receipts, signed payloads, addresses, transaction IDs,
+checkout secrets, purchase records and private conversation excerpts are not
+distributed. The sanitized report is NOT itself a signed proof and cannot
+independently reverify omitted private originals. No new paid run was performed.
+
+6. INDEPENDENT PACKAGE CHECKS
+
+Dependencies were installed into a disposable validation copy outside the
+original checkouts. Python 3.12 and Node 24.22.2 were used. Documented commands
+and exact validated Python constraints are included.
+
+Suite                                      Run   Passed   Skipped   Failed
+Selected Python source                     488      485         3        0
+Flattened hosted bridge regressions         153      153         0        0
+Flattened hosted polish regressions          71       71         0        0
+Checkout/wallet Node regressions             87       87         0        0
+Site/machine gateway Node regressions        45       45         0        0
+Actual custody logic + in-memory SQLite       5        5         0        0
+
+These suites overlap; do not sum them as unique tests. The three Python skips
+require explicitly configured local Wrangler custody credentials. The five
+new custody tests use actual Worker logic with SQLite and a mocked Cloudflare
+base class; they are not a live Durable Object deployment observation.
+
+Checks include synthetic published walkthrough/JSON intake, restrictions through
+correction/rebuild, unchanged and changed corrections, revision relationships,
+review/cancel/stale/repeated actions, Unicode byte limits, complete export
+reconstruction/corruption rejection, authentication/isolation, source/provenance,
+readiness, signed machine responses and bounded Prefer wait behavior.
+
+Built successfully: 28-file flat hosted artifact with validated import graph;
+Python wheel; wallet browser bundle. The rebuilt wallet bundle exactly matches
+the outer working bundle and freshly fetched public app.js:
+  723def620eb375297c65150693a388eb66f0f2aff7e9752064f2022b224dd98e
+
+Initial packaging failures were repaired without weakening assertions: restored
+required public configuration/release helper, corrected synthetic fixture keys
+and grounding, mocked test-only Git identity instead of inventing history, and
+documented the correct Python/module invocation and instructions route alias.
+Source records and production behavior were not changed to make tests pass.
+
+Test evidence: evidence/test-results.json. Setup: docs/TESTING.md.
+
+7. SELECTION, ORIGIN AND GITHUB CORRESPONDENCE
+
+Development-timeline addendum (November 5, 2026): authenticated, read-only
+`gh api repos/Max-ROI-LLCt/tool-offer-agent` returned:
+  full_name: Max-ROI-LLCt/tool-offer-agent
+  Original development repository created (UTC): 2026-10-31T04:33:07Z
+  html_url: https://github.com/Max-ROI-LLCt/tool-offer-agent
+The exact three fields are in evidence/original-repository-metadata.json;
+docs/EVIDENCE.md places them alongside retained commit and release references.
+This package is a separate curated copy, not a replacement development history.
+No supplied Network screenshot was located in the bounded accessible Codespace
+search; metadata alone is included. The weekly code-frequency graph is omitted.
+README payment-bridge emphasis and all implementation/release bytes are unchanged.
+
+Included: final runtime, profile/starters, site/machine gateway/public assets,
+required build/release helpers, current checkout/relay/wallet/custody components,
+relevant tests, public FAHCE contracts and sanitized source/operation evidence.
+
+Excluded: credentials and private keys, customer/founder conversations, incident
+and handoff records, purchase records, raw signed proofs, local databases,
+caches/dependencies, unrelated FAHCE engine/repair tooling and older adapters.
+Originals remain private and untouched. The original customer-derived fixture
+was replaced ONLY IN THE PACKAGE by clearly labeled synthetic data. Both images
+were visually reviewed, and the retained gzip was fully decompressed/inspected.
+Automated screening found no credential-pattern, known-secret or exact long
+private-statement match in selected content; this is a bounded scan, not an
+absolute guarantee or a complete security audit.
+
+No required implementation is known to be missing from the selected package
+for its documented build and test paths. Live hosting requires external services,
+authorized configuration and credentials, which are intentionally not included.
+Historical operator release tools may require fresh authorized snapshots; they
+are not advertised as self-contained deployment commands.
+
+Fresh read-only Git remote inspection agrees with the original inventory:
+  main: 218618b7c5cd57ebb111b51c6d906bd0373fe810
+  preserve/deployed-r63-b335ff91-20261103:
+    3191c938547cb609fe41b55cd7671cf2c7c1dc88
+  improve/machine-access-and-examples-20261103:
+    6d4904c768d6b7c0f731957d6f3294a7418ccfd6
+  No pushed tags. No fetch or ref mutation performed.
+
+The original comprehensive history inventory was reused, not presented as a
+new full-history scan. GitHub still lacks the complete local release: among
+explicitly selected ORIGINAL source paths, 27 are absent at the latest pushed
+path and 35 differ there. The per-file list is in source-correspondence.json;
+new judging-only documentation/tests are additional local material. Required
+outer checkout and inner custody implementations were not discarded because
+they were untracked/ignored or absent from the Python deployment manifest.
+
+Revision-79 release ID:
+  286e0c584063b4473836a02c7eeaf5a22deb7c8a6ba1df3b4476c049f34528c7
+Retained Agentverse code digest:
+  768c0e56565d1d513a00409d525540557ded2c6441b9239b2da00187e1944753
+Retained source gzip SHA-256:
+  7478cae2a42f3dd6b18f934169f6d70b1ff9488ca22f500001c1a725a1a27884
+Complete decompressed source archive SHA-256:
+  c262d3f3e2563b84032338d0ab00b230bc5a27195dd64b58cfabed1e87176e2a
+LOCAL UNDEPLOYED 28-module candidate hash (canonical module-hash mapping):
+  5713cb514bbfb12bc046ba731e19f55324f251c65008a911810415dd149fea82
+
+Seven baseline runtime modules differ from the pushed build; the new candidate
+differs from revision 79 in only the three presentation modules listed above.
+Fresh public discovery still advertises 1.4.6 and the baseline release ID.
+No new version number or release ID was falsely assigned to a deployment.
+
+8. GENUINE LIMITATIONS AND DECISION ITEMS
+
+A. New ASI card layout is not deployed or browser-confirmed. Available local
+   authentication did not complete fresh Agentverse source readback. Public
+   discovery and wallet bundle equality do not prove current Worker server bytes
+   or historical customer-record nonmutation. No new sign-in cycle is required
+   to review this local package. If a later deployment is authorized, only the
+   new review/readiness layout and intact navigation need visual confirmation;
+   do not repeat already accepted correction/Finish flows unnecessarily.
+
+B. The unchanged wallet dependency graph reports four affected package entries
+   stemming from one high-severity Zod memory-exhaustion advisory:
+   GHSA-mrhx-c7xc-m3w5. No exploit of this application was demonstrated. npm's
+   suggested direct SDK change was not applied silently. Review remediation
+   before a new production release. See evidence/dependency-review.json.
+
+C. Retained operational summaries are not independent proof of omitted private
+   signatures or development dates. Original commit IDs/dates and release hashes
+   are preserved; Git timestamps alone do not prove when all local code was
+   written. The new authenticated GitHub created_at record establishes original
+   repository creation only, not development dates for every file. No replacement
+   development history was fabricated.
+
+D. The prior external verify_new_tooloffer.mjs exit-code-1 remains unresolved:
+   the script was not found in the bounded checkout search. Existing Prefer wait
+   tests pass, but that does not turn the external harness run into a pass.
+
+E. The official Stranger Builds hackpack requires a public GitHub repository
+   with setup instructions and an ASI-usable primary workflow. Before any access
+   or publication decision, ask organizers whether a complete CURATED public
+   snapshot with original commit/date references and release hashes is accepted,
+   or what limited original-history evidence procedure they require without
+   exposing customer data. Do not assume a new repository is already accepted.
+
+FINAL DECISION STATUS
+Local preparation is complete and reviewable. Publication/access, dependency
+remediation, any future deployment and organizer acceptance remain explicit
+decisions. No action in this preparation grants authority or moves funds.

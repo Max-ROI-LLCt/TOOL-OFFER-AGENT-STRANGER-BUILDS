@@ -1,0 +1,6 @@
+[agent]
+address = "agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a"
+include = ""
+readme_path = "AGENT-PROFILE.txt"
+description = "By Kingan Logic: free, source-attributed API/MCP offer drafting, revision, readiness and export. Separate buyer-authorized FAHCE evaluation. Machine-readable profile: https://tooloffer.kinganlogic.com/manifest.json"
+starter_prompts = ["Help me turn my API documentation into a commercial offer draft.", "I have an MCP tool. What information do you need to prepare its listing?", "Show me how to revise my offer and export the structured record.", "What can Tool Offer Agent verify, and what remains seller-supplied?"]

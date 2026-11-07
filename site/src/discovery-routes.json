@@ -1,0 +1,5 @@
+{
+  "/instructions.md": "/instructions.txt",
+  "/.well-known/oauth-protected-resource": "/.well-known/oauth-protected-resource.json",
+  "/.well-known/oauth-protected-resource/mcp": "/.well-known/oauth-protected-resource.json"
+}

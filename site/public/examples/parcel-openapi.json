@@ -1,0 +1,150 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Fictional Parcel Format API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/normalize": {
+      "post": {
+        "summary": "Normalize seller-supplied parcel dimensions into centimetres",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "length",
+                  "width",
+                  "height",
+                  "unit"
+                ],
+                "properties": {
+                  "length": {
+                    "type": "number"
+                  },
+                  "width": {
+                    "type": "number"
+                  },
+                  "height": {
+                    "type": "number"
+                  },
+                  "unit": {
+                    "enum": [
+                      "cm",
+                      "in"
+                    ]
+                  }
+                }
+              },
+              "example": {
+                "length": 10,
+                "width": 4,
+                "height": 2,
+                "unit": "in"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Normalized dimensions; no carrier quote or shipment booking",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "length_cm": {
+                      "type": "number"
+                    },
+                    "width_cm": {
+                      "type": "number"
+                    },
+                    "height_cm": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "example": {
+                  "length_cm": 25.4,
+                  "width_cm": 10.16,
+                  "height_cm": 5.08
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-limitations": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+  "x-commercial-terms": "Documentation describes the interface; it grants no resale rights or seller authority.",
+  "x-synthetic-notes": [
+    "Fictional documentation retained to demonstrate multipart source export. 0",
+    "Fictional documentation retained to demonstrate multipart source export. 1",
+    "Fictional documentation retained to demonstrate multipart source export. 2",
+    "Fictional documentation retained to demonstrate multipart source export. 3",
+    "Fictional documentation retained to demonstrate multipart source export. 4",
+    "Fictional documentation retained to demonstrate multipart source export. 5",
+    "Fictional documentation retained to demonstrate multipart source export. 6",
+    "Fictional documentation retained to demonstrate multipart source export. 7",
+    "Fictional documentation retained to demonstrate multipart source export. 8",
+    "Fictional documentation retained to demonstrate multipart source export. 9",
+    "Fictional documentation retained to demonstrate multipart source export. 10",
+    "Fictional documentation retained to demonstrate multipart source export. 11",
+    "Fictional documentation retained to demonstrate multipart source export. 12",
+    "Fictional documentation retained to demonstrate multipart source export. 13",
+    "Fictional documentation retained to demonstrate multipart source export. 14",
+    "Fictional documentation retained to demonstrate multipart source export. 15",
+    "Fictional documentation retained to demonstrate multipart source export. 16",
+    "Fictional documentation retained to demonstrate multipart source export. 17",
+    "Fictional documentation retained to demonstrate multipart source export. 18",
+    "Fictional documentation retained to demonstrate multipart source export. 19",
+    "Fictional documentation retained to demonstrate multipart source export. 20",
+    "Fictional documentation retained to demonstrate multipart source export. 21",
+    "Fictional documentation retained to demonstrate multipart source export. 22",
+    "Fictional documentation retained to demonstrate multipart source export. 23",
+    "Fictional documentation retained to demonstrate multipart source export. 24",
+    "Fictional documentation retained to demonstrate multipart source export. 25",
+    "Fictional documentation retained to demonstrate multipart source export. 26",
+    "Fictional documentation retained to demonstrate multipart source export. 27",
+    "Fictional documentation retained to demonstrate multipart source export. 28",
+    "Fictional documentation retained to demonstrate multipart source export. 29",
+    "Fictional documentation retained to demonstrate multipart source export. 30",
+    "Fictional documentation retained to demonstrate multipart source export. 31",
+    "Fictional documentation retained to demonstrate multipart source export. 32",
+    "Fictional documentation retained to demonstrate multipart source export. 33",
+    "Fictional documentation retained to demonstrate multipart source export. 34",
+    "Fictional documentation retained to demonstrate multipart source export. 35",
+    "Fictional documentation retained to demonstrate multipart source export. 36",
+    "Fictional documentation retained to demonstrate multipart source export. 37",
+    "Fictional documentation retained to demonstrate multipart source export. 38",
+    "Fictional documentation retained to demonstrate multipart source export. 39",
+    "Fictional documentation retained to demonstrate multipart source export. 40",
+    "Fictional documentation retained to demonstrate multipart source export. 41",
+    "Fictional documentation retained to demonstrate multipart source export. 42",
+    "Fictional documentation retained to demonstrate multipart source export. 43",
+    "Fictional documentation retained to demonstrate multipart source export. 44",
+    "Fictional documentation retained to demonstrate multipart source export. 45",
+    "Fictional documentation retained to demonstrate multipart source export. 46",
+    "Fictional documentation retained to demonstrate multipart source export. 47",
+    "Fictional documentation retained to demonstrate multipart source export. 48",
+    "Fictional documentation retained to demonstrate multipart source export. 49",
+    "Fictional documentation retained to demonstrate multipart source export. 50",
+    "Fictional documentation retained to demonstrate multipart source export. 51",
+    "Fictional documentation retained to demonstrate multipart source export. 52",
+    "Fictional documentation retained to demonstrate multipart source export. 53",
+    "Fictional documentation retained to demonstrate multipart source export. 54",
+    "Fictional documentation retained to demonstrate multipart source export. 55",
+    "Fictional documentation retained to demonstrate multipart source export. 56",
+    "Fictional documentation retained to demonstrate multipart source export. 57",
+    "Fictional documentation retained to demonstrate multipart source export. 58",
+    "Fictional documentation retained to demonstrate multipart source export. 59",
+    "Fictional documentation retained to demonstrate multipart source export. 60",
+    "Fictional documentation retained to demonstrate multipart source export. 61",
+    "Fictional documentation retained to demonstrate multipart source export. 62",
+    "Fictional documentation retained to demonstrate multipart source export. 63",
+    "Fictional documentation retained to demonstrate multipart source export. 64"
+  ]
+}

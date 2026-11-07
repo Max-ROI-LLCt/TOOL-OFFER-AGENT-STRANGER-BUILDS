@@ -1,0 +1,122 @@
+{
+  "revision": 79,
+  "product_version": "1.4.6",
+  "release_id": "286e0c584063b4473836a02c7eeaf5a22deb7c8a6ba1df3b4476c049f34528c7",
+  "agentverse_code_digest": "768c0e56565d1d513a00409d525540557ded2c6441b9239b2da00187e1944753",
+  "archive_sha256": "7478cae2a42f3dd6b18f934169f6d70b1ff9488ca22f500001c1a725a1a27884",
+  "modules": {
+    "__init__.py": {
+      "sha256": "e75534f3ad2262ab46fef86b4cf75731908cc37a286ab7feb6e29c7791827da6",
+      "bytes": 108
+    },
+    "agent.py": {
+      "sha256": "eb1472d3a26fab0de7c61f406eadae37fbfe6729fb207a7605a3e2a9458117c7",
+      "bytes": 184
+    },
+    "buyer_guidance.py": {
+      "sha256": "5f5ab64049324d2f5ea795a7521fdaea156fe97c24980586c0c7c047601746f3",
+      "bytes": 9298
+    },
+    "chat.py": {
+      "sha256": "69eb0f7e9e750395934c87bf2038ce8c8f4908410453efbc703f887729637b4c",
+      "bytes": 12934
+    },
+    "cli.py": {
+      "sha256": "9998f0fc5714939deaaaccb6ac1bce7be8e383dc49c732c0e4a434aed3bd2d7b",
+      "bytes": 64
+    },
+    "cloudflare_custody.py": {
+      "sha256": "a82a110ec992b52a5f467c093b3fc70c1936714cc7cd7739bc29d4c7d15a681d",
+      "bytes": 2754
+    },
+    "commerce.py": {
+      "sha256": "7030202c16fa06890e78ae0eefb482b52021a4ad347a62bbda52c901cd34494d",
+      "bytes": 14878
+    },
+    "conversation.py": {
+      "sha256": "d154428075a09ec671bee1f4aca6d13ab19ff9185f4a4490dd2179781095d5de",
+      "bytes": 46309
+    },
+    "customer_recovery.py": {
+      "sha256": "b3c64a3cc2eacbfeb9eca8c38e52fec6b618f565ceb9b6e39742dc060682c79c",
+      "bytes": 7183
+    },
+    "documents.py": {
+      "sha256": "0ed6190c7eb399db48cd224edeb3eedd4cdaf81e71ec802920bf2aeae1d65cae",
+      "bytes": 10338
+    },
+    "drafting.py": {
+      "sha256": "2dfe9c3b2e03228c42666569f391e27b9df5e0dff5d7cec5787e6552ac1e430a",
+      "bytes": 51023
+    },
+    "export_delivery.py": {
+      "sha256": "5253846d1286d8d69a3c1034f19e4e06c1ebc461465793487dfcadd44024a7a1",
+      "bytes": 4879
+    },
+    "fahce.py": {
+      "sha256": "c73b2846bead40b4986e2d78bcbabc9b77cf9ed3ae4e055e35ffc9303cd8b77d",
+      "bytes": 7877
+    },
+    "fahce_checkout.py": {
+      "sha256": "c32882ba331af5061e6d51b88358e0839bfeb54b0c24d0a18ee93962f13f55c2",
+      "bytes": 6386
+    },
+    "guided_cards.py": {
+      "sha256": "949ec2c76786d8b34ec6497a99427c03a888c839215b28dba57281d919d928c5",
+      "bytes": 23413
+    },
+    "listing_guidance.py": {
+      "sha256": "512d9f05d326609ca50a0ee465a4e5769fa1972b92557955e7b3fd0ce2991024",
+      "bytes": 21302
+    },
+    "machine.py": {
+      "sha256": "e682884ff4efd9a01cf8b3e6fd76712d97878c5e1043c607bce8da2935dd9776",
+      "bytes": 9369
+    },
+    "machine_contract.py": {
+      "sha256": "eaf40e69570a9cc82df43d638d72bbb60be3a854269cea767ad6aaaf6385cb4e",
+      "bytes": 10038
+    },
+    "model_runtime.py": {
+      "sha256": "1a623860d353f92617136b006aabb4801346982d372d17dbe3af1d8f393ee396",
+      "bytes": 14356
+    },
+    "offer_representation.py": {
+      "sha256": "a1a17c38ffb0c6442bf6a5e8f8d07ea8c6b66c968bf4435bc76348ae93955f89",
+      "bytes": 27432
+    },
+    "owner_export.py": {
+      "sha256": "d9a83b4a729201ce1f2de00aa773c4b4f89e249791fab3acaf8e1cd1a589d1b5",
+      "bytes": 1791
+    },
+    "product_policy.py": {
+      "sha256": "f6112631a905e50a925e9e3ebaed8ef64e1be7d74640993f17bb118059d46174",
+      "bytes": 26820
+    },
+    "protocol_payment.py": {
+      "sha256": "dd51cc100c076bb4694d80783a1b2efe89bcc7c9d9acbcb26405c90bb6114dda",
+      "bytes": 3558
+    },
+    "readiness.py": {
+      "sha256": "b26a653f5bceaff664f0c6e2a79ec48c081d0a1ff4acf239fefdcf0c02e6173e",
+      "bytes": 19393
+    },
+    "readiness_cards.py": {
+      "sha256": "47bf14a5e901608dce4193c963a3268b24412e53a5c966d47fa8323d5b6428b7",
+      "bytes": 4842
+    },
+    "restrictions.py": {
+      "sha256": "79a04e7ff69567569950db911303c00582955b37c8d7f39127e7113961e3f7ef",
+      "bytes": 3007
+    },
+    "storage.py": {
+      "sha256": "efb2fb405e4184f6e27565018ae4ce5c5bb4f00165392cfaa0f08748bd4fa95e",
+      "bytes": 2926
+    },
+    "workflow.py": {
+      "sha256": "5a1cb75bccad98c2d17eeb147b7e6f9fa34e91d5ed46acf13fa20297cdee1206",
+      "bytes": 98251
+    }
+  },
+  "scope": "Retained deployment source, not a deployment of local polish. All archive members inspected as Python source; no env entry."
+}

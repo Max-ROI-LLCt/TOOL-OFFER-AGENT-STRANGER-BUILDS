@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-11-05T03:05:39.763439+00:00",
+  "method": "npm audit --json against unchanged checkout lockfile",
+  "affected_dependency_entries": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 4,
+    "critical": 0,
+    "total": 4
+  },
+  "direct_and_transitive": [
+    {
+      "name": "@base-org/account",
+      "severity": "high",
+      "direct": true,
+      "affected_range": "2.5.6 - 2.6.0",
+      "via": [
+        "@coinbase/cdp-sdk"
+      ],
+      "suggested_fix": {
+        "name": "@base-org/account",
+        "version": "2.5.5",
+        "isSemVerMajor": true
+      }
+    },
+    {
+      "name": "@coinbase/cdp-sdk",
+      "severity": "high",
+      "direct": false,
+      "affected_range": ">=1.0.0",
+      "via": [
+        "abitype",
+        "zod"
+      ],
+      "suggested_fix": {
+        "name": "@base-org/account",
+        "version": "2.5.5",
+        "isSemVerMajor": true
+      }
+    },
+    {
+      "name": "abitype",
+      "severity": "high",
+      "direct": false,
+      "affected_range": "<=0.0.0-main-20230430000127 || 0.7.0-canary.20230307T162852 - 1.0.9",
+      "via": [
+        "zod"
+      ],
+      "suggested_fix": {
+        "name": "@base-org/account",
+        "version": "2.5.5",
+        "isSemVerMajor": true
+      }
+    },
+    {
+      "name": "zod",
+      "severity": "high",
+      "direct": false,
+      "affected_range": "<4.6.6",
+      "via": [
+        {
+          "title": "Zod can exhaust memory while validating oversized constrained collections",
+          "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5"
+        }
+      ],
+      "suggested_fix": {
+        "name": "@base-org/account",
+        "version": "2.5.5",
+        "isSemVerMajor": true
+      }
+    }
+  ],
+  "fix_applied": false,
+  "scope": "Dependency advisory, not demonstrated application exploit. No automated downgrade or dependency change applied."
+}

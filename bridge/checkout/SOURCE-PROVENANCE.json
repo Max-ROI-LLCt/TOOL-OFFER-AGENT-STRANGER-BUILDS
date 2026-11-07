@@ -1,0 +1,113 @@
+{
+  "source": "Separate outer wallet-approval; exact current source, not the older inner adapter. No runtime behavior changes.",
+  "files": [
+    {
+      "path": "bridge/checkout/attestation-verifier.mjs",
+      "original_path": "wallet-approval/attestation-verifier.mjs",
+      "sha256": "18490f66db1611d4622110478f4695a54b281e75728254dac910a77217f72648",
+      "bytes": 22364
+    },
+    {
+      "path": "bridge/checkout/browser.mjs",
+      "original_path": "wallet-approval/browser.mjs",
+      "sha256": "6f5deb853022fb38959b4c8bbc892875f10da91fc1171bdeb7ff233a9efdd568",
+      "bytes": 19118
+    },
+    {
+      "path": "bridge/checkout/checkout-worker.mjs",
+      "original_path": "wallet-approval/checkout-worker.mjs",
+      "sha256": "340128b8178c93f0e8b8321f19c0adc2ab7e599ae179d107fe2436a78d6cc624",
+      "bytes": 47970
+    },
+    {
+      "path": "bridge/checkout/expired-authorization.mjs",
+      "original_path": "wallet-approval/expired-authorization.mjs",
+      "sha256": "d9f22aa40811d9dfffdc231a205171fa1a3b873548fa65507302d7976345c962",
+      "bytes": 5975
+    },
+    {
+      "path": "bridge/checkout/package-lock.json",
+      "original_path": "wallet-approval/package-lock.json",
+      "sha256": "fec9b53416f9ed83ff69383b20eb15bdcf71858cdf3b07550f7bf6af3dfc3d0e",
+      "bytes": 75087
+    },
+    {
+      "path": "bridge/checkout/package.json",
+      "original_path": "wallet-approval/package.json",
+      "sha256": "6ef55596e56b8da5c2d044d889eeac69db86a9f2f824c8ae63f2404e2439c07b",
+      "bytes": 485
+    },
+    {
+      "path": "bridge/checkout/payment-policy.mjs",
+      "original_path": "wallet-approval/payment-policy.mjs",
+      "sha256": "1d2ebc5f89f11e37f7e0197c1fe587d437e28741443dd31bf94b44decaa97be0",
+      "bytes": 4346
+    },
+    {
+      "path": "bridge/checkout/public/app.js",
+      "original_path": "wallet-approval/public/app.js",
+      "sha256": "723def620eb375297c65150693a388eb66f0f2aff7e9752064f2022b224dd98e",
+      "bytes": 2041805
+    },
+    {
+      "path": "bridge/checkout/public/bootstrap.js",
+      "original_path": "wallet-approval/public/bootstrap.js",
+      "sha256": "e24b59cfd70aa70a2daf190224f518477beac3007323c774257495278ed4407a",
+      "bytes": 1397
+    },
+    {
+      "path": "bridge/checkout/public/index.html",
+      "original_path": "wallet-approval/public/index.html",
+      "sha256": "cf24db39ab291543fa4549570dd56ead1364753367c791bda565b7a72834d2f6",
+      "bytes": 5843
+    },
+    {
+      "path": "bridge/checkout/public/style.css",
+      "original_path": "wallet-approval/public/style.css",
+      "sha256": "b41326a02afae9cb37b17f49791f976e1e93d934edc2f8a7e5dca30fdb93092b",
+      "bytes": 2586
+    },
+    {
+      "path": "bridge/checkout/server.mjs",
+      "original_path": "wallet-approval/server.mjs",
+      "sha256": "69e03b2a547ce2f8774eaba77f1d5e2eec52559d3063ce7a76a6687594cc4f29",
+      "bytes": 15949
+    },
+    {
+      "path": "bridge/checkout/tests/checkout.test.mjs",
+      "original_path": "wallet-approval/tests/checkout.test.mjs",
+      "sha256": "509a52454225dcac08ed98b3cb489ceba1cf32dfa0d6bc145041db538fc9d2ca",
+      "bytes": 44459
+    },
+    {
+      "path": "bridge/checkout/tests/expired-authorization.test.mjs",
+      "original_path": "wallet-approval/tests/expired-authorization.test.mjs",
+      "sha256": "2ebcf39f62c200d483c365b16b8285b50a9aac643bdc5f691df9b52ac96cfd30",
+      "bytes": 5982
+    },
+    {
+      "path": "bridge/checkout/tests/input-review-browser.test.mjs",
+      "original_path": "wallet-approval/tests/input-review-browser.test.mjs",
+      "sha256": "b225e9b14f7b3bf71bf658244f0107bd21558158e9cbe5832b69c99aa7080acb",
+      "bytes": 8817
+    },
+    {
+      "path": "bridge/checkout/tests/payment.test.mjs",
+      "original_path": "wallet-approval/tests/payment.test.mjs",
+      "sha256": "2ac66d2e23edc785063b5e92e69dc79ce54bbb9bed4d30e096a5d948b0319cd4",
+      "bytes": 14605
+    },
+    {
+      "path": "bridge/checkout/tests/wallet-onboarding-browser.test.mjs",
+      "original_path": "wallet-approval/tests/wallet-onboarding-browser.test.mjs",
+      "sha256": "1db0c925cf4e907ee96ec8690ef1827bd5b9233dbad3a1cdcae9a78128005813",
+      "bytes": 9546
+    },
+    {
+      "path": "bridge/checkout/wrangler.jsonc",
+      "original_path": "wallet-approval/wrangler.jsonc",
+      "sha256": "ea0bc08b520aa8f383cb35a120c7af5c0690d2a1837a0cdbf6220246a6f5113c",
+      "bytes": 522
+    }
+  ]
+}

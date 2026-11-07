@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://tooloffer.kinganlogic.com/</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/manifest.json</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/machine/</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/examples/</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/instructions.md</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/openapi.json</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/readiness.schema.json</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/examples/parcel-openapi.json</loc></url>
+<url><loc>https://tooloffer.kinganlogic.com/examples/quickstart.json</loc></url>
+</urlset>

@@ -1,0 +1,352 @@
+{
+  "schema": "TOOL_OFFER_HOSTED_CARD_JOURNEY_RELEASE_V1",
+  "checked_at": "2026-11-06T02:09:22.481627+00:00",
+  "target": "agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a",
+  "requested_handle": "@tool-offer-builder",
+  "identity_note": "Existing configured address and agent name verified; profile API handle field is null. No replacement agent created.",
+  "before": {
+    "revision": 80,
+    "digest": "25c75f646dbf6dbb3e5e7f2391f942de176852e3bb7faca7b175f1a61350dccb"
+  },
+  "after": {
+    "revision": 81,
+    "digest": "3347eea4261f72b3fb36eac773c9f18a4593a9da3564c0e9c491cf54322b1b54",
+    "compiled": true,
+    "running": true
+  },
+  "tested_release_candidate_id": "a674a21d15becb63e90b738ca964f8537667e8c3637b658dab1b9de4d5fb097b",
+  "preserved_machine_gateway_release_id": "286e0c584063b4473836a02c7eeaf5a22deb7c8a6ba1df3b4476c049f34528c7",
+  "changed_modules": [
+    "guided_cards.py",
+    "offer_representation.py",
+    "readiness.py"
+  ],
+  "source_hashes": {
+    "__init__.py": "e75534f3ad2262ab46fef86b4cf75731908cc37a286ab7feb6e29c7791827da6",
+    "agent.py": "eb1472d3a26fab0de7c61f406eadae37fbfe6729fb207a7605a3e2a9458117c7",
+    "buyer_guidance.py": "5f5ab64049324d2f5ea795a7521fdaea156fe97c24980586c0c7c047601746f3",
+    "chat.py": "69eb0f7e9e750395934c87bf2038ce8c8f4908410453efbc703f887729637b4c",
+    "cli.py": "9998f0fc5714939deaaaccb6ac1bce7be8e383dc49c732c0e4a434aed3bd2d7b",
+    "cloudflare_custody.py": "a82a110ec992b52a5f467c093b3fc70c1936714cc7cd7739bc29d4c7d15a681d",
+    "commerce.py": "7030202c16fa06890e78ae0eefb482b52021a4ad347a62bbda52c901cd34494d",
+    "conversation.py": "ab9e0e4b619175b0fa1bb1c9b0440d075c16ec370411b21ccaaa68aa43432e2f",
+    "customer_recovery.py": "564e469b03b245f1d0df9259a3f4011c3e9ed0f321d9fcd95f9c3335b55505df",
+    "documents.py": "0ed6190c7eb399db48cd224edeb3eedd4cdaf81e71ec802920bf2aeae1d65cae",
+    "drafting.py": "2dfe9c3b2e03228c42666569f391e27b9df5e0dff5d7cec5787e6552ac1e430a",
+    "export_delivery.py": "5253846d1286d8d69a3c1034f19e4e06c1ebc461465793487dfcadd44024a7a1",
+    "fahce.py": "c73b2846bead40b4986e2d78bcbabc9b77cf9ed3ae4e055e35ffc9303cd8b77d",
+    "fahce_checkout.py": "c32882ba331af5061e6d51b88358e0839bfeb54b0c24d0a18ee93962f13f55c2",
+    "guided_cards.py": "be0dfb5f2288e53493b19595d8fefb58a36b4bd16b4b3a5c0b81325ae54d1305",
+    "listing_guidance.py": "512d9f05d326609ca50a0ee465a4e5769fa1972b92557955e7b3fd0ce2991024",
+    "machine.py": "e682884ff4efd9a01cf8b3e6fd76712d97878c5e1043c607bce8da2935dd9776",
+    "machine_contract.py": "eaf40e69570a9cc82df43d638d72bbb60be3a854269cea767ad6aaaf6385cb4e",
+    "model_runtime.py": "1a623860d353f92617136b006aabb4801346982d372d17dbe3af1d8f393ee396",
+    "offer_representation.py": "7eb81f58b7cdd78b0dc42a848a8f0ee246abcc41e16619dbfe823a55a4b08b31",
+    "owner_export.py": "d9a83b4a729201ce1f2de00aa773c4b4f89e249791fab3acaf8e1cd1a589d1b5",
+    "parcel_fixture.py": "a1ea75cee90c7e72afd2441c545457517e818600daf4dcf85d20f6f1c40091a4",
+    "product_policy.py": "f6112631a905e50a925e9e3ebaed8ef64e1be7d74640993f17bb118059d46174",
+    "protocol_payment.py": "dd51cc100c076bb4694d80783a1b2efe89bcc7c9d9acbcb26405c90bb6114dda",
+    "readiness.py": "7984990bc5d935c6468e65fe3db0865a9ea12802c7df7c63590f7d114deb5589",
+    "readiness_cards.py": "9e8a21327a7988851a64ac9d19375f560fa65bc0777e10af6068e67197666e50",
+    "restrictions.py": "79a04e7ff69567569950db911303c00582955b37c8d7f39127e7113961e3f7ef",
+    "storage.py": "efb2fb405e4184f6e27565018ae4ce5c5bb4f00165392cfaa0f08748bd4fa95e",
+    "workflow.py": "f8233439e681f5358089c52b5e44abdc6961a668b59f15f804d6989c3373b5ef"
+  },
+  "cause": {
+    "confirmed_from_authenticated_retained_protocol_history": true,
+    "edit": {
+      "action": "edit",
+      "card_id": "<matching-issued-card-id>",
+      "approved": true
+    },
+    "routing": "@<target-agent-address> followed by compact JSON",
+    "mechanism": "The old validator required approved=false for edit, rejecting the actual approved=true acknowledgement before the form could open. Both card origins share the builder.",
+    "save_route_and_success_reply_recovered": true,
+    "typed_finish_binding_and_success_reply_recovered": true,
+    "replay_scope": "Sanitized actual action structures with fresh isolated bindings and state, not historical per-message state snapshots."
+  },
+  "profile": {
+    "matching_readme_uploaded_and_read_back": true,
+    "description_and_starters_unchanged": true,
+    "identity_avatar_banner_preserved": true
+  },
+  "preservation": {
+    "all_unselected_hosted_modules_unchanged": true,
+    "saved_founder_records_compared": 2,
+    "saved_records_unchanged": true,
+    "retained_history_and_11_part_export_unchanged": true,
+    "browser_history_unchanged": true,
+    "recoverable_before_release_retained_privately": true,
+    "payment_configuration_unchanged": true
+  },
+  "live_acp": {
+    "passed": true,
+    "signed_replies": 72,
+    "completed_at": "2026-11-06T02:06:37.648227+00:00",
+    "interface": "Live native Fetch Chat Protocol; controlled test mailbox, not independent ASI UI",
+    "temporary_mailbox_removed": true,
+    "checks": {
+      "action_cases": [
+        {
+          "origin": "automatic",
+          "action": "approve_cta",
+          "approved": true,
+          "passed": true
+        },
+        {
+          "origin": "automatic",
+          "action": "reject_cta",
+          "approved": true,
+          "passed": true
+        },
+        {
+          "origin": "typed_review",
+          "action": "approve_cta",
+          "approved": true,
+          "passed": true
+        },
+        {
+          "origin": "typed_review",
+          "action": "reject_cta",
+          "approved": true,
+          "passed": true
+        }
+      ],
+      "exports": [
+        {
+          "command": "export json",
+          "revision": 1,
+          "parts": 5,
+          "bytes": 12256,
+          "sha256": "a82227d60eab2be6dcaac22ee2a5aa95d4ade0305807dff7472032b926f5edb0"
+        },
+        {
+          "command": "readiness json",
+          "revision": 2,
+          "parts": 5,
+          "bytes": 12171,
+          "sha256": "d5206fc23cde0ef3ae84dd967f7d0f557692af2be527b6bae5a489987509db57"
+        },
+        {
+          "command": "export json",
+          "revision": 1,
+          "parts": 5,
+          "bytes": 12891,
+          "sha256": "a0bb28ffdfece7f3f98d915ec6b6ca5851922fa9cdb084afb97cce4db2446281"
+        },
+        {
+          "command": "export json",
+          "revision": 3,
+          "parts": 9,
+          "bytes": 24177,
+          "sha256": "2301a46ed5781506c5aaba5eb1f460c74fe56ff76e403fcb0da9c29c910af533"
+        }
+      ],
+      "customer_only_correction": true,
+      "identical_value": true,
+      "typed_correction_separate": true,
+      "explicit_limited_rebuild": true,
+      "historical_export_preserved": true,
+      "same_session_reentry_and_storage_readback": true,
+      "browser_reload_observed": false,
+      "action_transport": "Retained browser action structure with fresh disposable bindings, submitted through signed ACP; not a browser click."
+    },
+    "model_calls_requested": 0,
+    "payment_calls_requested": 0,
+    "fahce_calls_requested": 0,
+    "independent_receipt_audit": {
+      "passed": true,
+      "signed_replies_verified": 72,
+      "part_replies_verified": 29,
+      "unique_exports_reconstructed": 4,
+      "exports": [
+        {
+          "kind": "export json",
+          "revision": 1,
+          "parts": 5,
+          "bytes": 12256,
+          "sha256": "a82227d60eab2be6dcaac22ee2a5aa95d4ade0305807dff7472032b926f5edb0",
+          "json_parsed": true
+        },
+        {
+          "kind": "readiness_json",
+          "revision": 2,
+          "parts": 5,
+          "bytes": 12171,
+          "sha256": "d5206fc23cde0ef3ae84dd967f7d0f557692af2be527b6bae5a489987509db57",
+          "json_parsed": true
+        },
+        {
+          "kind": "export json",
+          "revision": 1,
+          "parts": 5,
+          "bytes": 12891,
+          "sha256": "a0bb28ffdfece7f3f98d915ec6b6ca5851922fa9cdb084afb97cce4db2446281",
+          "json_parsed": true
+        },
+        {
+          "kind": "export json",
+          "revision": 3,
+          "parts": 9,
+          "bytes": 24177,
+          "sha256": "2301a46ed5781506c5aaba5eb1f460c74fe56ff76e403fcb0da9c29c910af533",
+          "json_parsed": true
+        }
+      ],
+      "uses_application_reassembler": false,
+      "scope": "Independent signature/Base64/offset/count/length/SHA256/UTF8/JSON checks on retained signed live replies, not browser observations."
+    }
+  },
+  "release_regressions": {
+    "actual_revision_80_reproduces_both_edit_failures": true,
+    "hosted_card_journey_tests_passed": 6,
+    "staged_hosted_tests_passed": 362,
+    "chat_tests_passed": 13,
+    "site_tests_passed": 45,
+    "maintained_builder_tests_passed": 16,
+    "suites_overlap": true,
+    "candidate_clean_regressions": "See evidence/test-results.json; local custody configuration skips are not live passes."
+  },
+  "asi_one": {
+    "status": "revision 81 deployed; narrowly scoped post-repair visual acceptance pending",
+    "authenticated_browser_available": false,
+    "native_visual_acceptance": false,
+    "founder_prior_browser_observations": "Both welcome choices, automatic fictional drafting, the original edit failure, a later typed-card Finish, stale readiness/export views, and JSON manifest delivery were observed on revision 80.",
+    "new_observations": "Authenticated retained protocol history and fresh signed ACP, not new physical browser clicks.",
+    "remaining_steps": "See docs/CARD-JOURNEY-REPAIR.md. Do not repeat the already-observed welcome choices."
+  },
+  "scope": {
+    "website_deployed": false,
+    "payment_bridge_changed": false,
+    "fahce_changed": false,
+    "github_published": false,
+    "judging_package_finalized": false,
+    "judging_package": "private candidate"
+  },
+  "privacy": "Curated outcomes and module hashes only. No credentials, callbacks, private screenshots, founder records or raw conversations.",
+  "historical_welcome_release": {
+    "schema": "TOOL_OFFER_HOSTED_WELCOME_RELEASE_V1",
+    "checked_at": "2026-11-06T00:10:17.892536+00:00",
+    "target": "agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a",
+    "requested_handle": "@tool-offer-builder",
+    "identity_note": "Existing configured address and agent name verified; profile API handle field is null. No replacement agent created.",
+    "before": {
+      "revision": 79,
+      "digest": "768c0e56565d1d513a00409d525540557ded2c6441b9239b2da00187e1944753"
+    },
+    "after": {
+      "revision": 80,
+      "digest": "25c75f646dbf6dbb3e5e7f2391f942de176852e3bb7faca7b175f1a61350dccb",
+      "compiled": true,
+      "running": true
+    },
+    "tested_release_candidate_id": "d44f3b664a02bb6f661a4b850eb635a9c7ab83d96d72788bdf81d833aee44a3d",
+    "preserved_machine_gateway_release_id": "286e0c584063b4473836a02c7eeaf5a22deb7c8a6ba1df3b4476c049f34528c7",
+    "changed_modules": [
+      "conversation.py",
+      "customer_recovery.py",
+      "guided_cards.py",
+      "offer_representation.py",
+      "parcel_fixture.py",
+      "readiness_cards.py",
+      "workflow.py"
+    ],
+    "source_hashes": {
+      "__init__.py": "e75534f3ad2262ab46fef86b4cf75731908cc37a286ab7feb6e29c7791827da6",
+      "agent.py": "eb1472d3a26fab0de7c61f406eadae37fbfe6729fb207a7605a3e2a9458117c7",
+      "buyer_guidance.py": "5f5ab64049324d2f5ea795a7521fdaea156fe97c24980586c0c7c047601746f3",
+      "chat.py": "69eb0f7e9e750395934c87bf2038ce8c8f4908410453efbc703f887729637b4c",
+      "cli.py": "9998f0fc5714939deaaaccb6ac1bce7be8e383dc49c732c0e4a434aed3bd2d7b",
+      "cloudflare_custody.py": "a82a110ec992b52a5f467c093b3fc70c1936714cc7cd7739bc29d4c7d15a681d",
+      "commerce.py": "7030202c16fa06890e78ae0eefb482b52021a4ad347a62bbda52c901cd34494d",
+      "conversation.py": "ab9e0e4b619175b0fa1bb1c9b0440d075c16ec370411b21ccaaa68aa43432e2f",
+      "customer_recovery.py": "564e469b03b245f1d0df9259a3f4011c3e9ed0f321d9fcd95f9c3335b55505df",
+      "documents.py": "0ed6190c7eb399db48cd224edeb3eedd4cdaf81e71ec802920bf2aeae1d65cae",
+      "drafting.py": "2dfe9c3b2e03228c42666569f391e27b9df5e0dff5d7cec5787e6552ac1e430a",
+      "export_delivery.py": "5253846d1286d8d69a3c1034f19e4e06c1ebc461465793487dfcadd44024a7a1",
+      "fahce.py": "c73b2846bead40b4986e2d78bcbabc9b77cf9ed3ae4e055e35ffc9303cd8b77d",
+      "fahce_checkout.py": "c32882ba331af5061e6d51b88358e0839bfeb54b0c24d0a18ee93962f13f55c2",
+      "guided_cards.py": "608d9f103a7585ac1be3e655a8e32ba2e5a3f28cccba8e7acc94c03fa6888864",
+      "listing_guidance.py": "512d9f05d326609ca50a0ee465a4e5769fa1972b92557955e7b3fd0ce2991024",
+      "machine.py": "e682884ff4efd9a01cf8b3e6fd76712d97878c5e1043c607bce8da2935dd9776",
+      "machine_contract.py": "eaf40e69570a9cc82df43d638d72bbb60be3a854269cea767ad6aaaf6385cb4e",
+      "model_runtime.py": "1a623860d353f92617136b006aabb4801346982d372d17dbe3af1d8f393ee396",
+      "offer_representation.py": "7fb94bd601580da19fcf7888b89ddf68e2325d36d9bc923a7e4c36e764d193d7",
+      "owner_export.py": "d9a83b4a729201ce1f2de00aa773c4b4f89e249791fab3acaf8e1cd1a589d1b5",
+      "parcel_fixture.py": "a1ea75cee90c7e72afd2441c545457517e818600daf4dcf85d20f6f1c40091a4",
+      "product_policy.py": "f6112631a905e50a925e9e3ebaed8ef64e1be7d74640993f17bb118059d46174",
+      "protocol_payment.py": "dd51cc100c076bb4694d80783a1b2efe89bcc7c9d9acbcb26405c90bb6114dda",
+      "readiness.py": "b26a653f5bceaff664f0c6e2a79ec48c081d0a1ff4acf239fefdcf0c02e6173e",
+      "readiness_cards.py": "9e8a21327a7988851a64ac9d19375f560fa65bc0777e10af6068e67197666e50",
+      "restrictions.py": "79a04e7ff69567569950db911303c00582955b37c8d7f39127e7113961e3f7ef",
+      "storage.py": "efb2fb405e4184f6e27565018ae4ce5c5bb4f00165392cfaa0f08748bd4fa95e",
+      "workflow.py": "f8233439e681f5358089c52b5e44abdc6961a668b59f15f804d6989c3373b5ef"
+    },
+    "profile": {
+      "matching_readme_uploaded_and_read_back": true,
+      "description_and_starters_unchanged": true,
+      "identity_avatar_banner_preserved": true
+    },
+    "preservation": {
+      "all_unselected_hosted_modules_unchanged": true,
+      "saved_founder_records_compared": 2,
+      "saved_records_unchanged": true,
+      "retained_history_and_11_part_export_unchanged": true,
+      "recoverable_before_release_retained_privately": true,
+      "payment_configuration_unchanged": true
+    },
+    "live_acp": {
+      "passed": true,
+      "signed_replies": 23,
+      "completed_at": "2026-11-06T00:11:49.809241+00:00",
+      "interface": "Signed ACP messages and emitted action selections using an isolated temporary mailbox, not an ASI browser.",
+      "temporary_mailbox_removed": true,
+      "checks": {
+        "first_click_advances": true,
+        "direct_url_advances": true,
+        "demonstration_restriction_in_draft": true,
+        "duplicate_stale_cross_session_rejected": true,
+        "review_correction_readiness_protocol_verified": true,
+        "native_visual_acceptance": false
+      },
+      "first_reply_utf8_bytes": 262,
+      "first_card_payload_utf8_bytes": 526,
+      "first_click_reply_utf8_bytes": 74,
+      "button_labels": [
+        "Start with my tool",
+        "Try a fictional example"
+      ],
+      "intro_occurrences_in_text": 1,
+      "intro_repeated_in_card": false,
+      "labels_complete_in_payload": true,
+      "display_truncation_verified": false,
+      "demo_next_step": "Bundled fictional intake yields a restricted saved draft; next step is review or correction.",
+      "model_calls_requested": 0,
+      "payment_calls_requested": 0,
+      "fahce_calls_requested": 0
+    },
+    "release_regressions": {
+      "staged_hosted_tests_passed": 362,
+      "chat_tests_passed": 13,
+      "site_tests_passed": 45,
+      "suites_overlap": true,
+      "candidate_clean_regressions": "See evidence/test-results.json"
+    },
+    "asi_one": {
+      "status": "deployed; ASI:One visual check pending",
+      "authenticated_browser_available": false,
+      "native_visual_acceptance": false,
+      "client_rendering_limitation_established": false,
+      "remaining_steps": "See docs/WELCOME.md; fresh start and separate restricted demo, then review/correction/readiness navigation."
+    },
+    "scope": {
+      "website_deployed": false,
+      "payment_bridge_changed": false,
+      "fahce_changed": false,
+      "github_published": false,
+      "judging_package_finalized": false,
+      "judging_package": "private candidate"
+    },
+    "privacy": "Curated outcomes and module hashes only. No credentials, callbacks, private screenshots, founder records or raw conversations."
+  }
+}

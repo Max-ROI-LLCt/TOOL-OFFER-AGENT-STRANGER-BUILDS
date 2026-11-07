@@ -1,0 +1,103 @@
+{
+  "scope": "SANITIZED RETAINED OBSERVATIONS; NOT A SIGNED RECEIPT, NEW PAYMENT, OR FRESH CRYPTOGRAPHIC REVERIFICATION",
+  "prepared_at": "2026-11-05T03:01:13.806764+00:00",
+  "checkout_and_authorization": {
+    "phase": "response_received",
+    "signedAt": "2026-11-01T18:08:10.204Z",
+    "httpStatus": 200,
+    "paymentPayloadRecorded": true,
+    "paymentResponsePresent": true,
+    "recoveryTokenPresent": true
+  },
+  "service_completion": {
+    "checkedAt": "2026-11-01T18:15:07.170Z",
+    "phase": "response_received",
+    "httpStatus": 200,
+    "engine": "fahce-pilot-deterministic-v0.2.13-agent-offer-rc2",
+    "determination": "DETERMINATION_COMPLETE_NEGATIVE",
+    "offerVerified": false
+  },
+  "gateway": {
+    "success_reported": true,
+    "origin_billable_reported": true,
+    "immutable_receipt_payment_status": "AUTHORIZED_PENDING_GATEWAY_SETTLEMENT"
+  },
+  "prior_independent_receipt_audit": {
+    "verified": true,
+    "scope": "CONFIDENTIAL_DETERMINISTIC_COMPUTATION",
+    "issuance_time": "2026-11-01T18:08:14.276Z",
+    "engine_version": "fahce-pilot-deterministic-v0.2.13-agent-offer-rc2",
+    "historical_verification": true,
+    "fresh_execution_performed": false,
+    "external_actions_certified": false,
+    "caller_evidence_truth_verified": false,
+    "maa_service_tee_verified": false,
+    "caller_challenge_verified": false,
+    "caller_original_input_verified": false
+  },
+  "prior_message_readback_audit": {
+    "receiptMatchesChat": true,
+    "responseHashMatchesChat": true
+  },
+  "initial_readonly_chain_observations": [
+    {
+      "checkedAt": "2026-11-01T18:14:03.142Z",
+      "provider": "base-rpc.publicnode.com",
+      "chainId": 8453,
+      "receiptStatus": "success",
+      "transactionMatches": true,
+      "blockHashMatches": true,
+      "matchingPurchaseTransfers": 1,
+      "authorizationAmountMatches": true,
+      "authorizationRecipientMatches": true,
+      "atOrBeforeFinalizedHead": false
+    },
+    {
+      "checkedAt": "2026-11-01T18:14:03.410Z",
+      "provider": "base.drpc.org",
+      "chainId": 8453,
+      "receiptStatus": "success",
+      "transactionMatches": true,
+      "blockHashMatches": true,
+      "matchingPurchaseTransfers": 1,
+      "authorizationAmountMatches": true,
+      "authorizationRecipientMatches": true,
+      "atOrBeforeFinalizedHead": false
+    }
+  ],
+  "later_finality_observations": [
+    {
+      "checkedAt": "2026-11-01T18:29:14.697Z",
+      "provider": "base-rpc.publicnode.com",
+      "chainId": 8453,
+      "receiptStatus": "success",
+      "transactionMatches": true,
+      "blockHashMatches": true,
+      "atOrBeforeFinalizedHead": false
+    },
+    {
+      "checkedAt": "2026-11-01T18:29:14.959Z",
+      "provider": "base.drpc.org",
+      "chainId": 8453,
+      "receiptStatus": "success",
+      "transactionMatches": true,
+      "blockHashMatches": true,
+      "atOrBeforeFinalizedHead": true
+    }
+  ],
+  "audit_payment_calls": 0,
+  "this_preparation_payment_calls": 0,
+  "limitations": [
+    "Private original payloads, identifiers, addresses, receipts and conversations excluded.",
+    "Source hashes commit to private records but do not independently prove their contents.",
+    "Signed material existence does not independently demonstrate consent UI.",
+    "No two-provider finality convergence in retained follow-up.",
+    "No current native ASI browser observation."
+  ],
+  "source_commitments": {
+    "receipt-verification.json": "12997d2998c34ae12cfbd1d90a2173762cf31757ed5bc9e21db54b15b9e85055",
+    "payment-evidence.json": "d452df773ca73875cbbf143a90f672f83c1eb3e356255b3741e2400654bd26cf",
+    "onchain-verification.json": "7c77ee48a2c29359783bafe5d70fed923fe2f63ad543ffcc351259a1b5942a9e",
+    "finality-followup.json": "1384e4a0bfbf8dd4507dfefb9a4f85d9f737d9a96d98e801fcf0ca730828cdda"
+  }
+}

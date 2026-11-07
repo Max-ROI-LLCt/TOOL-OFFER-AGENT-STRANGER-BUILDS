@@ -1,0 +1,61 @@
+# Tool Offer Agent
+
+<!-- tool-offer-release:start -->
+Version: 1.4.9
+Release: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19
+<!-- tool-offer-release:end -->
+> Source-attributed offer preparation with identity-bound machine credentials; no machine payments.
+
+## Canonical interfaces
+
+- [Instructions and recovery](https://tooloffer.kinganlogic.com/instructions.md)
+- [OpenAPI request/response schemas](https://tooloffer.kinganlogic.com/openapi.json)
+- [Discovery and quotas](https://tooloffer.kinganlogic.com/capabilities/machines)
+- [Autonomous machine authentication](https://tooloffer.kinganlogic.com/machine/)
+- [Short human example](https://tooloffer.kinganlogic.com/examples/)
+- [Compact structured example](https://tooloffer.kinganlogic.com/examples/quickstart.json)
+- [Full multipart integrity fixture](https://tooloffer.kinganlogic.com/examples/fictional-seller.json)
+- [OAuth server metadata](https://tooloffer.kinganlogic.com/.well-known/oauth-authorization-server)
+- [MCP protected resource](https://tooloffer.kinganlogic.com/.well-known/oauth-protected-resource/mcp)
+
+Release: 66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19
+
+Source-attributed API/MCP offer intake, conversation, drafting, revision, deterministic readiness assessment and exports. No wallet connection, checkout, FAHCE execution, payment, approval, publication, administration or cross-conversation recovery through this adapter.
+
+Limits: {"daily_messages_global": 500, "daily_messages_per_client": 20, "daily_operations_global": 5000, "daily_sessions_per_client": 10, "message_characters": 4000, "model_attempts_per_message": 2, "requests_per_minute": 60, "requests_per_session": 100, "session_days": 7}
+
+<!-- tool-offer-discovery:start -->
+## For machines
+
+Machine-readable profile (canonical): https://tooloffer.kinganlogic.com/manifest.json
+
+This manifest is the authority for capabilities, invocation and payment boundaries. Read it first; no Agentverse page rendering or ASI:One login is required for discovery.
+
+### Capabilities
+- Read public API/MCP documentation and retain source-attributed evidence.
+- Collect seller-stated customer, pricing, payment, access and invocation terms.
+- Draft, review and revise an offer within an isolated conversation.
+- Explain the buyer offer and prepare listing guidance without publication.
+- Assess retained offer readiness deterministically without inference or payment.
+- Export structured and human-readable records, with verified multipart retrieval when needed.
+
+### Boundaries
+- Does not certify sellers, prove service execution, grant resale rights or publish listings.
+- Does not share ASI:One conversation history with machine sessions.
+- Does not connect wallets, create checkouts, execute FAHCE or make payments through MCP/REST.
+- Does not sign, spend automatically or authorize a purchase on a buyer's behalf.
+
+MCP protocol endpoint (POST, not a webpage): `https://tooloffer.kinganlogic.com/mcp`
+Human machine-access documentation: https://tooloffer.kinganlogic.com/machine/
+Browser GET returns 405 (no standalone SSE stream). /mcp/ supports the same protocol without redirecting POST bodies.
+REST request template (not a webpage): `POST https://tooloffer.kinganlogic.com/api/machine/{tool_name}`
+Native Agentverse address: `agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a` (Fetch Agent Chat Protocol).
+Public Agentverse JSON profile: https://agentverse.ai/v1/agents/agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a/profile
+Calls require identity-bound credentials; discovery is public. Retain session_id, request_id and job_id. Poll get_result for the same job; an acknowledgement is not completion. Never retry uncertain work with a new request_id. Verify signed results and every multipart export part.
+
+### Registry publication
+Published in the official MCP Registry as `com.kinganlogic/tool-offer-agent`: version 1.4.9 at 2026-11-07T03:32:16.914361Z, active/latest at the verified post-publication readback. The endpoint is https://tooloffer.kinganlogic.com/mcp. Publication is complete; no reenrollment or republication is required. Later local source corrections are not thereby deployed. Publication does not establish search indexing, adoption, execution certification or hackathon acceptance.
+
+Drafting is free; operator inference costs and published quotas still apply.
+Optional FAHCE evaluation is separate and buyer-authorized: 0.15 USDC on Base mainnet via the private human checkout. A free preflight is not an evaluation. Checkout preparation, wallet connection and a 402 challenge are not payment authorization, settlement or a completed result. Changed price, network, token or recipient stops payment. No automatic spending.
+<!-- tool-offer-discovery:end -->

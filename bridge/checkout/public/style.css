@@ -1,0 +1,33 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #ecf2fa; background: #0b111a; line-height: 1.55; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { width: min(760px, calc(100% - 36px)); margin: 64px auto; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); line-height: 1.12; letter-spacing: -.04em; margin: 16px 0; }
+h2 { font-size: 1.2rem; margin: 0 0 8px; }
+.eyebrow { color: #9be5c7; letter-spacing: .14em; font-size: .72rem; font-weight: 700; }
+.intro, .muted, .footer { color: #a8b7ca; }
+.intro { font-size: 1.08rem; margin-bottom: 30px; }
+.card { background: #131e2c; border: 1px solid #2b3b4e; border-radius: 16px; padding: 26px; margin-top: 20px; }
+.price-row { display: flex; justify-content: space-between; gap: 20px; align-items: start; }
+.price-row p { color: #a8b7ca; margin-top: 0; }
+.price { font-size: 2rem; color: #a0efce; white-space: nowrap; }
+.price span { font-size: .85rem; }
+dl { display: grid; grid-template-columns: 90px 1fr; gap: 12px; margin: 22px 0; font-size: .82rem; }
+dt { color: #a8b7ca; }
+dd { margin: 0; overflow-wrap: anywhere; font-family: ui-monospace, monospace; }
+summary { cursor: pointer; color: #b4d1ff; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 460px; overflow: auto; font-size: .8rem; padding: 16px; background: #09121e; border-radius: 10px; }
+select { width: 100%; padding: 12px; margin-top: 8px; color: inherit; background: #09121e; border: 1px solid #435b78; border-radius: 8px; }
+.legal { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; padding: 0; font-size: .9rem; }
+a { color: #b4d1ff; }
+.consent { display: flex; align-items: start; gap: 12px; margin: 22px 0; }
+input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; accent-color: #9be5c7; }
+button { cursor: pointer; font: inherit; font-weight: 650; border: 0; border-radius: 10px; padding: 15px 20px; background: #a0efce; color: #10291f; width: 100%; }
+button:disabled { cursor: not-allowed; opacity: .4; }
+button.secondary { background: transparent; color: #b4d1ff; border: 1px solid #435b78; font-size: .85rem; padding: 10px; }
+button:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid #b4d1ff; outline-offset: 4px; }
+#status { color: #b9dcca; }
+#error { color: #ffb8b8; overflow-wrap: anywhere; }
+.footer { font-size: .8rem; margin-top: 26px; }
+[hidden] { display: none !important; }
+@media (max-width: 480px) { main { margin-top: 32px; } .card { padding: 20px; } .price { font-size: 1.55rem; } }

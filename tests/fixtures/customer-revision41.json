@@ -1,0 +1,12 @@
+{
+  "fixture_observation": "SYNTHETIC REPLACEMENT FOR JUDGING. Written November 5, 2026; not a founder conversation or a captured response. Preserves restriction recovery, duplicate intake, and grounding failure behavior.",
+  "restriction_message": "Demonstration only. No commercial use. I do not own this API and I do not represent its maintainers.",
+  "natural_intake": "Use https://jsonplaceholder.typicode.com/ as the tool and documentation URL. The customer is developers learning HTTP integrations. Price is USD 0 for this demonstration only. No payment is collected. Access is public without an API key. Invoke GET https://jsonplaceholder.typicode.com/posts/1. The proposed job is demonstrate reading a fake post.",
+  "document": {
+    "source_url": "https://jsonplaceholder.typicode.com/",
+    "requested_url": "https://jsonplaceholder.typicode.com/",
+    "media_type": "text/plain",
+    "text": "JSONPlaceholder is the name referenced by this synthetic test document. GET /posts/1 returns a fictional post with id, title and body. This fixture describes a demonstration, not a live execution or authorization. No payment is collected in the synthetic exercise. It is not copied from a customer conversation or asserted to be current external documentation."
+  },
+  "observed_failures": []
+}

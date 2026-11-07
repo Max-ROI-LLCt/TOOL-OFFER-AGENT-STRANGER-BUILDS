@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Approve FAHCE check · Tool Offer Agent</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/bootstrap.js"></script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">TOOL OFFER AGENT BY KINGAN LOGIC / ONE-TIME PURCHASE</p>
+    <h1>Check your offer with FAHCE.</h1>
+    <p class="intro">Review the prepared offer against its supplied documentation. This buys one FAHCE Diagnose check. Your wallet approval submits this exact request.</p>
+    <section class="card" aria-labelledby="purchase-title">
+      <div class="price-row"><div><h2 id="purchase-title">FAHCE Diagnose</h2><p>One request · Base network</p></div><strong class="price">0.15 <span>USDC</span></strong></div>
+      <dl>
+        <dt>Buyer</dt><dd id="buyer">Loading…</dd>
+        <dt>Paid to</dt><dd id="recipient">Loading…</dd>
+        <dt>Request</dt><dd id="request-hash">Loading…</dd>
+      </dl>
+      <label class="consent"><input type="checkbox" id="hide-wallets" checked><span>Hide wallet addresses while recording</span></label>
+      <details><summary>Review the exact offer being checked</summary><pre id="candidate"></pre></details>
+      <p id="evidence" class="muted"></p>
+    </section>
+    <section class="card" id="revision-card" aria-labelledby="revision-title" hidden>
+      <h2 id="revision-title">Review the input-format repair</h2>
+      <p id="revision-summary"></p>
+      <p id="revision-preflight" class="muted"></p>
+      <details><summary>Original offer — preserved in history</summary><pre id="revision-original"></pre></details>
+      <details open><summary>Revised offer proposed for this check</summary><pre id="revision-candidate"></pre></details>
+      <p class="muted">Compare the wording and layout carefully: this is the candidate that will be checked. Source documents, wallet, merchant and price stay the same. Accepting here does not connect your wallet, sign anything or make a payment.</p>
+      <label class="consent"><input type="checkbox" id="accept-revision"><span>I reviewed both versions and approve this revised input for the check.</span></label>
+      <button type="button" id="apply-revision" disabled>Use revised input — no payment</button>
+    </section>
+    <section class="card" aria-labelledby="approval-title">
+      <h2 id="approval-title">Your wallet. Your approval.</h2>
+      <p>First connect your own wallet to share its public account with this page. Connection does not sign a payment, accept policies, check your balance, or give the agent ongoing spending permission. No repo, developer login, private key or seed phrase is needed.</p>
+      <label for="wallet">Wallet</label>
+      <select id="wallet"><option value="">Looking for connected wallets…</option></select>
+      <p id="wallet-help" class="muted">Use the browser where you normally approve payments.</p>
+      <button type="button" id="connect-wallet" class="secondary" disabled>Connect wallet — no payment</button>
+      <p id="connected-wallet" role="status" aria-live="polite">No wallet connected by this page.</p>
+      <p class="muted">No address needs to be pasted into chat. To inspect your selected account privately, uncheck Hide wallet addresses while recording above. Your wallet must have sufficient USDC on Base; connecting does not fund it. Gateway eligibility currently requires US-based buyers.</p>
+      <p>Review FAHCE’s published policies:</p><ul id="legal" class="legal"></ul>
+      <label class="consent"><input type="checkbox" id="accept-terms" disabled><span>I have reviewed and accept these policies for this one-time 0.15 USDC FAHCE purchase.</span></label>
+      <p class="muted">The one-time wallet authorization can remain valid for up to one hour. A completed negative diagnosis can still be billable. This is not verification of the seller’s identity or authenticity.</p>
+      <button type="button" id="pay" disabled>Pay now — 0.15 USDC</button>
+      <div id="saved-approval" hidden>
+        <p>Your wallet approval is saved, but the bridge has not sent it for payment. You can submit that same approval once after reviewing these policies. This can spend 0.15 USDC; it is not a status check. It does not open your wallet or create another signature.</p>
+        <label class="consent"><input type="checkbox" id="accept-saved-approval"><span>Submit my existing approval for this exact request. I understand this can complete the 0.15 USDC purchase.</span></label>
+        <button type="button" id="submit-saved-approval" disabled>Submit saved approval — 0.15 USDC</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">Loading your private purchase…</p>
+      <p id="error" role="alert"></p>
+      <button type="button" id="refresh" class="secondary">Refresh purchase status</button>
+    </section>
+    <section class="card" id="result-card" hidden>
+      <h2>Purchase response</h2>
+      <p>Return to your <strong>original ASI:One conversation</strong> and send <code>check</code> to retrieve this result, then <code>export json</code> for the record. Do not start another purchase to retrieve it.</p>
+      <p id="result-note"></p>
+      <p id="transaction"></p>
+      <details><summary>View returned result</summary><pre id="result"></pre></details>
+    </section>
+    <p class="footer">Tool Offer Agent by Kingan Logic coordinates this wallet-approved purchase of the separate FAHCE service. One pinned request. No automatic paid retries. Keep your checkout link private. Masking addresses does not hide your link's access capability, an external wallet popup or public transaction history. Recovery credentials remain in protected checkout storage, not in this page.</p>
+  </main>
+</body>
+</html>

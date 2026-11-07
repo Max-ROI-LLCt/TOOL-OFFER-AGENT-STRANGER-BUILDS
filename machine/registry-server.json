@@ -1,0 +1,13 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.kinganlogic/tool-offer-agent",
+  "description": "Source-attributed API/MCP offer drafting, revision, readiness assessment and export.",
+  "title": "Tool Offer Agent",
+  "version": "1.4.9",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tooloffer.kinganlogic.com/mcp"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "resource": "https://tooloffer.kinganlogic.com/mcp",
+  "authorization_servers": [
+    "https://tooloffer.kinganlogic.com"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "scopes_supported": [
+    "tool_offer:machine"
+  ],
+  "resource_documentation": "https://tooloffer.kinganlogic.com/machine/",
+  "x-release-id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "x-tool-offer-version": "1.4.9"
+}

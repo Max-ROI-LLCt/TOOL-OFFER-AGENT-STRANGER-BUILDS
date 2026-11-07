@@ -1,0 +1,482 @@
+{
+  "source_url": "https://fahce.kinganlogic.com/openapi.json",
+  "captured_on": "2026-11-03",
+  "source_sha256": "343847fda890eb621326e89b9e85da71ab8982b936f0d78221915cbb07de54aa",
+  "openapi": "3.1.0",
+  "components": {
+    "securitySchemes": {
+      "x402Payment": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "PAYMENT-SIGNATURE",
+        "description": "Wallet-only x402 v2 retry after gateway HTTP402. No prior API key or account and no mandatory Idempotency-Key; origin trusts only gateway-signed PAYMENT-CONTEXT."
+      },
+      "receiptAccess": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "FAHCEReceipt <FAHCE-Recovery-Token>. Receipt-only capability returned by the origin; scoped to the exact receipt UUID, not another purchase or privileged action."
+      },
+      "pilotBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Existing human/owner credential for historical receipt access only. It never authorizes a commercial machine POST."
+      },
+      "pilotSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "fahce_pilot_session",
+        "description": "Current authenticated session backed by a repair-scope pilot key. Mutating requests require an Origin header matching this API origin. Payment authorization is separate."
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/diagnose": {
+      "post": {
+        "operationId": "fahce_diagnose_integrity",
+        "summary": "diagnose candidate output integrity",
+        "description": "Check an AI-generated answer against supplied evidence. Identify unsupported claims, contradictions, missing proof, and reported actions that the available records do not establish.",
+        "x-payment-info": {
+          "protocols": [
+            {
+              "x402": {}
+            }
+          ],
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "0.15",
+            "description": "Fixed authorization for a completed billable determination. Processing failures are nonbillable; reconcile gateway charge evidence separately."
+          }
+        },
+        "x-fahce-payment": {
+          "scheme": "exact",
+          "authorized_atomic_units": "150000",
+          "implementation": "X402_REST_IMPLEMENTED",
+          "consumption_scope": "Daily origin-intent ceilings use UTC dates and reserved amounts across states, not verified gateway charges: 100 USDC service-wide and 10 USDC per payment-context principal. The published credential threshold is 3 USDC, but wallet-only purchases have null credential_id and no credential-level daily aggregation. Each distinct payment authorization has a separate principal; these are not cumulative per-wallet limits or wallet allowances. Request-rate and concurrency guards are separate.",
+          "production_payment_verification": {
+            "status": "VERIFIED_END_TO_END",
+            "tested_on": "2026-10-14",
+            "evidence_scope": "HISTORICAL_PRODUCTION_PURCHASES_NOT_CURRENT_RELEASE_ACCEPTANCE",
+            "release_bound": false,
+            "origin": "https://fahce.kinganlogic.com",
+            "adapter": "cloudflare",
+            "protocol": "x402-v2",
+            "network": "eip155:8453",
+            "asset": "USDC",
+            "scope": [
+              "buyer_payment",
+              "purchased_result_delivery",
+              "gateway_settlement",
+              "seller_receipt"
+            ],
+            "tested_operations": [
+              "diagnose",
+              "repair",
+              "verify",
+              "repair-bundle"
+            ],
+            "evidence": "Successful HTTP 200 results and gateway PAYMENT-RESPONSE records, Cloudflare settled-payment activity and receiving-wallet receipts.",
+            "evidence_access": "Public Base transaction links are provided for each operation. Gateway payment responses and seller receiving records support the corresponding FAHCE request references.",
+            "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+            "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+            "evidence_references": [
+              {
+                "operation": "diagnose",
+                "request_id": "f05ee4ad-aa79-47f3-8cc6-f111366f8c60",
+                "scheme": "exact",
+                "settled_atomic_units": "150000",
+                "transaction_hash": "0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51",
+                "status": "SETTLED",
+                "transaction_url": "https://basescan.org/tx/0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51"
+              },
+              {
+                "operation": "repair",
+                "request_id": "b327a160-1295-4c96-b65c-7f4a0e1d5557",
+                "scheme": "exact",
+                "settled_atomic_units": "150000",
+                "transaction_hash": "0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e",
+                "status": "SETTLED",
+                "transaction_url": "https://basescan.org/tx/0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e"
+              },
+              {
+                "operation": "verify",
+                "request_id": "3b548a2f-5e8d-4537-8d08-c9c2808eb344",
+                "scheme": "exact",
+                "settled_atomic_units": "150000",
+                "transaction_hash": "0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234",
+                "status": "SETTLED",
+                "transaction_url": "https://basescan.org/tx/0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234"
+              },
+              {
+                "operation": "repair-bundle",
+                "request_id": "7dab5f16-81ed-4500-9d76-5e419aa8400b",
+                "scheme": "upto",
+                "settled_atomic_units": "390000",
+                "transaction_hash": "0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10",
+                "status": "SETTLED",
+                "transaction_url": "https://basescan.org/tx/0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10"
+              }
+            ]
+          },
+          "activation": "ORIGIN_ACCEPTANCE_ENABLED",
+          "deployed_payment_verified": false,
+          "historical_production_payment_verified": true,
+          "current_release_payment_verification": {
+            "status": "NOT_ESTABLISHED",
+            "release_bound": false,
+            "evidence_url": "https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json",
+            "explanation": "Current-release acceptance results will appear here after the four controlled purchases and their settlement checks are complete. Existing historical settlement evidence remains available separately."
+          },
+          "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+          "network": "eip155:8453",
+          "asset": "USDC",
+          "recipient_authority": "RECEIVING_ONLY_NO_DELEGATED_SPENDING",
+          "preflight": "/api/v1/machine/preflight",
+          "recovery": "/api/v1/machine/recovery",
+          "lost_first_response": "/api/v1/machine/recovery/claim",
+          "disputes": "/api/v1/machine/refunds/disputes",
+          "legal_urls": {
+            "terms": "https://fahce.kinganlogic.com/legal/terms",
+            "refunds": "https://fahce.kinganlogic.com/legal/refunds",
+            "privacy": "https://fahce.kinganlogic.com/legal/privacy",
+            "acceptable-use": "https://fahce.kinganlogic.com/legal/acceptable-use",
+            "data-handling": "https://fahce.kinganlogic.com/legal/data-handling",
+            "security": "https://fahce.kinganlogic.com/legal/security"
+          },
+          "retention": {
+            "private_content_days": 30,
+            "financial_records": {
+              "years": 7,
+              "anchor": "END_OF_TRANSACTION_CALENDAR_YEAR",
+              "selected_standard": "FOUNDER_SELECTED_IMPLEMENTATION_STANDARD_2026_10_14",
+              "longer_preservation": "Applicable law, accounting obligations, unresolved reconciliation/disputes and legal holds",
+              "private_content_included": false
+            },
+            "provider_backups_instant_erasure": false
+          },
+          "workshop_definition": "Workshop is FAHCE's authenticated owner workflow interface; payment for a machine determination grants no owner workflow authority.",
+          "gateway_rule_audience": "Everyone",
+          "methods": [
+            "POST"
+          ],
+          "canonical_origin": "https://fahce.kinganlogic.com",
+          "jwt_audience_template": "https://fahce.kinganlogic.com/api/v1/{operation}",
+          "authentication": "Wallet-only x402 purchase: verified gateway PAYMENT-CONTEXT creates a payment-bound machine principal for the exact operation and stored receipt. No prior key, invitation or account is required. Payment grants no human, Workshop, Admin or external execution authority.",
+          "retry": "Read HTTP 402 PAYMENT-REQUIRED, use an x402 v2 client to authorize the selected requirement, then repeat the same REST URL, JSON and optional compatible Idempotency-Key (8 to 128 URL-safe characters); origin execution identity is server-owned with PAYMENT-SIGNATURE. Clients never create PAYMENT-CONTEXT.",
+          "origin_validation": "Ed25519 JWT from https://payments.cloudflare.com/certs; aud must equal the full canonical operation URL, including /api/v1/{operation}, not just the origin or the Everyone access policy. Timing, scheme and signed amount are required. Alternate hosts and query variants are rejected. A client-supplied header alone grants no authority.",
+          "headers": {
+            "PAYMENT-REQUIRED": "Gateway to client: base64 JSON requirements in HTTP 402",
+            "PAYMENT-SIGNATURE": "Client to gateway: base64 JSON x402 v2 payment authorization",
+            "PAYMENT-CONTEXT": "Gateway to origin: signed JWT; clients do not generate it",
+            "PAYMENT-SETTLEMENT": "Origin to gateway only: actual upto amount; omitted for exact and HTTP errors; removed before delivery to buyer",
+            "PAYMENT-RESPONSE": "Gateway to client: settlement receipt after successful settlement; never fabricated by the origin"
+          },
+          "settlement": "Exact: the origin omits PAYMENT-SETTLEMENT; the gateway settles the signed fixed amount and creates PAYMENT-RESPONSE after settlement. Bundle: zero for a nonbillable free-retry determination; 150000 for verified no-repair work; 390000 only for a required validated bounded repair plan. Held/invalid plans and unsupported processing return HTTP422 without an origin settlement instruction. A valid completed negative Verify returns its contracted determination and is billable even when verification.verified=false. HTTP 422 alone is not proof of no gateway charge; reconcile that individual purchase before paying again. A proposed plan never establishes external execution.",
+          "receipts": "Immutable origin receipts keep payment_receipt and settled_price_atomic_units null, including after delivery; later observations live in the separate append-only financial ledger. Customers retain the separate gateway PAYMENT-RESPONSE settlement receipt. Origin delivery intent is not a charge receipt. The October 14 production purchases completed gateway settlement and seller receipt. Automated ledger reconciliation is a separate accounting workflow; an immutable pending origin receipt does not negate a separately confirmed settlement.",
+          "repeated_delivery": "One delivery intent per signed authorization. Retain FAHCE-Recovery-Token and read the exact saved receipt with Authorization: FAHCEReceipt <capability>, without payment. Repeated delivery returns a distinct 409 without releasing a recovery token or another result; use the original token, or request verified original-purchase recovery if the first response was lost. Do not authorize another payment to retry an unknown charge.",
+          "mcp": "Discovery is free. MCP tools/call does not execute commercial operations. Buy through corresponding REST URLs; no pilot key can bypass their rules, whether acceptance is on or off.",
+          "external_dependencies": [
+            "Active gateway rules and valid payment authorization",
+            "Wallet balance and, for upto, Permit2 allowance and any required approval-transaction gas",
+            "Separate accounting review for unresolved individual purchases"
+          ]
+        },
+        "security": [
+          {
+            "x402Payment": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "FAHCE-Terms-Accepted",
+            "required": true,
+            "description": "Current published legal_documents.publication_hash, accepted by the authorized customer or its agent before payment.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "description": "Optional client alias; authorization, operation and canonical body hash define server-owned purchase identity. Same key with changed input conflicts. Recovery is free and never requires a new authorization.",
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9_-]{8,128}$"
+            }
+          },
+          {
+            "in": "header",
+            "name": "PAYMENT-SIGNATURE",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "x402 v2 wallet authorization on the unchanged gateway retry when activated. No customer API key or prior account is required."
+          },
+          {
+            "in": "header",
+            "name": "X-FAHCE-Discovery-Source",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "^[A-Za-z0-9_.:-]{1,80}$"
+            },
+            "description": "Optional acquisition source; never include candidate text or credentials."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MachineRequest"
+              },
+              "example": {
+                "schema": "FAHCE_MACHINE_REQUEST_V1",
+                "candidate_output": "Deployment completed successfully.",
+                "evidence": [
+                  {
+                    "id": "deployment_log",
+                    "kind": "log",
+                    "source_label": "caller-supplied deployment log",
+                    "text": "Deployment failed."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed bounded determination and immutable origin receipt. Inspect verification.verified, billing and claim support. Immutable origin charge fields remain null; retain the separate gateway PAYMENT-RESPONSE for paid settlement.",
+            "headers": {
+              "FAHCE-Recovery-Token": {
+                "description": "Cryptographically random purchase-specific recovery token; only its protected verifier is stored; use Authorization: FAHCEReceipt <value> on GET /api/v1/receipts/{receipt_id}.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "PAYMENT-RESPONSE": {
+                "description": "Gateway-generated base64 JSON settlement receipt after settlement. Zero-settlement gateway receipt behavior remains to be verified. The origin never creates it.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Correct invalid input before retrying.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Legacy credentials or a receipt-only read capability are missing or invalid; commercial wallet purchase requires no prior key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Gateway payment required: decode PAYMENT-REQUIRED and retry unchanged with PAYMENT-SIGNATURE from an x402 v2 client. This response is generated by the gateway; its body is provider-defined and is not a FAHCE MachineError envelope. Use the PAYMENT-REQUIRED header.",
+            "headers": {
+              "PAYMENT-REQUIRED": {
+                "description": "Base64-encoded x402 v2 JSON requirements; upto amount is the authorized maximum.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Gateway payment context or receipt-only capability is invalid/missing; payment does not grant owner permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflicting key or repeated paid delivery. Read the retained receipt and reconcile an unknown gateway charge before authorizing another payment. Revised input requires a new key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            },
+            "x-fahce-error-codes": {
+              "IDEMPOTENCY_CONFLICT": "Key or authorization reused with conflicting input, operation or account",
+              "PURCHASE_ALREADY_COMPLETED": "No second execution; use the scoped recovery route",
+              "DELIVERY_RECOVERY_IN_PROGRESS": "Original execution is reserved; recovery is pending",
+              "PAYMENT_RECONCILIATION_PENDING": "Original purchase did not reach completed delivery; reconcile before another payment",
+              "PAYMENT_AUTHORIZATION_CONFLICT": "Authorization bound to changed operation/input"
+            }
+          },
+          "413": {
+            "description": "The complete UTF-8 JSON body exceeds 524288 bytes; reduce the aggregate body, including JSON overhead.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Send JSON with Content-Type: application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "A valid contracted determination was not produced or a repair plan is held/invalid. No origin settlement instruction is issued. Reconcile this failed request's gateway charge status before another authorization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate or quota reached. Unchanged completed retries remain idempotent; wait when rate limited.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Processing failed; preserve the purchase evidence and request reconciliation. Do not authorize another payment automatically.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Payment acceptance, legal publication, resources or receipt integrity unavailable. No completed determination is claimed; preserve purchase evidence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/receipts/{receipt_id}": {
+      "get": {
+        "operationId": "fahce_get_receipt",
+        "description": "Read one immutable response without another payment or determination quota. Wallet-only buyers use Authorization: FAHCEReceipt <receipt capability>; legacy owners can use their existing key/session. response.request_id equals this receipt_id.",
+        "security": [
+          {
+            "receiptAccess": []
+          },
+          {
+            "pilotBearer": []
+          },
+          {
+            "pilotSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "receipt_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stored immutable response while retained, or safe EXPIRED metadata after the private-content window",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MachineResponse"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "status",
+                        "private_content_available"
+                      ],
+                      "properties": {
+                        "status": {
+                          "const": "EXPIRED"
+                        },
+                        "private_content_available": {
+                          "const": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Legacy credentials or a receipt-only read capability are missing or invalid; commercial wallet purchase requires no prior key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Receipt not found or not owned by this account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MachineError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "x-release-id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "machine_readable_profile": "https://tooloffer.kinganlogic.com/manifest.json",
+  "capabilities": [
+    "Read public API/MCP documentation and retain source-attributed evidence.",
+    "Collect seller-stated customer, pricing, payment, access and invocation terms.",
+    "Draft, review and revise an offer within an isolated conversation.",
+    "Explain the buyer offer and prepare listing guidance without publication.",
+    "Assess retained offer readiness deterministically without inference or payment.",
+    "Export structured and human-readable records, with verified multipart retrieval when needed."
+  ],
+  "linkset": [
+    {
+      "anchor": "https://tooloffer.kinganlogic.com",
+      "describedby": [
+        {
+          "href": "https://tooloffer.kinganlogic.com/manifest.json",
+          "type": "application/json"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://tooloffer.kinganlogic.com/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://tooloffer.kinganlogic.com/instructions.md",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ],
+  "x-tool-offer-version": "1.4.9"
+}

@@ -1,0 +1,4 @@
+/*
+  Content-Security-Policy: default-src 'self'; script-src https://tooloffer.kinganlogic.com/.webmcp/bridge.js; script-src-attr 'none'; connect-src 'self'; style-src 'self'; img-src 'self' https://verifymcp.io/badge/com-kinganlogic-tool-offer-agent/tooloffer.svg; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff

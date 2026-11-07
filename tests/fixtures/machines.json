@@ -1,0 +1,909 @@
+{
+  "schema": "FAHCE_MACHINE_DISCOVERY_V1",
+  "name": "FAHCE Integrity Repair",
+  "version": "1.5.0",
+  "contact": {
+    "support": "logan@kinganlogic.com",
+    "security": "logan@kinganlogic.com"
+  },
+  "description": "FAHCE evaluates AI claims against supplied evidence in a pinned Azure confidential workload. Completed determinations carry independently verifiable Microsoft-signed proof of the scoped computation. Free MCP discovery; paid x402 REST determinations.",
+  "homepage": "https://fahce.kinganlogic.com/capabilities/machines",
+  "release_identity": "https://fahce.kinganlogic.com/version",
+  "signing_scope": "OCI artifact signing, Microsoft-signed runtime attestation, application receipts and payment settlement are separate evidence. OCI verification applies only to its exact artifact digest and trusted signing identity; it does not establish source/build provenance, deployment, external execution or permission to act. The downloaded receipt verifier checks runtime evidence, not OCI signatures. See /attestation for the dated, digest-scoped signing record and verifier limits.",
+  "capabilities": "https://fahce.kinganlogic.com/capabilities",
+  "pricing": "https://fahce.kinganlogic.com/pricing",
+  "openapi": "https://fahce.kinganlogic.com/openapi.json",
+  "mcp": {
+    "endpoint": "https://fahce.kinganlogic.com/mcp",
+    "protocol_version": "2026-07-28",
+    "supported_protocol_versions": [
+      "2026-07-28",
+      "2025-11-25"
+    ],
+    "tools_list_public": true,
+    "calls_require_pilot_key": false,
+    "paid_execution": "REST_ONLY_WALLET_X402_NO_PILOT_KEY",
+    "quickstart": {
+      "scope": "FREE_DISCOVERY_ONLY_NO_PAID_EXECUTION",
+      "modern": {
+        "headers": {
+          "Content-Type": "application/json",
+          "Accept": "application/json, text/event-stream",
+          "MCP-Protocol-Version": "2026-07-28",
+          "Mcp-Method": "tools/list"
+        },
+        "body": {
+          "jsonrpc": "2.0",
+          "id": "discovery-modern",
+          "method": "tools/list",
+          "params": {
+            "_meta": {
+              "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+              "io.modelcontextprotocol/clientCapabilities": {},
+              "io.modelcontextprotocol/clientInfo": {
+                "name": "fahce-discovery-client",
+                "version": "1.0"
+              }
+            }
+          }
+        }
+      },
+      "legacy": {
+        "initialize": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "body": {
+            "jsonrpc": "2.0",
+            "id": "discovery-init",
+            "method": "initialize",
+            "params": {
+              "protocolVersion": "2025-11-25",
+              "capabilities": {},
+              "clientInfo": {
+                "name": "fahce-discovery-client",
+                "version": "1.0"
+              }
+            }
+          }
+        },
+        "initialized": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "body": {
+            "jsonrpc": "2.0",
+            "method": "notifications/initialized"
+          }
+        },
+        "list": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "body": {
+            "jsonrpc": "2.0",
+            "id": "discovery-legacy",
+            "method": "tools/list",
+            "params": {}
+          }
+        }
+      },
+      "session": "This endpoint issues no Mcp-Session-Id. Modern requests carry their metadata on every call; initialize alone does not supply it.",
+      "tool_arguments": "tools/list exposes a request wrapper. Submit properties.request alone to the advertised REST endpoint; idempotency_key maps to the optional REST Idempotency-Key header. MCP tools/call does not execute paid determinations."
+    }
+  },
+  "payment": {
+    "protocol": "x402-v2",
+    "status": "wallet_only_x402_available"
+  },
+  "cloudflare_origin": {
+    "implementation": "X402_REST_IMPLEMENTED",
+    "consumption_scope": "Daily origin-intent ceilings use UTC dates and reserved amounts across states, not verified gateway charges: 100 USDC service-wide and 10 USDC per payment-context principal. The published credential threshold is 3 USDC, but wallet-only purchases have null credential_id and no credential-level daily aggregation. Each distinct payment authorization has a separate principal; these are not cumulative per-wallet limits or wallet allowances. Request-rate and concurrency guards are separate.",
+    "production_payment_verification": {
+      "status": "VERIFIED_END_TO_END",
+      "tested_on": "2026-10-14",
+      "evidence_scope": "HISTORICAL_PRODUCTION_PURCHASES_NOT_CURRENT_RELEASE_ACCEPTANCE",
+      "release_bound": false,
+      "origin": "https://fahce.kinganlogic.com",
+      "adapter": "cloudflare",
+      "protocol": "x402-v2",
+      "network": "eip155:8453",
+      "asset": "USDC",
+      "scope": [
+        "buyer_payment",
+        "purchased_result_delivery",
+        "gateway_settlement",
+        "seller_receipt"
+      ],
+      "tested_operations": [
+        "diagnose",
+        "repair",
+        "verify",
+        "repair-bundle"
+      ],
+      "evidence": "Successful HTTP 200 results and gateway PAYMENT-RESPONSE records, Cloudflare settled-payment activity and receiving-wallet receipts.",
+      "evidence_access": "Public Base transaction links are provided for each operation. Gateway payment responses and seller receiving records support the corresponding FAHCE request references.",
+      "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+      "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "evidence_references": [
+        {
+          "operation": "diagnose",
+          "request_id": "f05ee4ad-aa79-47f3-8cc6-f111366f8c60",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51"
+        },
+        {
+          "operation": "repair",
+          "request_id": "b327a160-1295-4c96-b65c-7f4a0e1d5557",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e"
+        },
+        {
+          "operation": "verify",
+          "request_id": "3b548a2f-5e8d-4537-8d08-c9c2808eb344",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234"
+        },
+        {
+          "operation": "repair-bundle",
+          "request_id": "7dab5f16-81ed-4500-9d76-5e419aa8400b",
+          "scheme": "upto",
+          "settled_atomic_units": "390000",
+          "transaction_hash": "0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10"
+        }
+      ]
+    },
+    "activation": "ORIGIN_ACCEPTANCE_ENABLED",
+    "deployed_payment_verified": true,
+    "historical_production_payment_verified": true,
+    "current_release_payment_verification": {
+      "status": "VERIFIED_END_TO_END",
+      "release_bound": true,
+      "schema": "FAHCE_RELEASE_ACCEPTANCE_V1",
+      "worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+      "source_tree_sha256": "281368a3aeeddc444c378dc5f03019cabecf42ca189ca88894a8b2a5d89d13fe",
+      "worker_bundle_sha256": "6196365b6f30a2f83f59dc37936d645a9a8017ecb9fbeeb24b95034c8c0c077a",
+      "verified_at": "2026-10-30T05:38:45.263Z",
+      "origin": "https://fahce.kinganlogic.com",
+      "engine_version": "fahce-pilot-deterministic-v0.2.12-round2",
+      "image_sha256": "5e6e6f1305a40312827719478dc73e258f1dfbff94d1d825907d89f46bad2776",
+      "policy_sha256": "c392ffc25b0b14d444e93f6e36b26419343babccdf2d078c3e1d9eaa1f0efa9f",
+      "legal_publication_sha256": "00e052c9d6f388139023b672b9b458daadb7d243504e22907887d4829446a573",
+      "records": [
+        {
+          "operation": "diagnose",
+          "request_id": "790b7fa4-8623-4225-b12c-55c58530db67",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xf0b7f79cc730199d02a5ae83b140a6afeed6624a90d93f3735c69ae6871f7af5",
+          "receipt_body_sha256": "fdf5ea4a18bf23342b7cdc391ce52ce422744bf1046633f7df7bc872e6603e13",
+          "verified_at": "2026-10-30T05:32:52.599Z"
+        },
+        {
+          "operation": "repair",
+          "request_id": "68e69d0b-d64a-4719-a9a8-f14f4cca586b",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0x720bc51fe5e7435ba49fb01489b15584393587dd4a2ad83748dc079878fa3628",
+          "receipt_body_sha256": "5f9b74933e0d11c11bb4ed81b7d9f4bc1923fca4fc63566130380b0196c69389",
+          "verified_at": "2026-10-30T05:33:29.366Z"
+        },
+        {
+          "operation": "verify",
+          "request_id": "e3a1399d-4e49-42eb-9ac7-1fcb48d4a3d0",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xac46312f89a691dcab96d89b0fc83d71727c49d0ac57f81b5e67cc1f0b443df4",
+          "receipt_body_sha256": "ff95505ed7fae9132ab3a41ef4c2b7d9a86f9eff7e46b21f8a51b708e5b87517",
+          "verified_at": "2026-10-30T05:33:56.105Z"
+        },
+        {
+          "operation": "repair-bundle",
+          "request_id": "5d6fdbc9-4773-4387-b44c-220c0d9db849",
+          "scheme": "upto",
+          "settled_atomic_units": "390000",
+          "transaction_hash": "0xce695365c6646e560218890bf94470eb803fcbee389b9e3e69db72022418b4b6",
+          "receipt_body_sha256": "81f0396764a9b60b70a02934deae483a432e323fd86bc395fd97edaed980516d",
+          "verified_at": "2026-10-30T05:34:55.321Z"
+        }
+      ],
+      "publication": {
+        "schema": "FAHCE_PRESENTATION_RELEASE_V1",
+        "publication_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+        "publication_created_at": "2026-10-30T06:45:35.222Z",
+        "publication_source_sha256": "ce23ab78b6020e320ed2c1137e09549b2140276e37455f3b5d77c0fc869bab4a",
+        "publication_worker_bundle_sha256": "04e3286f523017633c76dfead651ed36bc444d2e005186c231b2541219fc0862",
+        "tested_worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+        "tested_worker_created_at": "2026-10-30T05:11:27.595Z",
+        "tested_evidence_sha256": "5ec09963ab859da3b149b1ab7ba13929673540edfe293ef06e6a21d21c5c8ec5",
+        "machine_contract_sha256": "3219607b617d56287dd7417d3913122d5707d0afe0b8ae08f7d1c82d8d8b39a3",
+        "runtime_configuration_sha256": "ce3647f8efa5549aa070b3b5893b5350d9d16b83439f6e1ead8076c433a5ae80",
+        "comparison_sha256": "f2d6f7f994d835f55dbdd14f68f0fb32c4a48803584dd4b17b941662d3ae1755",
+        "verified_at": "2026-10-30T06:51:06.100Z",
+        "change_scope": "PRESENTATION_AND_EVIDENCE_METADATA_ONLY",
+        "paid_purchases_repeated": false
+      },
+      "published_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+      "acceptance_basis": "UNCHANGED_MACHINE_CONTRACT_PRESENTATION_RELEASE",
+      "paid_tests_run_on_published_worker": false,
+      "evidence_url": "https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json",
+      "network": "eip155:8453",
+      "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+      "scope": [
+        "buyer_payment",
+        "purchased_result_delivery",
+        "attested_receipt_verification",
+        "gateway_settlement",
+        "seller_receipt",
+        "free_receipt_recovery"
+      ],
+      "limits": "Operator-published acceptance evidence for four controlled purchases on the identified tested Worker and pinned engine. A publication record, when present, identifies a later presentation-only release with unchanged protected machine source and runtime configuration; it does not claim new purchases. Tested source/build hashes and original transaction dates remain unchanged. Runtime version metadata is not a source-code signature. Transactions and receipt verification were checked when recorded, not on every page view. This is not a guarantee for every future request."
+    },
+    "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+    "network": "eip155:8453",
+    "asset": "USDC",
+    "recipient_authority": "RECEIVING_ONLY_NO_DELEGATED_SPENDING",
+    "preflight": "/api/v1/machine/preflight",
+    "recovery": "/api/v1/machine/recovery",
+    "lost_first_response": "/api/v1/machine/recovery/claim",
+    "disputes": "/api/v1/machine/refunds/disputes",
+    "legal_urls": {
+      "terms": "https://fahce.kinganlogic.com/legal/terms",
+      "refunds": "https://fahce.kinganlogic.com/legal/refunds",
+      "privacy": "https://fahce.kinganlogic.com/legal/privacy",
+      "acceptable-use": "https://fahce.kinganlogic.com/legal/acceptable-use",
+      "data-handling": "https://fahce.kinganlogic.com/legal/data-handling",
+      "security": "https://fahce.kinganlogic.com/legal/security"
+    },
+    "retention": {
+      "private_content_days": 30,
+      "financial_records": {
+        "years": 7,
+        "anchor": "END_OF_TRANSACTION_CALENDAR_YEAR",
+        "selected_standard": "FOUNDER_SELECTED_IMPLEMENTATION_STANDARD_2026_10_14",
+        "longer_preservation": "Applicable law, accounting obligations, unresolved reconciliation/disputes and legal holds",
+        "private_content_included": false
+      },
+      "provider_backups_instant_erasure": false
+    },
+    "workshop_definition": "Workshop is FAHCE's authenticated owner workflow interface; payment for a machine determination grants no owner workflow authority.",
+    "gateway_rule_audience": "Everyone",
+    "methods": [
+      "POST"
+    ],
+    "canonical_origin": "https://fahce.kinganlogic.com",
+    "jwt_audience_template": "https://fahce.kinganlogic.com/api/v1/{operation}",
+    "authentication": "Wallet-only x402 purchase: verified gateway PAYMENT-CONTEXT creates a payment-bound machine principal for the exact operation and stored receipt. No prior key, invitation or account is required. Payment grants no human, Workshop, Admin or external execution authority.",
+    "retry": "Read HTTP 402 PAYMENT-REQUIRED, use an x402 v2 client to authorize the selected requirement, then repeat the same REST URL, JSON and optional compatible Idempotency-Key (8 to 128 URL-safe characters); origin execution identity is server-owned with PAYMENT-SIGNATURE. Clients never create PAYMENT-CONTEXT.",
+    "origin_validation": "Ed25519 JWT from https://payments.cloudflare.com/certs; aud must equal the full canonical operation URL, including /api/v1/{operation}, not just the origin or the Everyone access policy. Timing, scheme and signed amount are required. Alternate hosts and query variants are rejected. A client-supplied header alone grants no authority.",
+    "headers": {
+      "PAYMENT-REQUIRED": "Gateway to client: base64 JSON requirements in HTTP 402",
+      "PAYMENT-SIGNATURE": "Client to gateway: base64 JSON x402 v2 payment authorization",
+      "PAYMENT-CONTEXT": "Gateway to origin: signed JWT; clients do not generate it",
+      "PAYMENT-SETTLEMENT": "Origin to gateway only: actual upto amount; omitted for exact and HTTP errors; removed before delivery to buyer",
+      "PAYMENT-RESPONSE": "Gateway to client: settlement receipt after successful settlement; never fabricated by the origin"
+    },
+    "settlement": "Exact: the origin omits PAYMENT-SETTLEMENT; the gateway settles the signed fixed amount and creates PAYMENT-RESPONSE after settlement. Bundle: zero for a nonbillable free-retry determination; 150000 for verified no-repair work; 390000 only for a required validated bounded repair plan. Held/invalid plans and unsupported processing return HTTP422 without an origin settlement instruction. A valid completed negative Verify returns its contracted determination and is billable even when verification.verified=false. HTTP 422 alone is not proof of no gateway charge; reconcile that individual purchase before paying again. A proposed plan never establishes external execution.",
+    "receipts": "Immutable origin receipts keep payment_receipt and settled_price_atomic_units null, including after delivery; later observations live in the separate append-only financial ledger. Customers retain the separate gateway PAYMENT-RESPONSE settlement receipt. Origin delivery intent is not a charge receipt. The October 14 production purchases completed gateway settlement and seller receipt. Automated ledger reconciliation is a separate accounting workflow; an immutable pending origin receipt does not negate a separately confirmed settlement.",
+    "repeated_delivery": "One delivery intent per signed authorization. Retain FAHCE-Recovery-Token and read the exact saved receipt with Authorization: FAHCEReceipt <capability>, without payment. Repeated delivery returns a distinct 409 without releasing a recovery token or another result; use the original token, or request verified original-purchase recovery if the first response was lost. Do not authorize another payment to retry an unknown charge.",
+    "mcp": "Discovery is free. MCP tools/call does not execute commercial operations. Buy through corresponding REST URLs; no pilot key can bypass their rules, whether acceptance is on or off.",
+    "external_dependencies": [
+      "Active gateway rules and valid payment authorization",
+      "Wallet balance and, for upto, Permit2 allowance and any required approval-transaction gas",
+      "Separate accounting review for unresolved individual purchases"
+    ]
+  },
+  "payment_availability": {
+    "source": "SERVER_PAYMENT_ACCEPTANCE_CONFIGURATION",
+    "gateway_enabled": true,
+    "paid_settlement_enabled": true,
+    "deployed_payment_verified": true,
+    "historical_production_payment_verified": true,
+    "current_release_payment_verification": {
+      "status": "VERIFIED_END_TO_END",
+      "release_bound": true,
+      "schema": "FAHCE_RELEASE_ACCEPTANCE_V1",
+      "worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+      "source_tree_sha256": "281368a3aeeddc444c378dc5f03019cabecf42ca189ca88894a8b2a5d89d13fe",
+      "worker_bundle_sha256": "6196365b6f30a2f83f59dc37936d645a9a8017ecb9fbeeb24b95034c8c0c077a",
+      "verified_at": "2026-10-30T05:38:45.263Z",
+      "origin": "https://fahce.kinganlogic.com",
+      "engine_version": "fahce-pilot-deterministic-v0.2.12-round2",
+      "image_sha256": "5e6e6f1305a40312827719478dc73e258f1dfbff94d1d825907d89f46bad2776",
+      "policy_sha256": "c392ffc25b0b14d444e93f6e36b26419343babccdf2d078c3e1d9eaa1f0efa9f",
+      "legal_publication_sha256": "00e052c9d6f388139023b672b9b458daadb7d243504e22907887d4829446a573",
+      "records": [
+        {
+          "operation": "diagnose",
+          "request_id": "790b7fa4-8623-4225-b12c-55c58530db67",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xf0b7f79cc730199d02a5ae83b140a6afeed6624a90d93f3735c69ae6871f7af5",
+          "receipt_body_sha256": "fdf5ea4a18bf23342b7cdc391ce52ce422744bf1046633f7df7bc872e6603e13",
+          "verified_at": "2026-10-30T05:32:52.599Z"
+        },
+        {
+          "operation": "repair",
+          "request_id": "68e69d0b-d64a-4719-a9a8-f14f4cca586b",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0x720bc51fe5e7435ba49fb01489b15584393587dd4a2ad83748dc079878fa3628",
+          "receipt_body_sha256": "5f9b74933e0d11c11bb4ed81b7d9f4bc1923fca4fc63566130380b0196c69389",
+          "verified_at": "2026-10-30T05:33:29.366Z"
+        },
+        {
+          "operation": "verify",
+          "request_id": "e3a1399d-4e49-42eb-9ac7-1fcb48d4a3d0",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xac46312f89a691dcab96d89b0fc83d71727c49d0ac57f81b5e67cc1f0b443df4",
+          "receipt_body_sha256": "ff95505ed7fae9132ab3a41ef4c2b7d9a86f9eff7e46b21f8a51b708e5b87517",
+          "verified_at": "2026-10-30T05:33:56.105Z"
+        },
+        {
+          "operation": "repair-bundle",
+          "request_id": "5d6fdbc9-4773-4387-b44c-220c0d9db849",
+          "scheme": "upto",
+          "settled_atomic_units": "390000",
+          "transaction_hash": "0xce695365c6646e560218890bf94470eb803fcbee389b9e3e69db72022418b4b6",
+          "receipt_body_sha256": "81f0396764a9b60b70a02934deae483a432e323fd86bc395fd97edaed980516d",
+          "verified_at": "2026-10-30T05:34:55.321Z"
+        }
+      ],
+      "publication": {
+        "schema": "FAHCE_PRESENTATION_RELEASE_V1",
+        "publication_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+        "publication_created_at": "2026-10-30T06:45:35.222Z",
+        "publication_source_sha256": "ce23ab78b6020e320ed2c1137e09549b2140276e37455f3b5d77c0fc869bab4a",
+        "publication_worker_bundle_sha256": "04e3286f523017633c76dfead651ed36bc444d2e005186c231b2541219fc0862",
+        "tested_worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+        "tested_worker_created_at": "2026-10-30T05:11:27.595Z",
+        "tested_evidence_sha256": "5ec09963ab859da3b149b1ab7ba13929673540edfe293ef06e6a21d21c5c8ec5",
+        "machine_contract_sha256": "3219607b617d56287dd7417d3913122d5707d0afe0b8ae08f7d1c82d8d8b39a3",
+        "runtime_configuration_sha256": "ce3647f8efa5549aa070b3b5893b5350d9d16b83439f6e1ead8076c433a5ae80",
+        "comparison_sha256": "f2d6f7f994d835f55dbdd14f68f0fb32c4a48803584dd4b17b941662d3ae1755",
+        "verified_at": "2026-10-30T06:51:06.100Z",
+        "change_scope": "PRESENTATION_AND_EVIDENCE_METADATA_ONLY",
+        "paid_purchases_repeated": false
+      },
+      "published_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+      "acceptance_basis": "UNCHANGED_MACHINE_CONTRACT_PRESENTATION_RELEASE",
+      "paid_tests_run_on_published_worker": false,
+      "evidence_url": "https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json",
+      "network": "eip155:8453",
+      "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+      "scope": [
+        "buyer_payment",
+        "purchased_result_delivery",
+        "attested_receipt_verification",
+        "gateway_settlement",
+        "seller_receipt",
+        "free_receipt_recovery"
+      ],
+      "limits": "Operator-published acceptance evidence for four controlled purchases on the identified tested Worker and pinned engine. A publication record, when present, identifies a later presentation-only release with unchanged protected machine source and runtime configuration; it does not claim new purchases. Tested source/build hashes and original transaction dates remain unchanged. Runtime version metadata is not a source-code signature. Transactions and receipt verification were checked when recorded, not on every page view. This is not a guarantee for every future request."
+    },
+    "production_payment_verification": {
+      "status": "VERIFIED_END_TO_END",
+      "tested_on": "2026-10-14",
+      "evidence_scope": "HISTORICAL_PRODUCTION_PURCHASES_NOT_CURRENT_RELEASE_ACCEPTANCE",
+      "release_bound": false,
+      "origin": "https://fahce.kinganlogic.com",
+      "adapter": "cloudflare",
+      "protocol": "x402-v2",
+      "network": "eip155:8453",
+      "asset": "USDC",
+      "scope": [
+        "buyer_payment",
+        "purchased_result_delivery",
+        "gateway_settlement",
+        "seller_receipt"
+      ],
+      "tested_operations": [
+        "diagnose",
+        "repair",
+        "verify",
+        "repair-bundle"
+      ],
+      "evidence": "Successful HTTP 200 results and gateway PAYMENT-RESPONSE records, Cloudflare settled-payment activity and receiving-wallet receipts.",
+      "evidence_access": "Public Base transaction links are provided for each operation. Gateway payment responses and seller receiving records support the corresponding FAHCE request references.",
+      "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+      "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "evidence_references": [
+        {
+          "operation": "diagnose",
+          "request_id": "f05ee4ad-aa79-47f3-8cc6-f111366f8c60",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51"
+        },
+        {
+          "operation": "repair",
+          "request_id": "b327a160-1295-4c96-b65c-7f4a0e1d5557",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e"
+        },
+        {
+          "operation": "verify",
+          "request_id": "3b548a2f-5e8d-4537-8d08-c9c2808eb344",
+          "scheme": "exact",
+          "settled_atomic_units": "150000",
+          "transaction_hash": "0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234"
+        },
+        {
+          "operation": "repair-bundle",
+          "request_id": "7dab5f16-81ed-4500-9d76-5e419aa8400b",
+          "scheme": "upto",
+          "settled_atomic_units": "390000",
+          "transaction_hash": "0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10",
+          "status": "SETTLED",
+          "transaction_url": "https://basescan.org/tx/0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10"
+        }
+      ]
+    },
+    "activation": "ORIGIN_ACCEPTANCE_ENABLED",
+    "paid_access": "WALLET_ONLY_X402_AVAILABLE",
+    "payment_status": "wallet_only_x402_available",
+    "pricing_status": "wallet_only_x402_available"
+  },
+  "limits": {
+    "request_bytes": 524288,
+    "candidate_characters": 200000,
+    "expected_characters": 200000,
+    "evidence_items": 12,
+    "evidence_characters_each": 200000,
+    "character_unit": "UTF-16 code units",
+    "aggregate_boundary": "The entire UTF-8 encoded JSON body must fit within 524288 bytes (512 KiB), including all fields, labels, escaping and JSON overhead. Per-field maxima are independent ceilings; they cannot all be used at once. MCP discovery requests include JSON-RPC framing in this limit; this does not enable paid MCP execution."
+  },
+  "latency": {
+    "class": "synchronous",
+    "guaranteed_ms": null
+  },
+  "tasks": [
+    "diagnose_unsupported_claim",
+    "plan_bounded_repair",
+    "verify_revised_output",
+    "issue_integrity_receipt"
+  ],
+  "tasks_scope": "Descriptive service outcomes, not callable method names. Receipts accompany completed REST determinations; no standalone receipt-issuance tool exists. Use tools/list for callable discovery names and their REST mapping.",
+  "api_catalog": "https://fahce.kinganlogic.com/.well-known/api-catalog",
+  "first_success": {
+    "request": {
+      "schema": "FAHCE_MACHINE_REQUEST_V1",
+      "candidate_output": "Deployment completed successfully.",
+      "evidence": [
+        {
+          "id": "deployment_log",
+          "kind": "log",
+          "source_label": "caller-supplied deployment log",
+          "text": "Deployment failed."
+        }
+      ]
+    },
+    "revised_candidate_output": "Deployment failed.",
+    "steps": [
+      "Review the published policies and send FAHCE-Terms-Accepted with their publication hash on each purchase",
+      "POST diagnose with the original request; contradictory evidence should produce original_verified=false",
+      "POST repair only when a validated plan is eligible; a held plan returns a nonbillable error and is not executed",
+      "POST verify with revised candidate_output; retain the recovery credential and immutable receipt"
+    ],
+    "expected": {
+      "original_verified": false,
+      "revised_verified": true,
+      "external_execution_verified": false
+    }
+  },
+  "provider": "KINGAN LOGIC",
+  "legal_documents": {
+    "status": "PUBLISHED_OWNER_APPROVED",
+    "publication_hash": "00e052c9d6f388139023b672b9b458daadb7d243504e22907887d4829446a573",
+    "approved_at": "2026-10-23T01:57:10.104Z",
+    "urls": {
+      "terms": "https://fahce.kinganlogic.com/legal/terms",
+      "refunds": "https://fahce.kinganlogic.com/legal/refunds",
+      "privacy": "https://fahce.kinganlogic.com/legal/privacy",
+      "acceptable-use": "https://fahce.kinganlogic.com/legal/acceptable-use",
+      "data-handling": "https://fahce.kinganlogic.com/legal/data-handling",
+      "security": "https://fahce.kinganlogic.com/legal/security"
+    },
+    "acceptance": {
+      "header": "FAHCE-Terms-Accepted",
+      "value": "00e052c9d6f388139023b672b9b458daadb7d243504e22907887d4829446a573",
+      "notice": "Review these policies before payment; the authorized customer or its agent accepts this exact published version by sending this header on the purchase request."
+    },
+    "company": {
+      "legal_entity": "Max R.O.I. LLC",
+      "operating_brand": "Kingan Logic",
+      "entity_type": "Alabama domestic limited liability company",
+      "entity_id": "001-160-677",
+      "formation_date": "2024-10-29",
+      "formation_state": "Alabama, United States",
+      "website": "https://kinganlogic.com",
+      "contact": "logan@kinganlogic.com",
+      "registry": "https://www.sos.alabama.gov/government-records/business-entity-records",
+      "identity_provenance": "Founder-provided company facts and September 22, 2026 Alabama certificate of existence reference"
+    },
+    "liability_cap": "GREATER_OF_USD100_OR_PRIOR_12_MONTH_CUSTOMER_FEES;MANDATORY_EXCEPTIONS"
+  },
+  "representation": {
+    "json": "https://fahce.kinganlogic.com/capabilities/machines.json",
+    "text": "https://fahce.kinganlogic.com/capabilities/machines.txt",
+    "human": "https://fahce.kinganlogic.com/capabilities/machines.html"
+  },
+  "use_when": [
+    "candidate claims exceed supplied evidence",
+    "evidence contradicts a candidate answer",
+    "a repaired answer needs an evidence-bound verification receipt"
+  ],
+  "services": [
+    {
+      "operation": "diagnose",
+      "name": "Diagnose",
+      "description": "Check an AI-generated answer against supplied evidence. Identify unsupported claims, contradictions, missing proof, and reported actions that the available records do not establish.",
+      "use_when": "You need to understand what the supplied evidence establishes.",
+      "method": "POST",
+      "endpoint": "https://fahce.kinganlogic.com/api/v1/diagnose",
+      "version": "1.5.0",
+      "input_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineRequest",
+      "output_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineResponse",
+      "payment": {
+        "scheme": "exact",
+        "authorized_atomic_units": "150000"
+      },
+      "price_display": "$0.15 fixed",
+      "settlement_display": "$0.15 fixed"
+    },
+    {
+      "operation": "repair",
+      "name": "Repair",
+      "description": "Evaluate an integrity problem and return a bounded, evidence-preserving correction plan when supported. Proposed corrections are not executed in the customer's systems.",
+      "use_when": "An identified deficiency needs a scoped correction with prerequisites and protected evidence.",
+      "method": "POST",
+      "endpoint": "https://fahce.kinganlogic.com/api/v1/repair",
+      "version": "1.5.0",
+      "input_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineRequest",
+      "output_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineResponse",
+      "payment": {
+        "scheme": "exact",
+        "authorized_atomic_units": "150000"
+      },
+      "price_display": "$0.15 fixed",
+      "settlement_display": "$0.15 for an eligible bounded plan; held/invalid plans are nonbillable errors, not proof of no gateway charge"
+    },
+    {
+      "operation": "verify",
+      "name": "Verify",
+      "description": "Recheck a submitted or revised answer against supplied evidence. Return a scoped verification determination and cryptographically attested engine receipt without claiming independent external execution.",
+      "use_when": "A claimed fix or completed action needs evidence-bound review.",
+      "method": "POST",
+      "endpoint": "https://fahce.kinganlogic.com/api/v1/verify",
+      "version": "1.5.0",
+      "input_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineRequest",
+      "output_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineResponse",
+      "payment": {
+        "scheme": "exact",
+        "authorized_atomic_units": "150000"
+      },
+      "price_display": "$0.15 fixed",
+      "settlement_display": "$0.15 fixed"
+    },
+    {
+      "operation": "repair-bundle",
+      "name": "Repair Bundle",
+      "description": "Receive diagnosis, a bounded proposed repair when required, verification state, and a receipt in one paid response. Authorize up to $0.39; eligible outcomes may settle at $0, $0.15, or $0.39.",
+      "use_when": "You need the connected diagnosis, proposed correction and current verification state in one determination.",
+      "method": "POST",
+      "endpoint": "https://fahce.kinganlogic.com/api/v1/repair-bundle",
+      "version": "1.5.0",
+      "input_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineRequest",
+      "output_schema": "https://fahce.kinganlogic.com/openapi.json#/components/schemas/MachineResponse",
+      "payment": {
+        "scheme": "upto",
+        "authorized_atomic_units": "390000",
+        "no_repair_atomic_units": "150000",
+        "repair_required_atomic_units": "390000"
+      },
+      "price_display": "$0.39 maximum authorization",
+      "settlement_display": "$0.15 without repair required; $0.39 with repair required"
+    }
+  ],
+  "keywords": [
+    "AI claim verification",
+    "AI evidence integrity",
+    "conflicting records and provenance",
+    "agent execution proof",
+    "unsupported authority detection",
+    "bounded AI repair",
+    "post-repair verification",
+    "deterministic case receipts",
+    "machine-to-machine integrity API",
+    "x402 paid AI tools"
+  ],
+  "pricing_terms": {
+    "schema": "FAHCE_MACHINE_PRICING_V1",
+    "currency": "USD",
+    "atomic_unit_usd": 1e-06,
+    "signing_scope": "OCI artifact signing, Microsoft-signed runtime attestation, application receipts and payment settlement are separate evidence. OCI verification applies only to its exact artifact digest and trusted signing identity; it does not establish source/build provenance, deployment, external execution or permission to act. The downloaded receipt verifier checks runtime evidence, not OCI signatures. See /attestation for the dated, digest-scoped signing record and verifier limits.",
+    "status": "wallet_only_x402_available",
+    "terms_status": "PUBLISHED_SERVICE_PRICES",
+    "payment_availability": {
+      "source": "SERVER_PAYMENT_ACCEPTANCE_CONFIGURATION",
+      "gateway_enabled": true,
+      "paid_settlement_enabled": true,
+      "deployed_payment_verified": true,
+      "historical_production_payment_verified": true,
+      "current_release_payment_verification": {
+        "status": "VERIFIED_END_TO_END",
+        "release_bound": true,
+        "schema": "FAHCE_RELEASE_ACCEPTANCE_V1",
+        "worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+        "source_tree_sha256": "281368a3aeeddc444c378dc5f03019cabecf42ca189ca88894a8b2a5d89d13fe",
+        "worker_bundle_sha256": "6196365b6f30a2f83f59dc37936d645a9a8017ecb9fbeeb24b95034c8c0c077a",
+        "verified_at": "2026-10-30T05:38:45.263Z",
+        "origin": "https://fahce.kinganlogic.com",
+        "engine_version": "fahce-pilot-deterministic-v0.2.12-round2",
+        "image_sha256": "5e6e6f1305a40312827719478dc73e258f1dfbff94d1d825907d89f46bad2776",
+        "policy_sha256": "c392ffc25b0b14d444e93f6e36b26419343babccdf2d078c3e1d9eaa1f0efa9f",
+        "legal_publication_sha256": "00e052c9d6f388139023b672b9b458daadb7d243504e22907887d4829446a573",
+        "records": [
+          {
+            "operation": "diagnose",
+            "request_id": "790b7fa4-8623-4225-b12c-55c58530db67",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0xf0b7f79cc730199d02a5ae83b140a6afeed6624a90d93f3735c69ae6871f7af5",
+            "receipt_body_sha256": "fdf5ea4a18bf23342b7cdc391ce52ce422744bf1046633f7df7bc872e6603e13",
+            "verified_at": "2026-10-30T05:32:52.599Z"
+          },
+          {
+            "operation": "repair",
+            "request_id": "68e69d0b-d64a-4719-a9a8-f14f4cca586b",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0x720bc51fe5e7435ba49fb01489b15584393587dd4a2ad83748dc079878fa3628",
+            "receipt_body_sha256": "5f9b74933e0d11c11bb4ed81b7d9f4bc1923fca4fc63566130380b0196c69389",
+            "verified_at": "2026-10-30T05:33:29.366Z"
+          },
+          {
+            "operation": "verify",
+            "request_id": "e3a1399d-4e49-42eb-9ac7-1fcb48d4a3d0",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0xac46312f89a691dcab96d89b0fc83d71727c49d0ac57f81b5e67cc1f0b443df4",
+            "receipt_body_sha256": "ff95505ed7fae9132ab3a41ef4c2b7d9a86f9eff7e46b21f8a51b708e5b87517",
+            "verified_at": "2026-10-30T05:33:56.105Z"
+          },
+          {
+            "operation": "repair-bundle",
+            "request_id": "5d6fdbc9-4773-4387-b44c-220c0d9db849",
+            "scheme": "upto",
+            "settled_atomic_units": "390000",
+            "transaction_hash": "0xce695365c6646e560218890bf94470eb803fcbee389b9e3e69db72022418b4b6",
+            "receipt_body_sha256": "81f0396764a9b60b70a02934deae483a432e323fd86bc395fd97edaed980516d",
+            "verified_at": "2026-10-30T05:34:55.321Z"
+          }
+        ],
+        "publication": {
+          "schema": "FAHCE_PRESENTATION_RELEASE_V1",
+          "publication_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+          "publication_created_at": "2026-10-30T06:45:35.222Z",
+          "publication_source_sha256": "ce23ab78b6020e320ed2c1137e09549b2140276e37455f3b5d77c0fc869bab4a",
+          "publication_worker_bundle_sha256": "04e3286f523017633c76dfead651ed36bc444d2e005186c231b2541219fc0862",
+          "tested_worker_version": "126ce2b7-5cb2-4ff7-acff-92efd878aee1",
+          "tested_worker_created_at": "2026-10-30T05:11:27.595Z",
+          "tested_evidence_sha256": "5ec09963ab859da3b149b1ab7ba13929673540edfe293ef06e6a21d21c5c8ec5",
+          "machine_contract_sha256": "3219607b617d56287dd7417d3913122d5707d0afe0b8ae08f7d1c82d8d8b39a3",
+          "runtime_configuration_sha256": "ce3647f8efa5549aa070b3b5893b5350d9d16b83439f6e1ead8076c433a5ae80",
+          "comparison_sha256": "f2d6f7f994d835f55dbdd14f68f0fb32c4a48803584dd4b17b941662d3ae1755",
+          "verified_at": "2026-10-30T06:51:06.100Z",
+          "change_scope": "PRESENTATION_AND_EVIDENCE_METADATA_ONLY",
+          "paid_purchases_repeated": false
+        },
+        "published_worker_version": "0af8d866-69ca-4d6f-99df-aa3130d99b76",
+        "acceptance_basis": "UNCHANGED_MACHINE_CONTRACT_PRESENTATION_RELEASE",
+        "paid_tests_run_on_published_worker": false,
+        "evidence_url": "https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json",
+        "network": "eip155:8453",
+        "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+        "scope": [
+          "buyer_payment",
+          "purchased_result_delivery",
+          "attested_receipt_verification",
+          "gateway_settlement",
+          "seller_receipt",
+          "free_receipt_recovery"
+        ],
+        "limits": "Operator-published acceptance evidence for four controlled purchases on the identified tested Worker and pinned engine. A publication record, when present, identifies a later presentation-only release with unchanged protected machine source and runtime configuration; it does not claim new purchases. Tested source/build hashes and original transaction dates remain unchanged. Runtime version metadata is not a source-code signature. Transactions and receipt verification were checked when recorded, not on every page view. This is not a guarantee for every future request."
+      },
+      "production_payment_verification": {
+        "status": "VERIFIED_END_TO_END",
+        "tested_on": "2026-10-14",
+        "evidence_scope": "HISTORICAL_PRODUCTION_PURCHASES_NOT_CURRENT_RELEASE_ACCEPTANCE",
+        "release_bound": false,
+        "origin": "https://fahce.kinganlogic.com",
+        "adapter": "cloudflare",
+        "protocol": "x402-v2",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "scope": [
+          "buyer_payment",
+          "purchased_result_delivery",
+          "gateway_settlement",
+          "seller_receipt"
+        ],
+        "tested_operations": [
+          "diagnose",
+          "repair",
+          "verify",
+          "repair-bundle"
+        ],
+        "evidence": "Successful HTTP 200 results and gateway PAYMENT-RESPONSE records, Cloudflare settled-payment activity and receiving-wallet receipts.",
+        "evidence_access": "Public Base transaction links are provided for each operation. Gateway payment responses and seller receiving records support the corresponding FAHCE request references.",
+        "recipient": "0x22cf7241E3e24ed0d22d710C86a497084da625cd",
+        "asset_contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "evidence_references": [
+          {
+            "operation": "diagnose",
+            "request_id": "f05ee4ad-aa79-47f3-8cc6-f111366f8c60",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51",
+            "status": "SETTLED",
+            "transaction_url": "https://basescan.org/tx/0xfdd1b9fe0cbab0760da509b2a2263238d6e35de8b54ab0ef417094b9c1093d51"
+          },
+          {
+            "operation": "repair",
+            "request_id": "b327a160-1295-4c96-b65c-7f4a0e1d5557",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e",
+            "status": "SETTLED",
+            "transaction_url": "https://basescan.org/tx/0x3681e98bd9ed9369b35a734fe5846571810d490eed4d0223747313d2a23b7c8e"
+          },
+          {
+            "operation": "verify",
+            "request_id": "3b548a2f-5e8d-4537-8d08-c9c2808eb344",
+            "scheme": "exact",
+            "settled_atomic_units": "150000",
+            "transaction_hash": "0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234",
+            "status": "SETTLED",
+            "transaction_url": "https://basescan.org/tx/0xac32ef5d24f3411594abe2fbaf0d7b4872da923801bfc6b66d1002dc63b14234"
+          },
+          {
+            "operation": "repair-bundle",
+            "request_id": "7dab5f16-81ed-4500-9d76-5e419aa8400b",
+            "scheme": "upto",
+            "settled_atomic_units": "390000",
+            "transaction_hash": "0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10",
+            "status": "SETTLED",
+            "transaction_url": "https://basescan.org/tx/0xcff08d0e4a67bd28e17907d1ba489555d89013e600bc45f55c6132da3bdc4f10"
+          }
+        ]
+      },
+      "activation": "ORIGIN_ACCEPTANCE_ENABLED",
+      "paid_access": "WALLET_ONLY_X402_AVAILABLE",
+      "payment_status": "wallet_only_x402_available",
+      "pricing_status": "wallet_only_x402_available"
+    },
+    "cloudflare_origin_ref": "#/cloudflare_origin",
+    "contact": {
+      "support": "logan@kinganlogic.com",
+      "security": "logan@kinganlogic.com"
+    },
+    "discovery": "free",
+    "acquisition": "Wallet-only x402 with no pilot key or prior account. Paid acceptance is enabled in this environment. Free syntactic preflight and authenticated recovery do not execute paid analysis.",
+    "authorization_boundary": "Bundle HTTP 402 requests a 390000 atomic-unit ($0.39) maximum authorization even when eligible actual settlement is 150000 ($0.15) or zero. An upto amount is a ceiling, not the charge. All four paid operations\u2014Diagnose, Repair, Verify and Repair Bundle\u2014completed end to end on Worker 126ce2b7-5cb2-4ff7-acff-92efd878aee1. Purchased results and attested receipts were verified, USDC settlement to the seller was confirmed on Base, and free receipt recovery returned the same results. Verified 2026-10-30T05:38:45.263Z. View the version-bound records at https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json. These are observed controlled purchases, not a guarantee for every future request.",
+    "comparison": {
+      "standalone_diagnose_repair_verify_atomic_units": "450000",
+      "bundle_maximum_atomic_units": "390000",
+      "explanation": "Three separate billable Diagnose, Repair and Verify calls total $0.45. A single bundle authorizes at most $0.39 and reports the submitted answer's current state and proposed plan; it does not execute a repair or verify a freshly revised answer. Standalone Repair authorizes $0.15 for an eligible bounded plan; held/invalid plans are nonbillable. An origin error alone does not establish the gateway charge status."
+    },
+    "computation_proof": "Completed production determinations include independently verifiable Microsoft-signed proof of the scoped computation; payment settlement evidence remains separate. Verification: /attestation",
+    "prices": {
+      "diagnose": {
+        "scheme": "exact",
+        "atomic_units": "150000"
+      },
+      "repair": {
+        "scheme": "exact",
+        "atomic_units": "150000",
+        "settlement": "Eligible completed plan: 150000 atomic units; held/invalid plan: no origin settlement instruction. Reconcile gateway charge status separately."
+      },
+      "verify": {
+        "scheme": "exact",
+        "atomic_units": "150000"
+      },
+      "repair_bundle": {
+        "scheme": "upto",
+        "maximum_atomic_units": "390000",
+        "settlement_atomic_units": {
+          "nonbillable_free_retry": "0",
+          "no_repair_required": "150000",
+          "repair_required": "390000"
+        }
+      }
+    }
+  },
+  "supported_inputs": {
+    "aggregate_limit": "The entire UTF-8 encoded JSON body must fit within 524288 bytes (512 KiB), including all fields, labels, escaping and JSON overhead. Per-field maxima are independent ceilings; they cannot all be used at once. MCP discovery requests include JSON-RPC framing in this limit; this does not enable paid MCP execution.",
+    "character_unit": "UTF-16 code units",
+    "candidate_output": "Required text, up to 200000 characters",
+    "expected_output": "Optional format/constraint and repair-target context for all operations, including Diagnose. Recognized directives (e.g. Return JSON) can affect diagnosis. Factual text is not compared for string equality or trusted as evidence; supply independent records.",
+    "evidence": "Up to 12 caller-supplied log, paste, document (text only) or description items; each up to 200000 characters, within the aggregate body ceiling",
+    "provenance": "Caller-supplied source labels and text are retained with hashes; labels do not authenticate authority.",
+    "unsupported": [
+      "binary PDF/image interpretation through this API",
+      "independent web retrieval",
+      "authenticated third-party retrieval",
+      "external repair execution"
+    ]
+  },
+  "error_boundary": "FAHCE application errors use a JSON envelope. Upstream WAF, Access or transport rejection can occur before the application and return HTML or another non-JSON response, including when Accept is application/json. Machine clients must inspect HTTP status and Content-Type before decoding and must never interpret a security block as an integrity determination. Security protections remain enforced.",
+  "request_schema": "FAHCE_MACHINE_REQUEST_V1",
+  "authentication": "Paid commercial REST calls use wallet-only x402; gateway-verified PAYMENT-CONTEXT grants a machine-only principal. No pilot key or account setup. A pilot key alone never authorizes a commercial machine operation. Independently authenticated human and owner routes remain separate; cookie mutations require same-origin Origin.",
+  "transactions": {
+    "pilot_key_bypass": false,
+    "protocol": "x402-v2",
+    "gateway_enabled": true,
+    "gateway_configuration_ready": true,
+    "paid_settlement_enabled": true,
+    "paid_access": "WALLET_ONLY_X402_AVAILABLE",
+    "pricing": "https://fahce.kinganlogic.com/pricing",
+    "pricing_publication": "Published service prices: Diagnose, Repair and Verify are $0.15 fixed each ($0.45 for three separate billable calls). Bundle HTTP 402 requests a $0.39 maximum authorization even when actual eligible settlement is $0 for nonbillable free retry, $0.15 for verified no-repair work, or $0.39 for a required validated bounded plan. Held/invalid plans and unsupported processing are nonbillable; completed negative Verify is a billable determination; a failed request requires its own gateway charge reconciliation. A bundle reports the supplied answer's state; a revised answer requires another submission. Confirmed receiving account: 0x22cf7241E3e24ed0d22d710C86a497084da625cd, USDC on Base (8453), receiving only. All four paid operations\u2014Diagnose, Repair, Verify and Repair Bundle\u2014completed end to end on Worker 126ce2b7-5cb2-4ff7-acff-92efd878aee1. Purchased results and attested receipts were verified, USDC settlement to the seller was confirmed on Base, and free receipt recovery returned the same results. Verified 2026-10-30T05:38:45.263Z. View the version-bound records at https://fahce.kinganlogic.com/.well-known/fahce-release-acceptance.json. These are observed controlled purchases, not a guarantee for every future request.",
+    "payment_flow": "request the operation; read the gateway's HTTP 402 PAYMENT-REQUIRED; authorize payment with an x402 v2 client; retry the same bound request using PAYMENT-SIGNATURE. No pilot key, invitation or prior account is required. The verified payment creates a machine-only principal for this operation. Before authorizing payment, review the published policies and send FAHCE-Terms-Accepted with their legal_documents.publication_hash on the bound request. Retain the random FAHCE-Recovery-Token for free recovery. It authorizes only this purchase's retained output and is not a refund or execution credential. If the first response is lost before the token arrives, original-purchase evidence must be verified separately; do not buy again automatically. The origin verifies the gateway-signed PAYMENT-CONTEXT; PAYMENT-SETTLEMENT is an origin-to-gateway instruction for upto only. Exact responses omit that instruction. The gateway returns PAYMENT-RESPONSE after settlement. Origin delivery intents are not charge receipts. Paid determinations execute only through REST; MCP tools/call does not execute them.",
+    "idempotency": "An authorization executes at most once. Repeating it returns a distinct 409; recover the saved result with the scoped credential. Optional keys bind unchanged input and a single authorization. Changed input or a new authorization conflicts with a reused key. Receipt recovery performs no determination.",
+    "payment_boundary": "Payment authorizes service access; it does not establish claim correctness, external execution or permission to act."
+  },
+  "boundaries": {
+    "evidence_scope": "Only the evidence supplied by the caller is reviewed; no independent web retrieval is performed.",
+    "unknown_semantics": "Unestablished claims remain UNVERIFIED or held; an unsupported operator cannot establish a clear result.",
+    "repair": "A proposed plan is not an executed repair. Verification reviews the separately submitted revised answer.",
+    "receipt": "New production machine and human engine runs carry Microsoft-signed hardware attestation bound to the exact processed input and result. The edge verifies the pinned workload and fresh challenge before delivery. Public verification material and instructions: /attestation. Attestation proves scoped engine computation, not source authenticity or external execution."
+  },
+  "request_headers": {
+    "Content-Type": "application/json",
+    "FAHCE-Terms-Accepted": "<current-legal-documents-publication-hash-after-review>",
+    "Idempotency-Key": "<optional-compatible-client-key>",
+    "PAYMENT-SIGNATURE": "<x402-v2-wallet-authorization-on-402-retry-only>"
+  },
+  "receipt_retrieval": "https://fahce.kinganlogic.com/api/v1/receipts/{receipt_id}",
+  "receipt_boundary": "For a completed determination, response.request_id is the receipt_id UUID and equals receipt.case_id and receipt.run_id. Error-envelope request_id is an HTTP trace; use error.receipt_id when present. New production machine and human engine runs include Microsoft-signed hardware attestation binding the exact processed input and result, with encrypted edge-to-workload transport. Verify the full receipt using /attestation and /api/v1/attestation/trust. Each receipt binds input/evidence hashes, engine version and response hash. Supply prior-case context as evidence text; this contract does not automatically load a human case or prior repair. Immutable origin charge fields remain null. Retain the gateway PAYMENT-RESPONSE separately; completed production settlement is established separately by gateway and receiving-wallet records. Automated ledger reconciliation remains a separate accounting workflow.",
+  "documentation": {
+    "service_catalog": "https://fahce.kinganlogic.com/capabilities/machines.html#services",
+    "pricing": "https://fahce.kinganlogic.com/capabilities/machines.html#pricing",
+    "quickstart": "https://fahce.kinganlogic.com/capabilities/machines.html#quickstart",
+    "receipts": "https://fahce.kinganlogic.com/capabilities/machines.html#receipts",
+    "limits": "https://fahce.kinganlogic.com/capabilities",
+    "api": "https://fahce.kinganlogic.com/openapi.json",
+    "mcp": "https://fahce.kinganlogic.com/.well-known/mcp.json",
+    "security": "https://fahce.kinganlogic.com/capabilities/machines.html#boundaries",
+    "changelog": "https://fahce.kinganlogic.com/capabilities/machines.html#version"
+  },
+  "publication_pending": []
+}

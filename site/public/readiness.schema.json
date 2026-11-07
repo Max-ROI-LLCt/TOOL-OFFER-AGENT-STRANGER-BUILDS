@@ -1,0 +1,328 @@
+{
+  "title": "ReadinessReport",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "enum": [
+        "TOOL_OFFER_READINESS_V1"
+      ],
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "enum": [
+        "preparation_for_review_only"
+      ],
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "enum": [
+        "prelaunch",
+        "needs_information",
+        "needs_revision",
+        "reviewable_with_caveats"
+      ],
+      "type": "string"
+    },
+    "basis": {
+      "$ref": "#/definitions/Basis"
+    },
+    "authorization": {
+      "$ref": "#/definitions/Authorization"
+    },
+    "sources": {
+      "title": "Sources",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EvidenceSource"
+      }
+    },
+    "facts": {
+      "title": "Facts",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Fact"
+      }
+    },
+    "findings": {
+      "title": "Findings",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Finding"
+      }
+    },
+    "planning": {
+      "title": "Planning",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PlanningItem"
+      }
+    },
+    "checks_performed": {
+      "title": "Checks Performed",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "not_assessed": {
+      "title": "Not Assessed",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_step": {
+      "title": "Next Step",
+      "type": "string"
+    },
+    "human_readable": {
+      "title": "Human Readable",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scope",
+    "status",
+    "basis",
+    "authorization",
+    "sources",
+    "facts",
+    "findings",
+    "planning",
+    "checks_performed",
+    "not_assessed",
+    "next_step",
+    "human_readable"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Basis": {
+      "title": "Basis",
+      "type": "object",
+      "properties": {
+        "snapshot_sha256": {
+          "title": "Snapshot Sha256",
+          "type": "string"
+        },
+        "draft_sha256": {
+          "title": "Draft Sha256",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        },
+        "release_id": {
+          "title": "Release Id",
+          "type": "string"
+        },
+        "policy_version": {
+          "title": "Policy Version",
+          "enum": [
+            "1.2.0"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "snapshot_sha256",
+        "draft_sha256",
+        "revision",
+        "release_id",
+        "policy_version"
+      ],
+      "additionalProperties": false
+    },
+    "Authorization": {
+      "title": "Authorization",
+      "type": "object",
+      "properties": {
+        "commercial": {
+          "title": "Commercial",
+          "enum": [
+            "not_established",
+            "explicitly_restricted"
+          ],
+          "type": "string"
+        },
+        "seller_approval": {
+          "title": "Seller Approval",
+          "enum": [
+            "not_recorded",
+            "current_sender_bound",
+            "stale_or_different_sender"
+          ],
+          "type": "string"
+        },
+        "independently_verified": {
+          "title": "Independently Verified",
+          "enum": [
+            false
+          ],
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "commercial",
+        "seller_approval",
+        "independently_verified"
+      ],
+      "additionalProperties": false
+    },
+    "EvidenceSource": {
+      "title": "EvidenceSource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "url",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "Fact": {
+      "title": "Fact",
+      "type": "object",
+      "properties": {
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "enum": [
+            "verbatim_quote",
+            "source_backed_derived",
+            "derived_schema_or_unaligned",
+            "seller_or_record_declaration"
+          ],
+          "type": "string"
+        },
+        "evidence_refs": {
+          "title": "Evidence Refs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_pointers": {
+          "title": "Source Pointers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "pointer",
+        "value",
+        "basis",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Finding": {
+      "title": "Finding",
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "next_step": {
+          "title": "Next Step",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "title": "Evidence Refs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "pointer",
+        "detail",
+        "next_step"
+      ],
+      "additionalProperties": false
+    },
+    "PlanningItem": {
+      "title": "PlanningItem",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "message_id": {
+          "title": "Message Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text",
+        "status",
+        "requirement_id",
+        "origin",
+        "message_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "x-release-id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "x-tool-offer-version": "1.4.9"
+}

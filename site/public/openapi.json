@@ -1,0 +1,5744 @@
+{
+  "openapi": "3.1.0",
+  "x-limits": {
+    "message_characters": 4000,
+    "daily_messages_per_client": 20,
+    "daily_messages_global": 500,
+    "daily_operations_global": 5000,
+    "daily_sessions_per_client": 10,
+    "requests_per_minute": 60,
+    "session_days": 7,
+    "requests_per_session": 100,
+    "model_attempts_per_message": 2
+  },
+  "x-quota-accounting": {
+    "send_message": "One client message, one global message, one global operation and one session request per new accepted job; commands also count.",
+    "get_status_assess_offer_readiness_export_offer_get_export_part": "One global operation and one session request per new accepted job; no messages.",
+    "start_session": "One client session per new session; no global operation or message.",
+    "get_result": "Minute quota only; no operation, session request or message.",
+    "replay": "Same request_id and arguments consumes minute quota only; changed arguments cause 409.",
+    "requests_per_minute": "All valid authenticated tool calls use fixed UTC minute buckets; rejected transactions roll back quota increments.",
+    "reset": "Daily counters reset at 00:00 UTC; minute counters reset at the next minute. Sessions expire seven days after creation; 100 requests is a lifetime limit.",
+    "retry_after": "429 minute/daily responses include Retry-After seconds and reset_at; lifetime 429 has no reset and retry_same_session=false."
+  },
+  "info": {
+    "title": "Tool Offer Agent restricted machine adapter",
+    "version": "1.4.9",
+    "description": "Source-attributed API/MCP offer intake, conversation, drafting, revision, deterministic readiness assessment and exports. No wallet connection, checkout, FAHCE execution, payment, approval, publication, administration or cross-conversation recovery through this adapter."
+  },
+  "x-machine-readable-profile": "https://tooloffer.kinganlogic.com/manifest.json",
+  "x-capabilities": [
+    "Read public API/MCP documentation and retain source-attributed evidence.",
+    "Collect seller-stated customer, pricing, payment, access and invocation terms.",
+    "Draft, review and revise an offer within an isolated conversation.",
+    "Explain the buyer offer and prepare listing guidance without publication.",
+    "Assess retained offer readiness deterministically without inference or payment.",
+    "Export structured and human-readable records, with verified multipart retrieval when needed."
+  ],
+  "x-payments": {
+    "drafting": {
+      "price": "0",
+      "wallet_required": false,
+      "terms": "Drafting is free; operator inference costs and published quotas still apply."
+    },
+    "evaluation": {
+      "provider": "FAHCE Diagnose",
+      "optional": true,
+      "separate_from_drafting": true,
+      "buyer_authorization_required": true,
+      "machine_adapter_supported": false,
+      "protocol": "x402 with buyer-signed EIP-3009 authorization",
+      "amount": "0.15",
+      "asset": "USDC",
+      "network": "Base mainnet",
+      "chain_id": 8453,
+      "atomic_amount": "150000",
+      "terms": "Optional FAHCE evaluation is separate and buyer-authorized: 0.15 USDC on Base mainnet via the private human checkout. A free preflight is not an evaluation. Checkout preparation, wallet connection and a 402 challenge are not payment authorization, settlement or a completed result. Changed price, network, token or recipient stops payment. No automatic spending.",
+      "instructions_url": "https://tooloffer.kinganlogic.com/instructions.md",
+      "checkout_access": "In native chat, wallet explains setup; check prepares an eligible private checkout only when explicitly requested. The buyer reviews the exact request and separately signs there. purchase status retrieves the existing outcome; never purchase again to resolve uncertainty."
+    }
+  },
+  "servers": [
+    {
+      "url": "https://tooloffer.kinganlogic.com"
+    }
+  ],
+  "security": [
+    {
+      "machineBearer": []
+    },
+    {
+      "machineOAuth": [
+        "tool_offer:machine"
+      ]
+    }
+  ],
+  "x-release-id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "components": {
+    "securitySchemes": {
+      "machineBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "machineOAuth": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://tooloffer.kinganlogic.com/oauth/token",
+            "scopes": {
+              "tool_offer:machine": "Bounded offer preparation and exports; no payment or administration."
+            }
+          }
+        }
+      },
+      "accessRequestCapability": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "AccessRequest followed by the applicant's private tar_ status capability, not a machine Bearer token."
+      }
+    },
+    "schemas": {
+      "Basis": {
+        "title": "Basis",
+        "type": "object",
+        "properties": {
+          "snapshot_sha256": {
+            "title": "Snapshot Sha256",
+            "type": "string"
+          },
+          "draft_sha256": {
+            "title": "Draft Sha256",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "release_id": {
+            "title": "Release Id",
+            "type": "string"
+          },
+          "policy_version": {
+            "title": "Policy Version",
+            "enum": [
+              "1.2.0"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "snapshot_sha256",
+          "draft_sha256",
+          "revision",
+          "release_id",
+          "policy_version"
+        ],
+        "additionalProperties": false
+      },
+      "Authorization": {
+        "title": "Authorization",
+        "type": "object",
+        "properties": {
+          "commercial": {
+            "title": "Commercial",
+            "enum": [
+              "not_established",
+              "explicitly_restricted"
+            ],
+            "type": "string"
+          },
+          "seller_approval": {
+            "title": "Seller Approval",
+            "enum": [
+              "not_recorded",
+              "current_sender_bound",
+              "stale_or_different_sender"
+            ],
+            "type": "string"
+          },
+          "independently_verified": {
+            "title": "Independently Verified",
+            "enum": [
+              false
+            ],
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "commercial",
+          "seller_approval",
+          "independently_verified"
+        ],
+        "additionalProperties": false
+      },
+      "EvidenceSource": {
+        "title": "EvidenceSource",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "Fact": {
+        "title": "Fact",
+        "type": "object",
+        "properties": {
+          "pointer": {
+            "title": "Pointer",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          },
+          "basis": {
+            "title": "Basis",
+            "enum": [
+              "verbatim_quote",
+              "source_backed_derived",
+              "derived_schema_or_unaligned",
+              "seller_or_record_declaration"
+            ],
+            "type": "string"
+          },
+          "evidence_refs": {
+            "title": "Evidence Refs",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_pointers": {
+            "title": "Source Pointers",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "pointer",
+          "value",
+          "basis",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "Finding": {
+        "title": "Finding",
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "pointer": {
+            "title": "Pointer",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "next_step": {
+            "title": "Next Step",
+            "type": "string"
+          },
+          "evidence_refs": {
+            "title": "Evidence Refs",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "pointer",
+          "detail",
+          "next_step"
+        ],
+        "additionalProperties": false
+      },
+      "PlanningItem": {
+        "title": "PlanningItem",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "requirement_id": {
+            "title": "Requirement Id",
+            "type": "string"
+          },
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "message_id": {
+            "title": "Message Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "text",
+          "status",
+          "requirement_id",
+          "origin",
+          "message_id"
+        ],
+        "additionalProperties": false
+      },
+      "ReadinessReport": {
+        "title": "ReadinessReport",
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "title": "Schema Version",
+            "enum": [
+              "TOOL_OFFER_READINESS_V1"
+            ],
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "enum": [
+              "preparation_for_review_only"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "enum": [
+              "prelaunch",
+              "needs_information",
+              "needs_revision",
+              "reviewable_with_caveats"
+            ],
+            "type": "string"
+          },
+          "basis": {
+            "$ref": "#/components/schemas/Basis"
+          },
+          "authorization": {
+            "$ref": "#/components/schemas/Authorization"
+          },
+          "sources": {
+            "title": "Sources",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvidenceSource"
+            }
+          },
+          "facts": {
+            "title": "Facts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fact"
+            }
+          },
+          "findings": {
+            "title": "Findings",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            }
+          },
+          "planning": {
+            "title": "Planning",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanningItem"
+            }
+          },
+          "checks_performed": {
+            "title": "Checks Performed",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "not_assessed": {
+            "title": "Not Assessed",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_step": {
+            "title": "Next Step",
+            "type": "string"
+          },
+          "human_readable": {
+            "title": "Human Readable",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "scope",
+          "status",
+          "basis",
+          "authorization",
+          "sources",
+          "facts",
+          "findings",
+          "planning",
+          "checks_performed",
+          "not_assessed",
+          "next_step",
+          "human_readable"
+        ],
+        "additionalProperties": false
+      },
+      "ReadinessDelivery": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "snapshot_sha256",
+          "report_sha256",
+          "delivery"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": "TOOL_OFFER_READINESS_DELIVERY_V1"
+          },
+          "snapshot_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "report_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "delivery": {
+            "enum": [
+              "inline",
+              "text_json",
+              "multipart"
+            ]
+          },
+          "report": {
+            "$ref": "#/components/schemas/ReadinessReport"
+          },
+          "manifest": {
+            "type": "object",
+            "description": "Existing complete-payload-false export manifest; retrieve and verify all parts."
+          },
+          "summary": {
+            "$ref": "#/components/schemas/ReadinessSummary"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "delivery": {
+                  "const": "inline"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "report"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "delivery": {
+                  "const": "multipart"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "manifest"
+              ]
+            }
+          }
+        ]
+      },
+      "ReadinessSummary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "scope",
+          "basis",
+          "authorization",
+          "finding_count",
+          "next_step"
+        ],
+        "properties": {
+          "status": {
+            "title": "Status",
+            "enum": [
+              "prelaunch",
+              "needs_information",
+              "needs_revision",
+              "reviewable_with_caveats"
+            ],
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "enum": [
+              "preparation_for_review_only"
+            ],
+            "type": "string"
+          },
+          "basis": {
+            "$ref": "#/components/schemas/Basis"
+          },
+          "authorization": {
+            "$ref": "#/components/schemas/Authorization"
+          },
+          "next_step": {
+            "title": "Next Step",
+            "type": "string"
+          },
+          "finding_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "StructuredIntake": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "tool_url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "customer": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "pricing": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "payment": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "access": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "invocation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "seller_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "job": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          },
+          "docs": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 6000
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000,
+                  "format": "uri"
+                }
+              }
+            ]
+          },
+          "schema": {
+            "const": "TOOL_OFFER_INTAKE_V1"
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "tool_url"
+            ]
+          },
+          {
+            "required": [
+              "docs"
+            ]
+          },
+          {
+            "required": [
+              "customer"
+            ]
+          },
+          {
+            "required": [
+              "pricing"
+            ]
+          },
+          {
+            "required": [
+              "payment"
+            ]
+          },
+          {
+            "required": [
+              "access"
+            ]
+          },
+          {
+            "required": [
+              "invocation"
+            ]
+          },
+          {
+            "required": [
+              "seller_name"
+            ]
+          },
+          {
+            "required": [
+              "job"
+            ]
+          }
+        ]
+      },
+      "OAuthRegistration": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "client_name",
+          "grant_types",
+          "token_endpoint_auth_method",
+          "token_endpoint_auth_signing_alg",
+          "jwks"
+        ],
+        "properties": {
+          "client_name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "grant_types": {
+            "type": "array",
+            "items": {
+              "const": "client_credentials"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          },
+          "token_endpoint_auth_method": {
+            "const": "private_key_jwt"
+          },
+          "token_endpoint_auth_signing_alg": {
+            "const": "ES256"
+          },
+          "scope": {
+            "const": "tool_offer:machine"
+          },
+          "jwks": {
+            "type": "object",
+            "required": [
+              "keys"
+            ],
+            "properties": {
+              "keys": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": {
+                  "type": "object",
+                  "description": "Public P-256 EC JWK only; private fields rejected. No remote jwks_uri fetch."
+                }
+              }
+            }
+          }
+        }
+      },
+      "OAuthClientAssertion": {
+        "type": "object",
+        "required": [
+          "client_id",
+          "client_assertion_type",
+          "client_assertion"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "grant_type": {
+            "const": "client_credentials"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "client_assertion_type": {
+            "const": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+          },
+          "client_assertion": {
+            "type": "string",
+            "description": "ES256 private_key_jwt: iss=sub=client_id, aud=exact endpoint, iat, exp<=iat+120 seconds, fresh jti. Replay rejected."
+          },
+          "scope": {
+            "const": "tool_offer:machine"
+          },
+          "resource": {
+            "const": "https://tooloffer.kinganlogic.com/mcp"
+          }
+        }
+      },
+      "FetchEnrollment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "body",
+          "signature"
+        ],
+        "properties": {
+          "body": {
+            "type": "string",
+            "description": "Exact JSON: schema TOOL_OFFER_ACCESS_ENROLL_V1, name (2..100), use_case (10..1000), identity {type:uagents,address:caller agent1 address}, RSA-OAEP-256 public_key JWK (2048/3072/4096 bits), status_secret_sha256 (SHA-256 of applicant-generated tar_ + 32 random base64url bytes), issued_at (UTC milliseconds within 60 seconds), nonce (fresh UUID v4)."
+          },
+          "signature": {
+            "type": "string",
+            "description": "uAgents secp256k1 signature over SHA-256 of TOOL_OFFER_ACCESS_ENROLL_V1 followed by newline and exact body. The caller's existing identity signs, never the operator."
+          }
+        }
+      },
+      "OperatorAccessRequest": {
+        "type": "object",
+        "required": [
+          "body",
+          "signature"
+        ],
+        "properties": {
+          "body": {
+            "type": "string",
+            "description": "Domain-separated TOOL_OFFER_ACCESS_OWNER_V1 JSON with action list/revoke/audit, request_id (client ID for revoke/audit), issued_at UTC milliseconds and nonce UUID; expires after 60 seconds."
+          },
+          "signature": {
+            "type": "string",
+            "description": "Existing operator gateway signature; never granted by chat, enrollment or OAuth."
+          }
+        }
+      },
+      "OAuthTokenRequest": {
+        "type": "object",
+        "required": [
+          "grant_type",
+          "client_id",
+          "client_assertion_type",
+          "client_assertion",
+          "scope",
+          "resource"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "grant_type": {
+            "const": "client_credentials"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "client_assertion_type": {
+            "const": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+          },
+          "client_assertion": {
+            "type": "string",
+            "description": "ES256 private_key_jwt: iss=sub=client_id, aud=exact endpoint, iat, exp<=iat+120 seconds, fresh jti. Replay rejected."
+          },
+          "scope": {
+            "const": "tool_offer:machine"
+          },
+          "resource": {
+            "const": "https://tooloffer.kinganlogic.com/mcp"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/machine/start_session": {
+      "post": {
+        "operationId": "start_session",
+        "description": "Create an isolated seven-day offer conversation. Requires a unique request_id; replaying it returns the same session. No model inference.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  }
+                },
+                "required": [
+                  "request_id"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "request_id": "00000000-0000-4000-8000-000000000001"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "request_id": "00000000-0000-4000-8000-000000000001"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/send_message": {
+      "post": {
+        "operationId": "send_message",
+        "description": "Send field: value lines, or a JSON-serialized StructuredIntake object in message, a product question, a revision or a drafting command. Intake keys: tool_url, docs (URL string or 1–3 URL strings), customer, pricing, payment, access, invocation; optional job and seller_name. All other values are strings. Optional schema is TOOL_OFFER_INTAKE_V1. Unknown/duplicate keys and invalid values reject the entire update. Card selections are separate. May use bounded operator model quota. Returns a stable job; optional HTTP Prefer: wait=1 through wait=5 waits without redispatch and may include the signed completed result. Otherwise poll get_result. Never resend uncertain work with a new request_id. No payments or FAHCE execution. May overwrite seller fields or rebuild retained drafts; not read-only. Request-ID deduplication is bounded by retained session/job lifetime, not an unqualified retry guarantee.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The isolated session UUID returned by start_session; use the same client identity."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  },
+                  "message": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000,
+                    "description": "Offer intake, question, revision or supported drafting command as text; JSON intake must be serialized into this string. Real terms require truthful authorization."
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "request_id",
+                  "message"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "session_id": "00000000-0000-4000-8000-000000000002",
+                    "request_id": "00000000-0000-4000-8000-000000000001",
+                    "message": "status"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "session_id": "00000000-0000-4000-8000-000000000002",
+                "request_id": "00000000-0000-4000-8000-000000000001",
+                "message": "status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/get_status": {
+      "post": {
+        "operationId": "get_status",
+        "description": "Ask the existing agent for the current offer status without inference. Returns a job; poll get_result. Does not revise seller terms, but creates a metered asynchronous job and may retain delivery state.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The isolated session UUID returned by start_session; use the same client identity."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "request_id"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "session_id": "00000000-0000-4000-8000-000000000002",
+                    "request_id": "00000000-0000-4000-8000-000000000001"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "session_id": "00000000-0000-4000-8000-000000000002",
+                "request_id": "00000000-0000-4000-8000-000000000001"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/assess_offer_readiness": {
+      "post": {
+        "operationId": "assess_offer_readiness",
+        "description": "Deterministic assessment of your retained session without revising seller terms. No fetching, inference, FAHCE, approval or payment. Returns a job, not the report: poll get_result for signed readiness JSON plus full human_readable content, or a resumable report manifest. Not seller certification or commercial clearance. Does not revise seller terms, but creates a metered asynchronous job and may retain delivery state.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The isolated session UUID returned by start_session; use the same client identity."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "request_id"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "session_id": "00000000-0000-4000-8000-000000000002",
+                    "request_id": "00000000-0000-4000-8000-000000000001"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "session_id": "00000000-0000-4000-8000-000000000002",
+                "request_id": "00000000-0000-4000-8000-000000000001"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/export_offer": {
+      "post": {
+        "operationId": "export_offer",
+        "description": "Export your session's saved offer, proposed plan or explicitly incomplete response without inference. Large responses use the agent's resumable manifest; retrieve each indexed part with get_export_part. An export is not publication or certification. Does not revise seller terms, but creates a metered asynchronous job and may retain delivery state.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The isolated session UUID returned by start_session; use the same client identity."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "json",
+                      "readable",
+                      "buyer",
+                      "representation",
+                      "listing",
+                      "plan",
+                      "incomplete"
+                    ],
+                    "description": "Saved representation to export. Choose incomplete only for an explicitly unfinished record; export does not publish or authorize it."
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "request_id",
+                  "format"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "session_id": "00000000-0000-4000-8000-000000000002",
+                    "request_id": "00000000-0000-4000-8000-000000000001",
+                    "format": "json"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "session_id": "00000000-0000-4000-8000-000000000002",
+                "request_id": "00000000-0000-4000-8000-000000000001",
+                "format": "json"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/get_export_part": {
+      "post": {
+        "operationId": "get_export_part",
+        "description": "Retrieve one existing resumable export part from your session, without inference. Preserve the manifest and verify its hashes; do not claim completion until all parts are received. Does not revise seller terms, but creates a metered asynchronous job and may retain delivery state.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The isolated session UUID returned by start_session; use the same client identity."
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Caller-generated UUID for this logical operation. Retain it and identical arguments for retries; do not reuse it for different work."
+                  },
+                  "export_id": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$",
+                    "description": "The 64-character export hash identifier returned in a multipart manifest for this session."
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 999999,
+                    "description": "One-based part index from the manifest. Retrieve every part and verify hashes before claiming complete delivery."
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "request_id",
+                  "export_id",
+                  "index"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "session_id": "00000000-0000-4000-8000-000000000002",
+                    "request_id": "00000000-0000-4000-8000-000000000001",
+                    "export_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "index": 1
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "session_id": "00000000-0000-4000-8000-000000000002",
+                "request_id": "00000000-0000-4000-8000-000000000001",
+                "export_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "index": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/machine/get_result": {
+      "post": {
+        "operationId": "get_result",
+        "description": "Read a job owned by your authenticated client. pending/processing/uncertain is not completion. Poll this same job; do not duplicate an uncertain message. No inference. Polling is metered and may wake queued processing; it is not annotated as a side-effect-free read.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "The stable job UUID returned by an operation; poll this same job rather than dispatching replacement work."
+                  }
+                },
+                "required": [
+                  "job_id"
+                ],
+                "additionalProperties": false,
+                "examples": [
+                  {
+                    "job_id": "00000000-0000-4000-8000-000000000003"
+                  }
+                ],
+                "description": "Illustrative example identifiers must be replaced by IDs returned for your authenticated session; this schema does not dispatch the example."
+              },
+              "example": {
+                "job_id": "00000000-0000-4000-8000-000000000003"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session, queued job or stored result; inspect status before claiming completion.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "session_id",
+                    "release_id",
+                    "job_id",
+                    "status"
+                  ],
+                  "properties": {
+                    "session_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "release_id": {
+                      "type": "string"
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "job_id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "processing",
+                        "uncertain",
+                        "complete",
+                        "error"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Complete transport text, which may itself be a multipart manifest or explicitly incomplete generation; inspect its content."
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "model_attempts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "proof": {
+                      "type": "object",
+                      "required": [
+                        "agent_address",
+                        "body",
+                        "signature"
+                      ],
+                      "properties": {
+                        "agent_address": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "Exact signed UTF-8 JSON body; never reserialize before verifying SHA-256/secp256k1 via uAgents identity."
+                        },
+                        "signature": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "readiness": {
+                      "$ref": "#/components/schemas/ReadinessDelivery"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid arguments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Identity-bound Bearer credential required; enroll or renew using proof of key control",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer realm=tool-offer-machine; obtain an automatically enrolled client credential."
+              }
+            }
+          },
+          "403": {
+            "description": "Origin not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "POST JSON required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds byte limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "application/json Content-Type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or not owned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or session busy/uncertain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a minute/daily quota resets; absent for lifetime limits.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; do not blindly replay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "recovery": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "client",
+                        "global",
+                        "session"
+                      ]
+                    },
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "minute",
+                        "utc_day",
+                        "lifetime"
+                      ]
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "retry_after_seconds": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "retry_same_session": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/register": {
+      "post": {
+        "security": [],
+        "description": "Automatic public-key client registration. Registration is not authorization. No human approval; prove possession at token endpoint.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthRegistration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded result; credentials only in private token/encrypted delivery, never discovery."
+          },
+          "400": {
+            "description": "Invalid metadata, scope or request"
+          },
+          "401": {
+            "description": "Missing, invalid, expired or replayed proof"
+          },
+          "403": {
+            "description": "Identity revoked or origin denied"
+          },
+          "409": {
+            "description": "Conflicting application replay"
+          },
+          "429": {
+            "description": "Access rate limit; honor Retry-After"
+          }
+        }
+      }
+    },
+    "/oauth/token": {
+      "post": {
+        "security": [],
+        "description": "Client credentials with private_key_jwt. Required: grant_type=client_credentials, scope=tool_offer:machine, resource=https://tooloffer.kinganlogic.com/mcp. Scoped one-hour Bearer token returned over TLS; store privately. No refresh token or interactive consent.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded result; credentials only in private token/encrypted delivery, never discovery."
+          },
+          "400": {
+            "description": "Invalid metadata, scope or request"
+          },
+          "401": {
+            "description": "Missing, invalid, expired or replayed proof"
+          },
+          "403": {
+            "description": "Identity revoked or origin denied"
+          },
+          "409": {
+            "description": "Conflicting application replay"
+          },
+          "429": {
+            "description": "Access rate limit; honor Retry-After"
+          }
+        }
+      }
+    },
+    "/oauth/status": {
+      "post": {
+        "security": [],
+        "description": "Read only your own registration status with a fresh assertion whose audience is this status endpoint.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthClientAssertion"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded result; credentials only in private token/encrypted delivery, never discovery."
+          },
+          "400": {
+            "description": "Invalid metadata, scope or request"
+          },
+          "401": {
+            "description": "Missing, invalid, expired or replayed proof"
+          },
+          "403": {
+            "description": "Identity revoked or origin denied"
+          },
+          "409": {
+            "description": "Conflicting application replay"
+          },
+          "429": {
+            "description": "Access rate limit; honor Retry-After"
+          }
+        }
+      }
+    },
+    "/api/access/applications": {
+      "post": {
+        "security": [],
+        "description": "Automatically verify existing Fetch identity and return request ID plus applicant-bound encrypted credential. No approval queue; RSA private key remains with applicant.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FetchEnrollment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded result; credentials only in private token/encrypted delivery, never discovery."
+          },
+          "400": {
+            "description": "Invalid metadata, scope or request"
+          },
+          "401": {
+            "description": "Missing, invalid, expired or replayed proof"
+          },
+          "403": {
+            "description": "Identity revoked or origin denied"
+          },
+          "409": {
+            "description": "Conflicting application replay"
+          },
+          "429": {
+            "description": "Access rate limit; honor Retry-After"
+          }
+        }
+      }
+    },
+    "/api/access/owner": {
+      "post": {
+        "security": [],
+        "description": "Signed operator list, audit and revocation only. Enrollment never requires an operator decision.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperatorAccessRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded result; credentials only in private token/encrypted delivery, never discovery."
+          },
+          "400": {
+            "description": "Invalid metadata, scope or request"
+          },
+          "401": {
+            "description": "Missing, invalid, expired or replayed proof"
+          },
+          "403": {
+            "description": "Identity revoked or origin denied"
+          },
+          "409": {
+            "description": "Conflicting application replay"
+          },
+          "429": {
+            "description": "Access rate limit; honor Retry-After"
+          }
+        }
+      }
+    },
+    "/api/access/applications/{request_id}": {
+      "get": {
+        "security": [
+          {
+            "accessRequestCapability": []
+          }
+        ],
+        "description": "Own Fetch application status, using Authorization: AccessRequest <private tar_ capability>. A request ID alone never grants access. Credential remains RSA-encrypted.",
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Own status and encrypted delivery"
+          },
+          "401": {
+            "description": "Wrong capability, ID or expired application"
+          },
+          "429": {
+            "description": "Rate limited"
+          }
+        }
+      }
+    }
+  },
+  "x-tool-offer-version": "1.4.9"
+}

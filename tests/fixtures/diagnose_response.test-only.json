@@ -1,0 +1,43 @@
+{
+  "schema": "FAHCE_MACHINE_RESPONSE_V1",
+  "operation": "diagnose",
+  "request_id": "00000000-0000-4000-8000-000000000001",
+  "input_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "diagnosis": {
+    "state": "HOLD",
+    "claims": [{"id": "test_claim", "claim": "TEST FIXTURE ONLY: conversion is available", "source": "candidate_output", "support": "UNVERIFIED", "evidence_refs": []}],
+    "contradictions": [],
+    "missing_evidence": ["TEST FIXTURE ONLY: actual execution evidence absent"],
+    "missing_evidence_details": [],
+    "claim_ceiling": "TEST FIXTURE ONLY; not a live determination"
+  },
+  "repair": null,
+  "verification": {
+    "verified": false,
+    "scope": "TEST FIXTURE ONLY; supplied evidence, not source authenticity",
+    "external_execution_verified": false
+  },
+  "billing": {
+    "billable": true,
+    "free_retry": false,
+    "reason": "TEST FIXTURE ONLY; no request or payment occurred",
+    "determination_status": "DETERMINATION_COMPLETE_NEGATIVE"
+  },
+  "receipt": {
+    "case_id": "00000000-0000-4000-8000-000000000001",
+    "run_id": "00000000-0000-4000-8000-000000000001",
+    "input_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "result_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "hash_scheme": "SHA256_SORTED_JSON_RESULT_WITH_EMPTY_RESULT_HASH_V2",
+    "provider": "TEST FIXTURE ONLY",
+    "model": "TEST FIXTURE ONLY",
+    "engine_version": "TEST FIXTURE ONLY",
+    "created_at": "2026-10-31T00:00:00Z",
+    "response_hash_scheme": "SHA256_SORTED_JSON_RESPONSE_WITH_EMPTY_RESPONSE_HASH_V2",
+    "response_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "payment_status": "AUTHORIZED_PENDING_GATEWAY_SETTLEMENT",
+    "payment_receipt": null,
+    "settled_price_atomic_units": null
+  },
+  "next_safe_action": {"action": "HOLD", "reason": "TEST FIXTURE ONLY; collect independent evidence"}
+}

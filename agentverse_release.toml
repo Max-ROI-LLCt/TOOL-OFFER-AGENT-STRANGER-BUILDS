@@ -1,0 +1,5 @@
+[agent]
+address = "agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a"
+include = ""
+readme_path = "README.txt"
+description = "By Kingan Logic: free, source-attributed API/MCP offer drafting, revision, readiness and export. Separate buyer-authorized FAHCE evaluation. Machine-readable profile: https://tooloffer.kinganlogic.com/manifest.json"

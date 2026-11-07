@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-11-05T03:01:14.077511+00:00",
+  "methods": [
+    "GET"
+  ],
+  "paid_calls": 0,
+  "deployment_mutations": 0,
+  "machine_discovery": {
+    "url": "https://tooloffer.kinganlogic.com/capabilities/machines",
+    "sha256": "20bd32f5de05b9ab679baa6fb376b77e9fcc4160f2e895f87a8e3464bac51e5e",
+    "version": "1.4.6",
+    "release_id": "286e0c584063b4473836a02c7eeaf5a22deb7c8a6ba1df3b4476c049f34528c7",
+    "agent_address": "agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a"
+  },
+  "wallet_discovery": {
+    "url": "https://tool-offer-fahce-checkout.t-logandavis.workers.dev/wallet-api.json",
+    "sha256": "e72874e7ee4f3bc684f2dd3c9a3f14c20a2de2cedc10b8023c568c1d21869935",
+    "protocol": "x402-v2",
+    "separateFromFetchPaymentProtocol": true
+  },
+  "browser_bundle": {
+    "sha256": "723def620eb375297c65150693a388eb66f0f2aff7e9752064f2022b224dd98e",
+    "matches_outer_working_bundle": true,
+    "proves_worker_server_source": false
+  },
+  "authenticated_agentverse_source_readback": {
+    "verified": false,
+    "failure_type": "ValueError",
+    "limitation": "Available local authentication did not complete readback; no credential or callback published."
+  },
+  "native_asi_browser_rendering_observed": false,
+  "retained_revision_79_identity_correspondence": true
+}

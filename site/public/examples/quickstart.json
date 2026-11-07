@@ -1,0 +1,244 @@
+{
+  "machine_readable_profile": "https://tooloffer.kinganlogic.com/manifest.json",
+  "capabilities": [
+    "Read public API/MCP documentation and retain source-attributed evidence.",
+    "Collect seller-stated customer, pricing, payment, access and invocation terms.",
+    "Draft, review and revise an offer within an isolated conversation.",
+    "Explain the buyer offer and prepare listing guidance without publication.",
+    "Assess retained offer readiness deterministically without inference or payment.",
+    "Export structured and human-readable records, with verified multipart retrieval when needed."
+  ],
+  "payments": {
+    "drafting": {
+      "price": "0",
+      "wallet_required": false,
+      "terms": "Drafting is free; operator inference costs and published quotas still apply."
+    },
+    "evaluation": {
+      "provider": "FAHCE Diagnose",
+      "optional": true,
+      "separate_from_drafting": true,
+      "buyer_authorization_required": true,
+      "machine_adapter_supported": false,
+      "protocol": "x402 with buyer-signed EIP-3009 authorization",
+      "amount": "0.15",
+      "asset": "USDC",
+      "network": "Base mainnet",
+      "chain_id": 8453,
+      "atomic_amount": "150000",
+      "terms": "Optional FAHCE evaluation is separate and buyer-authorized: 0.15 USDC on Base mainnet via the private human checkout. A free preflight is not an evaluation. Checkout preparation, wallet connection and a 402 challenge are not payment authorization, settlement or a completed result. Changed price, network, token or recipient stops payment. No automatic spending.",
+      "instructions_url": "https://tooloffer.kinganlogic.com/instructions.md",
+      "checkout_access": "In native chat, wallet explains setup; check prepares an eligible private checkout only when explicitly requested. The buyer reviews the exact request and separately signs there. purchase status retrieves the existing outcome; never purchase again to resolve uncertainty."
+    }
+  },
+  "schema": "TOOL_OFFER_QUICKSTART_V1",
+  "fictional": true,
+  "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "source": {
+    "url": "https://parcel-example.invalid/openapi.json",
+    "openapi": {
+      "openapi": "3.1.0",
+      "info": {
+        "title": "Fictional Parcel Format API",
+        "version": "1.0"
+      },
+      "paths": {
+        "/normalize": {
+          "post": {
+            "summary": "Normalize seller-supplied parcel dimensions into centimetres",
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "required": [
+                      "length",
+                      "width",
+                      "height",
+                      "unit"
+                    ],
+                    "properties": {
+                      "length": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      },
+                      "height": {
+                        "type": "number"
+                      },
+                      "unit": {
+                        "enum": [
+                          "cm",
+                          "in"
+                        ]
+                      }
+                    }
+                  },
+                  "example": {
+                    "length": 10,
+                    "width": 4,
+                    "height": 2,
+                    "unit": "in"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Normalized dimensions; no carrier quote or shipment booking",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "length_cm": {
+                          "type": "number"
+                        },
+                        "width_cm": {
+                          "type": "number"
+                        },
+                        "height_cm": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "example": {
+                      "length_cm": 25.4,
+                      "width_cm": 10.16,
+                      "height_cm": 5.08
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-limitations": "Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required.",
+      "x-commercial-terms": "Documentation describes the interface; it grants no resale rights or seller authority."
+    },
+    "scope": "Fictional source claims; no external API execution."
+  },
+  "seller_terms": {
+    "tool_url": "https://parcel-example.invalid/",
+    "docs": "https://parcel-example.invalid/openapi.json",
+    "seller_name": "Fictional Parcel Workshop",
+    "job": "Normalize parcel dimensions for a packing form",
+    "customer": "Shipping form developers",
+    "pricing": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+    "payment": "Fictional invoice; no payment connection exists",
+    "access": "Fictional seller-issued API key; do not send a real credential",
+    "invocation": "POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>"
+  },
+  "buyer_offer": "## Buyer explanation — Draft v1; revision 1\n\nConcise derived overview, not a quotation or full specification.\n\nDocumented details available for review; behavior, payment operation and seller authorization remain unverified.\n\nOffered operation (documented, not independently verified): POST /normalize: Normalize seller-supplied parcel dimensions into centimetres\n\nFor: Shipping form developers\n\nSeller-scoped proposed job: Normalize parcel dimensions for a packing form\n\nSeller-stated pricing: Fictional seller proposes USD 9 per month for 1000 calls; overage disabled\n\nPayment (seller supplied): Fictional invoice; no payment connection exists\n\nAccess (seller supplied): Fictional seller-issued API key; do not send a real credential\n\nInvoke (seller supplied): POST /normalize with JSON length, width, height, unit; Authorization: Bearer <API_KEY>\n\nCommercial authorization: not established.\n\n### Input highlights\n\n- Request body (required). application/json: object. Fields — length (required): number; width (required): number; height (required): number; unit (required): text. choices: cm (centimetres), in (inches) [1]\n\n### Output highlights\n\n- Response 200: Normalized dimensions; no carrier quote or shipment booking. application/json: object. Fields — length_cm (optional): number; width_cm (optional): number; height_cm (optional): number [1]\n\n### Documented capabilities and limitations\n\n- Dimensions only. No carrier prices, shipment booking, insurance or delivery guarantees. Positive finite numbers required. [1]\n\n### Third-party documented terms (not seller authority)\n\n- Documentation describes the interface; it grants no resale rights or seller authority. [1]\n\nInterface highlights follow the explicitly seller-stated invocation: POST /normalize.\n\nExtraction coverage is partial/limited, not proof of absence. Full recorded coverage is in export json.\n\n### Sources (documentation claims, not verified behavior)\n\n- [1] https://parcel-example.invalid/openapi.json\n\nFull schemas, statuses and provenance: export buyer readable. Audit: export json. No seller authority, approval, publication, payment or execution is established.",
+  "machine_offer": {
+    "method": "POST",
+    "path": "/normalize",
+    "description": "Normalize seller-supplied parcel dimensions into centimetres",
+    "request_schema": {
+      "type": "object",
+      "required": [
+        "length",
+        "width",
+        "height",
+        "unit"
+      ],
+      "properties": {
+        "length": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "cm",
+            "in"
+          ]
+        }
+      }
+    },
+    "response_schema": {
+      "type": "object",
+      "properties": {
+        "length_cm": {
+          "type": "number"
+        },
+        "width_cm": {
+          "type": "number"
+        },
+        "height_cm": {
+          "type": "number"
+        }
+      }
+    },
+    "source_pointers": [
+      "/paths/~1normalize/post/summary",
+      "/paths/~1normalize/post/requestBody",
+      "/paths/~1normalize/post/responses/200"
+    ],
+    "pricing": "Fictional seller proposes USD 9 per month for 1000 calls; overage disabled",
+    "evaluation": {
+      "status": "not_requested",
+      "machine_adapter_execution": "unavailable_by_design",
+      "separate_human_checkout": "available_in_native_flow_subject_to_input_readiness"
+    }
+  },
+  "distinctions": {
+    "source_alignment": "Verified derivation of retained structural fields; not a contiguous quote or proof of truth.",
+    "operational_proof": "not_established",
+    "seller_identity": "fictional_not_authenticated",
+    "commercial_permission": "not_established"
+  },
+  "continue": {
+    "authentication": {
+      "human_approval_required": false,
+      "request_url": "https://tooloffer.kinganlogic.com/machine/#access",
+      "oauth": {
+        "registration_endpoint": "https://tooloffer.kinganlogic.com/oauth/register",
+        "token_endpoint": "https://tooloffer.kinganlogic.com/oauth/token",
+        "status_endpoint": "https://tooloffer.kinganlogic.com/oauth/status",
+        "grant_types": [
+          "client_credentials"
+        ],
+        "token_endpoint_auth_method": "private_key_jwt",
+        "algorithm": "ES256",
+        "scope": "tool_offer:machine",
+        "resource": "https://tooloffer.kinganlogic.com/mcp",
+        "token_seconds": 3600,
+        "client_id_metadata_documents": "not_implemented_no_remote_metadata_fetch",
+        "registration_is_authorization": false
+      },
+      "fetch": {
+        "enrollment_endpoint": "https://tooloffer.kinganlogic.com/api/access/applications",
+        "proof": "TOOL_OFFER_ACCESS_ENROLL_V1\\n plus exact body, signed by caller existing uAgents identity",
+        "delivery": "RSA-OAEP-256 encrypted to applicant public key",
+        "status_authentication": "AccessRequest capability retained privately by applicant"
+      },
+      "anonymous_limits": {
+        "applications_per_ip_day": 5,
+        "applications_global_day": 100,
+        "requests_per_ip_minute": 30,
+        "requests_global_minute": 600
+      },
+      "identity_policy": "Registration records public key identity; valid proof receives only bounded machine scope. Same key/Fetch address retains its quota principal. Operator may revoke abusive identities. New-key identities are not certified people or organizations; global quotas remain authoritative.",
+      "credential_storage": "Private keys never sent; issued tokens never published, logged, or sent through agent chat. Tokens stored as hashes.",
+      "oauth_interoperability": {
+        "mcp_extension": "io.modelcontextprotocol/oauth-client-credentials",
+        "a2a_authentication": "OAuth and Bearer are usable by A2A-capable clients through this service MCP/REST interfaces; the A2A task protocol itself is not implemented."
+      }
+    },
+    "steps": [
+      "Automatically enroll with OAuth or existing Fetch identity proof.",
+      "Create a session with a fresh request_id; send the fictional seller intake.",
+      "Poll each returned job until complete. Assess readiness and export; verify all multipart hashes."
+    ],
+    "full_integrity_fixture": "https://tooloffer.kinganlogic.com/examples/fictional-seller.json"
+  },
+  "version": "1.4.9"
+}

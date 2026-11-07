@@ -1,0 +1,24 @@
+{
+  "scope": "READ-ONLY REASSESSMENT OF A RETAINED SNAPSHOT; NOT FRESH AUTHENTICATED CUSTOMER READBACK",
+  "source_sha256": "be4eee5c45cafbcf12103cc56ccce859ad4c313961a9dcc5cdcf375256518293",
+  "intake_revision": 6,
+  "draft_revision": 6,
+  "draft_outdated": false,
+  "stored_fact_basis_counts": {
+    "verbatim_quote": 22,
+    "source_backed_derived": 0,
+    "derived_schema_or_unaligned": 48,
+    "seller_or_record_declaration": 9
+  },
+  "buyer_projection_category_counts": {
+    "capabilities": 5,
+    "inputs": 8,
+    "outputs": 2,
+    "limitations": 3,
+    "documented_commercial_terms": 2
+  },
+  "legacy_fragment_appearances": 10,
+  "unique_legacy_fragments": 7,
+  "stored_state_changed_by_assessment": false,
+  "interpretation": "Assessment uses saved leaf claims. Buyer renderer can recover structured derived presentation from matching retained sources without writing it back. No established classifier defect; unresolved claims were not promoted."
+}

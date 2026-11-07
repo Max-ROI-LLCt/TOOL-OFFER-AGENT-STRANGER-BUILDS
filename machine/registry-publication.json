@@ -1,0 +1,16 @@
+{
+  "schema": "TOOL_OFFER_REGISTRY_PUBLICATION_V1",
+  "evidence_origin": "Owner-supplied official post-publication readback, November 7, 2026; not a new publication or independent live replay by this correction job",
+  "name": "com.kinganlogic/tool-offer-agent",
+  "version": "1.4.9",
+  "status": "active",
+  "isLatest": true,
+  "publishedAt": "2026-11-07T03:32:16.914361Z",
+  "endpoint": "https://tooloffer.kinganlogic.com/mcp",
+  "published_source": {
+    "baseline_commit": "03c58e64c890b53bdcc9b003de42f8d3567eb403",
+    "release_id": "294379abcc1a2df39f22d9aa94423f2902e5353bb74fc29411e657e6d2c0afa1",
+    "registry_server_sha256": "6da281c639e8134a38d64cf02a2153d86877df2ba345936b6462d689c4765b77"
+  },
+  "limits": "Active/latest describes the supplied publication readback. The server metadata name, version and endpoint match the baseline generated registry-server.json; this is not a signed publication receipt or proof that later local source edits were deployed. Historical publication evidence is unchanged."
+}

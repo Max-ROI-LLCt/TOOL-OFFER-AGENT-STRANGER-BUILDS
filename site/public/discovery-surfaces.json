@@ -1,0 +1,219 @@
+{
+  "schema": "TOOL_OFFER_DISCOVERY_SURFACES_V1",
+  "version": "1.4.9",
+  "release_id": "66979784d826683d48d83d6639e924078a3a3476c3ab488a93a9a57519767f19",
+  "surfaces": [
+    {
+      "path": "/",
+      "file": "index.html",
+      "content_type": "text/html",
+      "sha256": "b87feb6cb723c309f46248da14c34831c4d7968c9cb34461d0179c7ac5fcfe72"
+    },
+    {
+      "path": "/.well-known/api-catalog",
+      "file": ".well-known/api-catalog",
+      "content_type": "application/json",
+      "sha256": "3cb46819d1564cc1e93186e31898e14221e1575eb58b2a13e781be064ab93605"
+    },
+    {
+      "path": "/.well-known/mcp.json",
+      "file": ".well-known/mcp.json",
+      "content_type": "application/json",
+      "sha256": "701acfbf004975e740a7ce9f9b4824fa236ee2a46e79fd72e1f647a71ae07445"
+    },
+    {
+      "path": "/.well-known/oauth-authorization-server",
+      "file": ".well-known/oauth-authorization-server",
+      "content_type": "application/json",
+      "sha256": "00c2b63ed2ce19555b1bd94285858c98320b041f5b9f45a5180e7cce3b0ea9bc"
+    },
+    {
+      "path": "/.well-known/oauth-protected-resource",
+      "file": ".well-known/oauth-protected-resource.json",
+      "content_type": "application/json",
+      "sha256": "46a838b79fc664db32e6a5ba939c64e17a07227aae46e7112355211ed55f3eb9"
+    },
+    {
+      "path": "/.well-known/oauth-protected-resource.json",
+      "file": ".well-known/oauth-protected-resource.json",
+      "content_type": "application/json",
+      "sha256": "46a838b79fc664db32e6a5ba939c64e17a07227aae46e7112355211ed55f3eb9"
+    },
+    {
+      "path": "/.well-known/oauth-protected-resource/mcp",
+      "file": ".well-known/oauth-protected-resource.json",
+      "content_type": "application/json",
+      "sha256": "46a838b79fc664db32e6a5ba939c64e17a07227aae46e7112355211ed55f3eb9"
+    },
+    {
+      "path": "/.well-known/owners.json",
+      "file": ".well-known/owners.json",
+      "content_type": "application/json",
+      "sha256": "42a9794ca029cdab7c17f7a1e0ee68fa3b84ea3f20625bead7da0da4046e3297"
+    },
+    {
+      "path": "/404",
+      "file": "404.html",
+      "content_type": "text/html",
+      "sha256": "5a641d92d78e2e45729d44eb60eb9b416158d0caace397713e6df4184f29dd4f"
+    },
+    {
+      "path": "/404.html",
+      "redirect": "/404"
+    },
+    {
+      "path": "/assets/tool-offer-banner.png",
+      "file": "assets/tool-offer-banner.png",
+      "content_type": "image/png",
+      "sha256": "52a386b969dff7e6727839dd2dcbc88b309e054d44c8f58d172940a9d2604a67"
+    },
+    {
+      "path": "/assets/tool-offer-emblem.png",
+      "file": "assets/tool-offer-emblem.png",
+      "content_type": "image/png",
+      "sha256": "aa849170c61b617fb47baa4ee7200a8100db4f11f7ebf5f005c5007e9ea11dd2"
+    },
+    {
+      "path": "/capabilities/machines",
+      "file": "capabilities/machines",
+      "content_type": "application/json",
+      "sha256": "c9a595fc97ad0d397b97400243a9b913e0de28300e07efd725581c0a7bfef90c"
+    },
+    {
+      "path": "/discovery-surfaces.json",
+      "file": "discovery-surfaces.json",
+      "content_type": "application/json"
+    },
+    {
+      "path": "/examples",
+      "redirect": "/examples/"
+    },
+    {
+      "path": "/examples/",
+      "file": "examples/index.html",
+      "content_type": "text/html",
+      "sha256": "86616e3b58b3044f9e820070674fde158b2aa3c62969082de577156a31a2e0ee"
+    },
+    {
+      "path": "/examples/fictional-seller.json",
+      "file": "examples/fictional-seller.json",
+      "content_type": "application/json",
+      "sha256": "112c21280e2c768a86ca702e9a926aeaf1fc51adcaf534de2b8cf51f24c30af8"
+    },
+    {
+      "path": "/examples/index.html",
+      "redirect": "/examples/"
+    },
+    {
+      "path": "/examples/parcel-openapi-compact.json",
+      "file": "examples/parcel-openapi-compact.json",
+      "content_type": "application/json",
+      "sha256": "6bbcdb50ce1535479bf073295f8a387f882d7801a95df0ca8ccdd43a35b4ed6e"
+    },
+    {
+      "path": "/examples/parcel-openapi.json",
+      "file": "examples/parcel-openapi.json",
+      "content_type": "application/json",
+      "sha256": "7eaae66034c7e28f885bcd9fe3328f7eda8899037779eb6ee0d3b47da4b31900"
+    },
+    {
+      "path": "/examples/quickstart.json",
+      "file": "examples/quickstart.json",
+      "content_type": "application/json",
+      "sha256": "da35898d41c298662e750559244f81a1fe20f3b0797b83a5b0184b9e5b775802"
+    },
+    {
+      "path": "/index.html",
+      "redirect": "/"
+    },
+    {
+      "path": "/instructions.md",
+      "file": "instructions.txt",
+      "content_type": "text/markdown",
+      "sha256": "a2d864ff2721b109e67146b29d6a8a57975009e25f4c4f199492b91939d00401"
+    },
+    {
+      "path": "/instructions.txt",
+      "file": "instructions.txt",
+      "content_type": "text/plain",
+      "sha256": "a2d864ff2721b109e67146b29d6a8a57975009e25f4c4f199492b91939d00401"
+    },
+    {
+      "path": "/llms.txt",
+      "file": "llms.txt",
+      "content_type": "text/plain",
+      "sha256": "8aa01cc14fd98023b095776dd21b3909226a5c48d5fbcfbc4bd303809d20f3f2"
+    },
+    {
+      "path": "/machine",
+      "redirect": "/machine/"
+    },
+    {
+      "path": "/machine/",
+      "file": "machine/index.html",
+      "content_type": "text/html",
+      "sha256": "354439f1a3186d1555e362b724031a2977fb288a8acdf0e06565b2625371f139"
+    },
+    {
+      "path": "/machine/index.html",
+      "redirect": "/machine/"
+    },
+    {
+      "path": "/manifest.json",
+      "file": "manifest.json",
+      "content_type": "application/json",
+      "sha256": "b8e6e7132d2df117916857deb8e054e4cdaf2d712393fe574e672acc8eba0349"
+    },
+    {
+      "path": "/mcp/.well-known/owners.json",
+      "file": "mcp/.well-known/owners.json",
+      "content_type": "application/json",
+      "sha256": "42a9794ca029cdab7c17f7a1e0ee68fa3b84ea3f20625bead7da0da4046e3297"
+    },
+    {
+      "path": "/openapi.json",
+      "file": "openapi.json",
+      "content_type": "application/json",
+      "sha256": "621c6d450a9aa7ba9a12e0291b14139f1bec90e69bdba97d9982b6599c825acd"
+    },
+    {
+      "path": "/product.css",
+      "file": "product.css",
+      "content_type": "text/css",
+      "sha256": "7c747129a569aa8f414a2ee880f0aa0f45962d7f51ef53646cf22da22545104e"
+    },
+    {
+      "path": "/readiness.schema.json",
+      "file": "readiness.schema.json",
+      "content_type": "application/json",
+      "sha256": "d096bbe875f02cd4a9c8b6c8a60e46c72b827000a2d06e872c2adf6cf63f5c4b"
+    },
+    {
+      "path": "/robots.txt",
+      "file": "robots.txt",
+      "content_type": "text/plain",
+      "sha256": "593bde014f275c6d5927911933623b0b310b7f41c8d7d415fd3f20d6c21ae1f6"
+    },
+    {
+      "path": "/sitemap.xml",
+      "file": "sitemap.xml",
+      "content_type": "application/xml",
+      "sha256": "057d06da8ad00f4975f4f089e423a23662126be1fbb7010a8d0438c709c69f07"
+    },
+    {
+      "path": "/styles.css",
+      "file": "styles.css",
+      "content_type": "text/css",
+      "sha256": "a5696bd27486779a6447e8844e32e5629c383cc68bbd9d1d3baa8fea59caf4e5"
+    }
+  ],
+  "dynamic_discovery": [
+    "/mcp initialize",
+    "/mcp tools/list",
+    "https://agentverse.ai/v1/agents/agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a/profile"
+  ],
+  "excluded": {
+    "/.webmcp/bridge.js": "Cloudflare-managed injection, not a Tool Offer release asset.",
+    "/cdn-cgi/": "Cloudflare-managed infrastructure, not Tool Offer product documentation."
+  }
+}

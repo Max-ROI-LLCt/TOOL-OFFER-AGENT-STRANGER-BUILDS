@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-11-05T03:05:39.764339+00:00",
+  "python": "3.12",
+  "node": "24.22.2",
+  "suites": [
+    {
+      "suite": "Python selected source",
+      "command": "python scripts/test_offline.py",
+      "tests_run": 488,
+      "passed": 485,
+      "skipped": 3,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "7848265e6e405c08dd15ad6debfef9edcc3c4d2bcb92ee640fd091c2f0810b4c"
+    },
+    {
+      "suite": "Flattened hosted bridge regression",
+      "command": "python -m tests.run_staged_wallet_regression --source build/hosted",
+      "tests_run": 153,
+      "passed": 153,
+      "skipped": 0,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "012a05ec56ebf4e568930cb1066f867db3c8fddf3f43a99a623d4fa738a56efd"
+    },
+    {
+      "suite": "Flattened hosted polish regression",
+      "command": "python -m tests.run_staged_wallet_regression --source build/hosted --tests tests.test_card_client_acceptance tests.test_native_correction tests.test_buyer_view tests.test_readiness tests.test_public_journey tests.test_ticketlens_acceptance tests.test_judging_polish",
+      "tests_run": 71,
+      "passed": 71,
+      "skipped": 0,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "26b0ba886b049e96a66945192b2c148eae1ad947fca0103a61a950ba73fb12b3"
+    },
+    {
+      "suite": "Checkout and wallet",
+      "command": "npm --prefix bridge/checkout test",
+      "tests_run": 87,
+      "passed": 87,
+      "skipped": 0,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "7a2a7cd13791792162bcf0e5ef9483cd602f0efe5f4b7011695868d7615ae7be"
+    },
+    {
+      "suite": "Site and machine gateway",
+      "command": "TOOL_OFFER_TEST_PYTHON=<venv-python> npm --prefix site run check",
+      "tests_run": 45,
+      "passed": 45,
+      "skipped": 0,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "7d504b1ac88eff62d644ebdf2534545639e89386f6689dfdf09da65fc73fea3d"
+    },
+    {
+      "suite": "Custody actual logic with SQLite harness",
+      "command": "node --test bridge/custody/custody.test.mjs",
+      "tests_run": 5,
+      "passed": 5,
+      "skipped": 0,
+      "failed": 0,
+      "mode": "synthetic/local; no paid upstream calls",
+      "private_log_sha256": "08f1c962ee77495cf0e1eb7d276ec5f80b8adca7af68ec44f6a983e148393f36"
+    }
+  ],
+  "overlap_note": "Hosted/source suites overlap; these are execution counts, not unique-test totals.",
+  "skipped_reason": "Three tests require an explicitly configured local Wrangler custody endpoint and test token. They were not represented as live passes.",
+  "builds": {
+    "flat_hosted_modules": 28,
+    "import_graph": "PASS",
+    "wallet_browser": "PASS; matches outer working and fresh public bundle SHA-256",
+    "python_wheel": "PASS"
+  },
+  "failed_initial_packaging_attempts_resolved": [
+    "Synthetic fixture used wrong Document constructor keys, then lacked the exact grounded intake values. Fixed synthetic fixture only.",
+    "Required public .avctl configuration and repair_release helper were omitted. Explicitly selected after inspection.",
+    "Release-preparation test assumed Git history. Added test-only Git identity mock, no repository created.",
+    "Site test needed the selected Python interpreter and existing instructions.md route-alias fallback. Documented interpreter and copied current canonical text.",
+    "Hosted test script invoked as file did not expose tests package. Documented module invocation."
+  ],
+  "external_failed_harness": "verify_new_tooloffer.mjs not found in bounded checkout search; prior Antigravity exit-code-1 is not claimed as passed. Existing bounded-wait gateway regression passes locally.",
+  "authenticated_native_asi_observed": false,
+  "payments_initiated": 0,
+  "deployments_modified": 0
+}
