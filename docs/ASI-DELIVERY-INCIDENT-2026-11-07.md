@@ -1,6 +1,6 @@
 # Tool Offer Agent — ASI delivery incident
 
-Status: unresolved external delivery incident; sanitized, support-ready summary. Date: November 7, 2026 UTC. These observations were supplied by the owner from completed live testing, not replayed during the local correction job.
+Status: resolved. Closure recorded November 13, 2026 from the owner’s confirmation. Original incident date: November 7, 2026 UTC. The following is a historical record, not an open support request.
 
 ## Observed behavior
 
@@ -22,6 +22,6 @@ A separate, demonstrated local defect was found: incoming card-response metadata
 
 ## Requested provider investigation
 
-Correlate the two trace IDs with MetaConnector ingress, outbound envelope acceptance, ASI history persistence and delivery status around the database-pool timeout. Determine where persistence/delivery stopped and whether affected conversations require recovery. Agentverse manual success and fresh ASI failure should be considered separately.
+Historical investigation request (closed): correlate ingress, outbound acceptance and history persistence around the timeout. No further investigation is requested for this resolved incident.
 
-No database fix is asserted. No restart, redeployment, credential rotation, enrollment or repeated live-testing campaign was performed to chase this incident. Resolution requires provider-side evidence or a later owner-authorized delivery observation, not another local envelope-submission claim.
+Closure was confirmed by the owner on November 13, 2026. No provider root cause or database repair is inferred from that confirmation. The original investigation and local tests above retain their dated scope.

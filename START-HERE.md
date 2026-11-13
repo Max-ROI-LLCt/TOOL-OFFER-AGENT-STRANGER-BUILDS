@@ -2,7 +2,7 @@
 
 Publication handoff: **November 7, 2026 UTC**. This is an owner-authorized public snapshot, not the original private development repository or its Git history. Its initial commit records publication, not the dates when the underlying work or historical transactions occurred. A later owner-authorized follow-up adds [PolyForm Noncommercial 1.0.0](LICENSE), [attribution and judging permission](NOTICE), and [third-party notices](THIRD-PARTY-NOTICES.md). It does not relicense dependencies or external services.
 
-The **initial** public snapshot, commit `12f2362c93e88684673fdede649e88b315099ce4`, preserved all 237 prepared files byte-for-byte and added this quickstart, for 238 files. The first documentation follow-up produced 239 files. The subsequent license/feedback follow-up produces **244 files**: the three top-level guides are updated and five license/notice/feedback files are added. All 236 other initial files, including executable source, dependency locks, tests and historical evidence, are unchanged. The dated preparation reports describe their status when written; statements that publication had not occurred are historical. See [publication history](PUBLICATION-HISTORY.md) for the verified repository creation timestamp and the exact scope of each update.
+The **initial** public snapshot, commit `12f2362c93e88684673fdede649e88b315099ce4`, preserved all 237 prepared files byte-for-byte and added this quickstart, for 238 files. The first documentation follow-up produced 239 files. The subsequent license/feedback follow-up produces **244 files**: the three top-level guides are updated and five license/notice/feedback files are added. That follow-up left 236 other initial files unchanged. The November 13 closure correction additionally updates four dated reports; executable source, dependency locks, tests and historical evidence receipts remain unchanged. The dated preparation reports describe their status when written; statements that publication had not occurred are historical. See [publication history](PUBLICATION-HISTORY.md) for the verified repository creation timestamp and the exact scope of each update.
 
 ## Live product and source identity
 
@@ -60,7 +60,7 @@ Tests use synthetic/mocked services; the offline Python runner blocks external s
 **Integrity scope:** `scripts/verify_package.py` checks the original selected-file manifest, which includes the original README, and the retained revision-79 archive. That historical manifest and `evidence/publication-preparation.json` are intentionally unchanged. Running the historical verifier directly against the updated README will correctly report that selected content changed; it is not the integrity command for this documentation overlay. In a full Git clone, verify that every non-overlay file still matches the audited initial public snapshot:
 
 ```sh
-git diff --exit-code 12f2362c93e88684673fdede649e88b315099ce4 -- . ':!README.md' ':!START-HERE.md' ':!PUBLICATION-HISTORY.md' ':!LICENSE' ':!NOTICE' ':!THIRD-PARTY-NOTICES.md' ':!LICENSES/Apache-2.0.txt' ':!docs/COMPETITION-FEEDBACK-2026-11-07.md'
+git diff --exit-code 12f2362c93e88684673fdede649e88b315099ce4 -- . ':!README.md' ':!START-HERE.md' ':!PUBLICATION-HISTORY.md' ':!LICENSE' ':!NOTICE' ':!THIRD-PARTY-NOTICES.md' ':!LICENSES/Apache-2.0.txt' ':!docs/COMPETITION-FEEDBACK-2026-11-07.md' ':!DEPLOYED-RELEASE.md' ':!docs/ASI-DELIVERY-INCIDENT-2026-11-07.md' ':!docs/RELEASE-READINESS.md' ':!docs/CORRECTIONS-2026-11-07.md'
 git status --short
 ```
 
@@ -72,7 +72,7 @@ git archive 12f2362c93e88684673fdede649e88b315099ce4 | tar -x -C "$baseline_dir"
 python "$baseline_dir/scripts/verify_package.py"
 ```
 
-The current Git commit records the documentation/license overlay; historical inventories are not relabeled as current documentation hashes. [Publication history](PUBLICATION-HISTORY.md) lists its exact eight-path scope relative to the initial commit. These integrity checks are not a rerun of product tests or a new deployment attestation.
+The current Git commit records the documentation/license overlay; historical inventories are not relabeled as current documentation hashes. [Publication history](PUBLICATION-HISTORY.md) lists its exact twelve-path cumulative scope relative to the initial commit. These integrity checks are not a rerun of product tests or a new deployment attestation.
 
 Retained results for the unchanged candidate: **550 Python tests with three skips**, **163 staged tests**, **51 site tests**, and clean-package **550 Python tests with the same three skips**. Deployment separately verified **29/29 hosted members**, all seven changed members, the full Agentverse profile, **108 public-surface checks** and the established non-payment signed-result/replay health check. See the dated evidence rather than treating these as fresh tests of future dependencies or services.
 
@@ -88,7 +88,7 @@ The current bridge source is provided for review; its service and the custody/FA
 
 - The retained **November 1, 2026** payment/service observations describe that earlier transaction and negative determination, **not a transaction on release `66979784…` or runtime revision 86**. Sanitized summaries are not the original signed receipt or a fresh execution.
 - MCP Registry `com.kinganlogic/tool-offer-agent` **1.4.9** was published at **`2026-11-07T03:32:16.914361Z`**. `machine/registry-publication.json` preserves the owner-supplied official readback and its historical source correspondence. The correction release and public Git snapshot are not new registry publications.
-- The **ASI delivery incident remains unresolved**: MetaConnector database-pool timeout, unconfirmed transport and absent ASI history, despite fast hosted replies and working manual Agentverse Testing. Generated replies, envelope submission, transport status and confirmed ASI display are different. See [the sanitized incident summary](docs/ASI-DELIVERY-INCIDENT-2026-11-07.md); its predeployment language is historical, not evidence that deployment fixed the incident.
+- ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 - Three explicitly configured custody integration checks remain skipped. Four inherited high-severity dependency entries from the dated review and the missing `verify_new_tooloffer.mjs` harness finding remain limitations, not fixed or rerun by publication.
 - Twelve public HTML comparisons required removal of the already recorded Cloudflare WebMCP insertion; 96 checks were byte-exact. Those observations do not certify the inserted script or ASI rendering.
 - No credentials, private Git objects/history, raw operational logs, customer records, private purchase payloads or unrelated service implementations are selected. The bounded disclosure review is not an independent security certification. Historical commit/hash references remain attribution evidence, not imported private Git history or proof of judging eligibility.

@@ -45,5 +45,5 @@ Follow **Setup And Tests** in `README.md` for Python 3.12, Node 24, installation
 - Twelve HTML checks include the previously recorded Cloudflare WebMCP script insertion. Removing only that exact insertion gives the candidate bytes. Script execution and ASI display were not certified by these readbacks.
 - Startup and post-health runtime logs showed no error/warning/exception matches in the inspected postdeployment window. This bounded observation is not a guarantee of future service availability.
 - The three explicitly configured local-Wrangler custody checks remain skipped. The inherited outer-wallet dependency advisory and missing `verify_new_tooloffer.mjs` failure remain unresolved.
-- The separate ASI database-pool/history-delivery incident remains unresolved. Signed machine completion, generated replies and transport status are not proof of ASI history persistence or display.
+- ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 - This directory is prepared for a separate judging repository, not published. Original repository visibility and private history remain unchanged; organizer/history and owner disclosure decisions are not presumed approved.

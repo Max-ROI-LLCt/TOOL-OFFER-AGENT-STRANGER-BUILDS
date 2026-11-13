@@ -18,8 +18,8 @@ The supplied message links to [the tester's notes and screenshots](https://stran
 
 **Recorded for follow-up:** the concise-summary request and the two reported delivery problems. This documentation/license update does not claim a runtime fix or a fresh reproduction of them. The WebMCP error does not establish missing HTTP fetching or justify weakening authentication. Request IDs, HTTP outcomes and backend correlation are needed before assigning a cause.
 
-**Still unresolved:** ASI:One delivery. Existing owner evidence includes a postdeployment 262-byte reply generated at November 7, 07:13:44 UTC with transport unconfirmed and no confirmed ASI display. That evidence does not establish oversized replies or ACP card metadata as the cause; no speculative text-only fallback, mailbox migration or service restart is presented as a fix. See [the sanitized delivery incident](ASI-DELIVERY-INCIDENT-2026-11-07.md). Generated replies, submitted envelopes, transport status and actual ASI display remain distinct.
+ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 
 **Already corrected in revision 86, from separate earlier testing:** natural-language readiness routing, retained-intake review/correction/cancellation and crowded draft structure. Those findings and completed checks belong to [the earlier correction report](CORRECTIONS-2026-11-07.md); they are not retroactively attributed to this tester's message.
 
-One tester, account and observation period do not establish permanent reliability, official eligibility or a counted hire. This follow-up does not rerun the product suite, execute a payment, change the deployed release or resolve the broader ASI incident.
+One tester, account and observation period do not establish permanent reliability, official eligibility or a counted hire. This follow-up does not rerun the product suite, execute a payment, change the deployed release or establish a provider root cause for the historical ASI incident.

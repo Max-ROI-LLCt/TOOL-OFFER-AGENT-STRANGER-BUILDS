@@ -22,7 +22,7 @@ Scope: local implementation and controlled verification only, November 7, 2026 U
 
 ## Separate ACP/delivery disposition
 
-**Fixed locally:** SDK metadata-only card selections/cancellations previously vanished at the `msg.text()` boundary; they now pass through existing bound validation. **Explained:** transport statuses and acknowledgement/session construction follow the installed SDK; envelope submission is not ASI delivery. **Unresolved:** the supplied ASI database-pool/history incident has no demonstrated local response-envelope cause. No restart/redeployment is prescribed as a speculative fix. Sanitized provider-support evidence is in `docs/ASI-DELIVERY-INCIDENT-2026-11-07.md`.
+**Fixed locally:** SDK metadata-only card selections/cancellations previously vanished at the `msg.text()` boundary; they now pass through existing bound validation. **Explained:** transport statuses and acknowledgement/session construction follow the installed SDK; envelope submission is not ASI delivery. **Resolved:** ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 
 ## Preserved historical regression evidence
 

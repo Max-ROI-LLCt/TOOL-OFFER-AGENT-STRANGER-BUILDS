@@ -10,7 +10,6 @@ Open [Tool Offer Agent](https://tooloffer.kinganlogic.com/), choose **Launch Age
 - Agent address: `agent1qg0p9zy9rxqz83l5p8tr7vevguk3hny963luv4pd8nu8hp87qc0syk3c88a`
 - **For code review and local setup:** [Start here](START-HERE.md), [source layout](#source-layout), [dated verification and publication history](PUBLICATION-HISTORY.md).
 
-**Known live limitation:** ASI:One delivery remains under investigation. Some requests stay on “Reasoning…” despite generated hosted replies; Agentverse manual Testing returned responses. A read receipt or outgoing envelope is not confirmed ASI display. Use the included local instructions to inspect the implementation; this documentation update does not resolve or conceal the [delivery incident](docs/ASI-DELIVERY-INCIDENT-2026-11-07.md).
 
 ## Feedback Into Corrections
 
@@ -121,7 +120,7 @@ This is the **owner-authorized public judging snapshot** of Tool Offer Agent, no
 
 Tool Offer Agent's reviewed contribution covers offer preparation, source attribution, retained intake, native/machine integration, correction, readiness, exports, its gateway and companion integration. Kingan Logic branding and the external FAHCE engine/payment/receipt/attestation infrastructure pre-exist these corrections; the repository does not claim to implement those external services. The **November 1, 2026** transaction evidence remains historical, not a transaction on revision 86.
 
-The ASI delivery incident, **three skipped custody integration checks**, **four inherited high-severity dependency entries** from the dated review and missing `verify_new_tooloffer.mjs` harness remain explicit limitations. Source inspection and local tests do not certify live delivery, service execution, commercial rights or hackathon acceptance. Do not submit credentials in chat or documentation URLs; we do not control retention by ASI or other platform components.
+The **three skipped custody integration checks**, **four inherited high-severity dependency entries** from the dated review and missing `verify_new_tooloffer.mjs` harness remain explicit limitations. Source inspection and local tests do not certify live delivery, service execution, commercial rights or hackathon acceptance. Do not submit credentials in chat or documentation URLs; we do not control retention by ASI or other platform components.
 
 Future updates are separately reviewed, owner-approved snapshots, not an automatic mirror of private working files. Historical manifests and frozen ZIPs remain unchanged; [the quickstart](START-HERE.md#tests-and-integrity) explains integrity checks after this documentation/license update.
 

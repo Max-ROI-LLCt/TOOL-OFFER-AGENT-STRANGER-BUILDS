@@ -41,7 +41,7 @@ The bounded public readback initiated at **09:33:43 UTC** found the canonical ma
 
 The owner-completed GitHub About description, homepage and topics were present and are preserved. `.avctl/config.toml` remains the audited 666-byte public profile reference: SHA-256 `ffe62613c0ee409a1a9ba3b48f712d4e8d84da409ceb0125e0a25c220d666d1a`. It contains public agent/profile settings, not tokens or authenticated CLI state. The prior nested-archive/disclosure audit is retained, not represented as a new security certification.
 
-Only documentation integrity, license/notice correspondence and publication readback are checked for this update. No product tests, payments, hosted deployments or registry publications are repeated. The ASI delivery incident remains unresolved. Future public changes require a separately reviewed, owner-approved snapshot rather than automatic synchronization of private work in progress.
+Only documentation integrity, license/notice correspondence and publication readback are checked for this update. No product tests, payments, hosted deployments or registry publications are repeated. The owner confirmed ASI:One delivery resolved on November 13, 2026. Future public changes require a separately reviewed, owner-approved snapshot rather than automatic synchronization of private work in progress.
 
 ## Deployed Source And Historical Records
 
@@ -63,6 +63,16 @@ The [November 7 correction report](docs/CORRECTIONS-2026-11-07.md) records **550
 
 Deployment separately recorded **29/29 hosted members**, all seven corrected members, full Agentverse profile correspondence and **108 public-surface checks**: 96 byte-exact, 12 matching after the recorded Cloudflare WebMCP insertion was removed for comparison. The established non-payment signed-result/replay check also passed. These results do not certify ASI display or the edge-injected browser script.
 
-**ASI delivery remains unresolved.** The [sanitized incident report](docs/ASI-DELIVERY-INCIDENT-2026-11-07.md) records the database-pool timeout, missing history and unconfirmed transport. Later postdeployment observations also reported generated replies without confirmed ASI display. A generated reply, read receipt, sent envelope or SDK transport status is not proof of history persistence or rendering. No causal fix or provider resolution is claimed by this source publication.
+ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 
 The three skipped custody integration checks, four inherited high-severity dependency entries from the dated review and missing `verify_new_tooloffer.mjs` harness remain limitations. The new first-party source license does not change third-party or external-service terms. A public source snapshot, timestamp, license or third-party badge does not establish organizer eligibility or security certification.
+
+## November 13, 2026 — resolved delivery status correction
+
+The owner confirmed that ASI:One delivery had been resolved and requested removal of stale open-incident wording everywhere. November 13 is the date this closure was recorded, not an inferred date of the underlying repair. Current guidance now reflects closure; historical observations retain their original dates and test scope. This correction does not claim a provider root cause or a new live test.
+
+This update changes eight documentation paths: `README.md`, `START-HERE.md`, `PUBLICATION-HISTORY.md`, `DEPLOYED-RELEASE.md`, `docs/ASI-DELIVERY-INCIDENT-2026-11-07.md`, `docs/RELEASE-READINESS.md`, `docs/CORRECTIONS-2026-11-07.md`, and `docs/COMPETITION-FEEDBACK-2026-11-07.md`. The cumulative overlay relative to the initial commit is twelve paths; the tree remains 244 files. Historical JSON receipts and package manifests remain unchanged, including the dated unresolved observation in `evidence/deployed-corrections.json`; that observation is superseded by the closure recorded here. The historical package verifier must be run against the initial snapshot as documented in START-HERE.
+
+Validation: all tracked text was searched for stale ASI incident status; current documentation has no open-incident claims. The documented non-overlay comparison against the initial snapshot passes. No executable source or runtime configuration is changed by this correction.
+
+When closing an incident, review current entry points, dated reports, feedback responses, generated presentation and publication instructions together. Keep historical receipts immutable and explicitly link their superseding status so they cannot be mistaken for current limitations.

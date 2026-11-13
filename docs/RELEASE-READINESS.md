@@ -37,7 +37,7 @@ HSTS was absent on the deployed product host before this follow-up. HTTPS respon
 
 VerifyMCP's report says Stability is unverified because there is insufficient scan history for a 30-day window, explicitly describing that as a verification gap rather than a product finding. It is not treated as an observed stability defect, and no architectural changes were made to chase the score. A future scanner rescan/index refresh is external; this release does not claim its displayed score has updated.
 
-Native card payload/state/navigation regression is not proof of physical ASI:One rendering. The owner subsequently completed the fictional Agentverse manual journey, including corrections, rebuild, persistence, unchanged replacement, cancellation and restricted authorization. That is not an ASI delivery confirmation or observation of these later local corrections. ASI delivery remains unconfirmed following a platform database-pool timeout; see `docs/ASI-DELIVERY-INCIDENT-2026-11-07.md`. This correction job does not launch another live-testing campaign.
+The owner completed the fictional Agentverse manual journey, including corrections, rebuild, persistence, unchanged replacement, cancellation and restricted authorization. ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation. Payload tests retain their original scope and do not independently verify physical rendering.
 
 ## Existing acceptance: release 1.4.7 only
 
@@ -63,7 +63,7 @@ Publication is complete. Do not republish 1.4.9, repeat enrollment or create/rot
 
 - **Open dependency advisory:** fresh outer wallet `npm audit` still reports four high affected dependency entries from GHSA-mrhx-c7xc-m3w5 (Zod memory exhaustion), through the existing Base/Coinbase SDK chain. The suggested SDK downgrade is not a verified safe fix. No application exploit established; current checkout behavior was preserved, not redeployed. Remediation needs an independently tested SDK update/pin, not an unreviewed downgrade.
 - **Open external harness:** `verify_new_tooloffer.mjs` was not found in accessible workspaces. The previously reported exit-code-1 is neither resolved nor a pass. Owner action: supply the original script and nonsecret failure output for reproducible diagnosis.
-- **ASI delivery unresolved:** the owner's Agentverse manual Testing journey worked; ASI history lacked replies despite fast hosted handlers. Transport submission is not confirmed ASI delivery. The local ACP metadata fix is independently demonstrated, not an invented fix for Fetch's database incident.
+- ASI:One delivery is resolved, as confirmed by the owner on November 13, 2026. The November 7 observations below are historical; they are not a current product limitation.
 - **History/privacy decision:** known private history and customer-derived fixture disclosures remain in the original private repository. The judges' builder replaces that fixture only in the package with a clearly labeled synthetic fixture. Do not publish the original history or claim curated history is organizer-approved.
 
 ## Judges' selection and reproducibility
